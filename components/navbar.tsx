@@ -24,7 +24,7 @@ export function Navbar() {
             <img
               src="/traflinq-logo-no-tagline-Photoroom.svg"
               alt="TrafLinq Logo"
-              className="h-12 w-auto"
+              className="h-12 w-auto brightness-0 invert"
               style={{ maxWidth: '200px' }}
             />
           </Link>

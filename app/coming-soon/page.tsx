@@ -6,7 +6,7 @@ import { ArrowRight, Bell, Mail, Twitter, Linkedin, Github, Armchair, Handshake,
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-export default function Home() {
+export default function ComingSoon() {
   const [email, setEmail] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [timeLeft, setTimeLeft] = useState({
@@ -49,7 +49,7 @@ export default function Home() {
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       
-      {/* Subtle Grid Pattern - Adjusted for light theme */}
+      {/* Subtle Grid Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.05] pointer-events-none" 
         style={{ 
@@ -59,7 +59,7 @@ export default function Home() {
       />
 
       <div className="z-10 max-w-4xl w-full text-center space-y-12">
-        {/* Logo - Black for white background */}
+        {/* Logo */}
         <div className="flex justify-center mb-8">
           <img
             src="/traflinq-logo-no-tagline-Photoroom.svg"
@@ -85,7 +85,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Unique Savings Visualization - Adjusted for light theme */}
+        {/* Unique Savings Visualization */}
         <div className="max-w-2xl mx-auto bg-white border border-gray-100 shadow-xl shadow-primary/5 rounded-3xl p-8 relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-4 opacity-10">
             <ArrowRight className="rotate-[-45deg] text-primary" size={48} />

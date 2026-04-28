@@ -12,10 +12,10 @@ const navigation = {
     { name: "About Us", href: "#" },
     { name: "Careers", href: "#" },
     { name: "Blog", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Contact", href: "/support" },
   ],
   legal: [
-    { name: "Privacy Policy", href: "#" },
+    { name: "Privacy Policy", href: "/privacy" },
     { name: "Terms of Service", href: "#" },
     { name: "Cookie Policy", href: "#" },
   ],
@@ -32,7 +32,7 @@ export function Footer() {
               <img
                 src="/traflinq-logo-no-tagline-Photoroom.svg"
                 alt="TrafLinq Logo"
-                className="h-10 w-auto"
+                className="h-10 w-auto brightness-0 invert"
                 style={{ maxWidth: '180px' }}
               />
             </Link>
