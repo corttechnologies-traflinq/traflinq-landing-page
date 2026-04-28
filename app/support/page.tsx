@@ -16,9 +16,37 @@ import {
 export default function SupportPage() {
   const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    const formData = new FormData(e.currentTarget as HTMLFormElement)
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+    }
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080"
+
+    try {
+      const response = await fetch(`${apiUrl}/support/submit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+      } else {
+        const errorData = await response.json()
+        alert(errorData.message || "Failed to submit form. Please try again.")
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      alert("An error occurred. Please check if the server is running.")
+    }
   }
 
   const faqs = [
@@ -71,24 +99,24 @@ export default function SupportPage() {
             <div className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
               {!submitted ? (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-400">Name</label>
-                      <Input placeholder="John Doe" className="bg-white/5 border-white/10 text-white" required />
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-400">Name</label>
+                        <Input name="name" placeholder="John Doe" className="bg-white/5 border-white/10 text-white" required />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-400">Email</label>
+                        <Input name="email" type="email" placeholder="john@example.com" className="bg-white/5 border-white/10 text-white" required />
+                      </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-400">Email</label>
-                      <Input type="email" placeholder="john@example.com" className="bg-white/5 border-white/10 text-white" required />
+                      <label className="text-sm font-medium text-gray-400">Subject</label>
+                      <Input name="subject" placeholder="General Inquiry" className="bg-white/5 border-white/10 text-white" required />
                     </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-400">Subject</label>
-                    <Input placeholder="General Inquiry" className="bg-white/5 border-white/10 text-white" required />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-400">Message</label>
-                    <Textarea placeholder="Tell us how we can help..." className="bg-white/5 border-white/10 text-white min-h-[120px]" required />
-                  </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-400">Message</label>
+                      <Textarea name="message" placeholder="Tell us how we can help..." className="bg-white/5 border-white/10 text-white min-h-[120px]" required />
+                    </div>
                   <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white h-12 rounded-xl font-bold gap-2">
                     <Send size={18} /> Send Message
                   </Button>
