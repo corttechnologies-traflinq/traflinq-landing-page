@@ -28,10 +28,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link href="#home">
-              <span className="text-2xl font-bold">
-                traf<span className="text-primary">linq</span>
-              </span>
+            <Link href="#home" className="inline-block">
+              <img
+                src="/traflinq-logo-no-tagline-Photoroom.svg"
+                alt="TrafLinq Logo"
+                className="h-10 w-auto"
+                style={{ maxWidth: '180px' }}
+              />
             </Link>
             <p className="mt-4 text-background/70 max-w-xs">
               Smart mobility platform helping businesses cut commute costs through intelligent route planning and fleet management.
@@ -43,11 +46,11 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-background/70">
                 <Phone className="h-5 w-5 text-primary" />
-                <span>+1 (555) 123-4567</span>
+                <span>+92 336 245 0386</span>
               </div>
               <div className="flex items-center gap-3 text-background/70">
                 <MapPin className="h-5 w-5 text-primary" />
-                <span>San Francisco, CA</span>
+                <span>National Incubation Center, Karachi</span>
               </div>
             </div>
           </div>

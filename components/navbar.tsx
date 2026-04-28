@@ -20,10 +20,13 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <div className="flex lg:flex-1">
-          <Link href="#home" className="-m-1.5 p-1.5">
-            <span className="text-2xl font-bold text-foreground">
-              traf<span className="text-primary">linq</span>
-            </span>
+          <Link href="#home" className="-m-1.5 p-1.5 flex items-center">
+            <img
+              src="/traflinq-logo-no-tagline-Photoroom.svg"
+              alt="TrafLinq Logo"
+              className="h-12 w-auto"
+              style={{ maxWidth: '200px' }}
+            />
           </Link>
         </div>
         
