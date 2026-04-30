@@ -48,21 +48,21 @@ export default function Home() {
       {/* Background Soft Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      
+
       {/* Subtle Grid Pattern - Adjusted for light theme */}
-      <div 
-        className="absolute inset-0 opacity-[0.05] pointer-events-none" 
-        style={{ 
+      <div
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
+        style={{
           backgroundImage: `radial-gradient(circle at 2px 2px, #fe8503 1px, transparent 0)`,
           backgroundSize: '40px 40px'
-        }} 
+        }}
       />
 
       <div className="z-10 max-w-4xl w-full text-center space-y-12">
         {/* Logo - Black for white background */}
         <div className="flex justify-center mb-8">
           <img
-            src="/traflinq-logo-no-tagline-Photoroom.svg"
+            src="/traflinq_light_no_tagline-Photoroom.png"
             alt="TrafLinq Logo"
             className="h-16 w-auto"
           />
@@ -109,10 +109,10 @@ export default function Home() {
             </div>
             <div className="h-24 flex items-end gap-2 px-4">
               {[40, 65, 45, 90, 55, 75, 45].map((h, i) => (
-                <div 
-                  key={i} 
-                  className="w-3 bg-primary/10 rounded-t-full transition-all duration-500 group-hover:bg-primary group-hover:animate-pulse" 
-                  style={{ height: `${h}%`, transitionDelay: `${i * 100}ms` }} 
+                <div
+                  key={i}
+                  className="w-3 bg-primary/10 rounded-t-full transition-all duration-500 group-hover:bg-primary group-hover:animate-pulse"
+                  style={{ height: `${h}%`, transitionDelay: `${i * 100}ms` }}
                 />
               ))}
             </div>
