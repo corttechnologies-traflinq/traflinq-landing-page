@@ -63,7 +63,7 @@ export function FleetServicesSection() {
                   </div>
                   <h3 className="mt-6 text-2xl font-bold text-foreground">{service.title}</h3>
                   <p className="mt-3 text-muted-foreground">{service.description}</p>
-                  
+
                   <ul className="mt-6 space-y-3">
                     {service.features.map((feature) => (
                       <li key={feature} className="flex items-center gap-3">
@@ -100,62 +100,6 @@ export function FleetServicesSection() {
                 <p className="mt-2 text-sm text-muted-foreground">{option.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* App Integration */}
-        <div className="mx-auto mt-24 max-w-4xl">
-          <div className="relative rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 p-8 lg:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 mb-4">
-                  <Smartphone className="h-5 w-5 text-primary" />
-                  <span className="text-sm font-medium text-primary">Mobile Integration</span>
-                </div>
-                <h3 className="text-2xl font-bold text-foreground">Track Everything in Real-Time</h3>
-                <p className="mt-4 text-muted-foreground">
-                  Our platform supports both tracker API and mobile app integration for comprehensive fleet tracking. 
-                  Drivers can use the app for navigation, while clients monitor everything from their dashboard.
-                </p>
-                <ul className="mt-6 space-y-3">
-                  <li className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-primary" />
-                    <span className="text-foreground">Live GPS tracking for all vehicles</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-primary" />
-                    <span className="text-foreground">Driver app for seamless operations</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-primary" />
-                    <span className="text-foreground">Real-time ETA updates</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="relative flex justify-center">
-                <div className="relative w-48 h-96 bg-foreground rounded-[3rem] p-3 shadow-2xl">
-                  <div className="w-full h-full bg-card rounded-[2.5rem] overflow-hidden">
-                    <div className="h-full flex flex-col">
-                      <div className="bg-primary p-4 text-center">
-                        <p className="text-sm font-semibold text-primary-foreground">Traflinq Driver</p>
-                      </div>
-                      <div className="flex-1 p-4 space-y-3">
-                        <div className="h-24 bg-secondary rounded-lg flex items-center justify-center">
-                          <MapPin className="h-8 w-8 text-primary" />
-                        </div>
-                        <div className="p-3 bg-secondary rounded-lg">
-                          <p className="text-xs text-muted-foreground">Next Stop</p>
-                          <p className="text-sm font-medium text-foreground">Tech Park - Gate 2</p>
-                        </div>
-                        <div className="p-3 bg-primary/10 rounded-lg">
-                          <p className="text-xs text-primary font-medium">ETA: 5 mins</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -22,14 +22,14 @@ export function Navbar() {
         <div className="flex lg:flex-1">
           <Link href="#home" className="-m-1.5 p-1.5 flex items-center">
             <img
-              src="/traflinq-logo-no-tagline-Photoroom.svg"
+              src="/traflinq_light_no_tagline-Photoroom.png"
               alt="TrafLinq Logo"
-              className="h-12 w-auto brightness-0 invert"
+              className="h-12 w-auto brightness-0"
               style={{ maxWidth: '200px' }}
             />
           </Link>
         </div>
-        
+
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -44,7 +44,7 @@ export function Navbar() {
             )}
           </button>
         </div>
-        
+
         <div className="hidden lg:flex lg:gap-x-8">
           {navItems.map((item) => (
             <Link
@@ -56,7 +56,7 @@ export function Navbar() {
             </Link>
           ))}
         </div>
-        
+
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
             Get Started

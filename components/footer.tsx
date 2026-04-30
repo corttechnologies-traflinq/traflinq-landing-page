@@ -30,7 +30,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="#home" className="inline-block">
               <img
-                src="/traflinq-logo-no-tagline-Photoroom.svg"
+                src="/traflinq_dark_no_tagline-Photoroom.png"
                 alt="TrafLinq Logo"
                 className="h-10 w-auto brightness-0 invert"
                 style={{ maxWidth: '180px' }}
