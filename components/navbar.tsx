@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -20,11 +21,13 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <div className="flex lg:flex-1">
           <Link href="#home" className="-m-1.5 p-1.5 flex items-center">
-            <img
+            <Image
               src="/traflinq_dark_no_tagline-Photoroom.png"
               alt="Traflinq"
+              width={160}
+              height={40}
               className="h-10 w-auto"
-              style={{ maxWidth: '160px' }}
+              priority
             />
           </Link>
         </div>

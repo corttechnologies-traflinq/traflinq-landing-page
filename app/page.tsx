@@ -1,12 +1,17 @@
+import dynamic from "next/dynamic"
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
-import { ProblemSection } from "@/components/problem-section"
-import { RouteOptimizationSection } from "@/components/route-optimization-section"
-import { GhostSeatSection } from "@/components/ghost-seat-section"
-import { MobileIntegrationSection } from "@/components/mobile-integration-section"
-import { FleetServicesSection } from "@/components/fleet-services-section"
-import { CTASection } from "@/components/cta-section"
-import { Footer } from "@/components/footer"
+
+// Below-the-fold sections: code-split for faster initial load
+const ProblemSection = dynamic(() => import("@/components/problem-section").then(m => ({ default: m.ProblemSection })))
+const RouteOptimizationSection = dynamic(() => import("@/components/route-optimization-section").then(m => ({ default: m.RouteOptimizationSection })))
+const GhostSeatSection = dynamic(() => import("@/components/ghost-seat-section").then(m => ({ default: m.GhostSeatSection })))
+const MobileIntegrationSection = dynamic(() => import("@/components/mobile-integration-section").then(m => ({ default: m.MobileIntegrationSection })))
+const FleetServicesSection = dynamic(() => import("@/components/fleet-services-section").then(m => ({ default: m.FleetServicesSection })))
+const LeakageCalculator = dynamic(() => import("@/components/leakage-calculator").then(m => ({ default: m.LeakageCalculator })))
+const OperationalSuccessReports = dynamic(() => import("@/components/operational-success-reports").then(m => ({ default: m.OperationalSuccessReports })))
+const CTASection = dynamic(() => import("@/components/cta-section").then(m => ({ default: m.CTASection })))
+const Footer = dynamic(() => import("@/components/footer").then(m => ({ default: m.Footer })))
 
 export default function Home() {
   return (
@@ -16,8 +21,10 @@ export default function Home() {
       <ProblemSection />
       <RouteOptimizationSection />
       <GhostSeatSection />
+      <LeakageCalculator />
       <MobileIntegrationSection />
       <FleetServicesSection />
+      <OperationalSuccessReports />
       <CTASection />
       <Footer />
     </main>

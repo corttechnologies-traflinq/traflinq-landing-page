@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
@@ -9,10 +10,12 @@ export function CTASection() {
     <section className="relative py-32 overflow-hidden bg-[#080b14] border-t border-white/[0.04]">
       {/* Background: subtle logo watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <img
+        <Image
           src="/traflinq_dark_no_tagline-Photoroom.png"
           alt=""
           aria-hidden="true"
+          width={600}
+          height={200}
           className="w-[600px] max-w-full opacity-[0.025] grayscale"
         />
       </div>

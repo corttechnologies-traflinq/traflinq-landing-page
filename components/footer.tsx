@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Linkedin, Twitter } from "lucide-react"
 
 const navLinks = [
@@ -19,11 +20,12 @@ export function Footer() {
           {/* Brand */}
           <div className="md:max-w-xs">
             <Link href="#home" className="inline-block">
-              <img
+              <Image
                 src="/traflinq_dark_no_tagline-Photoroom.png"
                 alt="Traflinq"
+                width={200}
+                height={48}
                 className="h-12 w-auto"
-                style={{ maxWidth: '200px' }}
               />
             </Link>
             <p className="mt-3 text-sm text-white/30 leading-relaxed">
