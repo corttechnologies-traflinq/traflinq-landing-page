@@ -22,8 +22,8 @@ export function Footer() {
               <img
                 src="/traflinq_dark_no_tagline-Photoroom.png"
                 alt="Traflinq"
-                className="h-9 w-auto"
-                style={{ maxWidth: '150px' }}
+                className="h-12 w-auto"
+                style={{ maxWidth: '200px' }}
               />
             </Link>
             <p className="mt-3 text-sm text-white/30 leading-relaxed">
