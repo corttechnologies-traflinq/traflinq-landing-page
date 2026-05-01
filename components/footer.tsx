@@ -1,108 +1,96 @@
 import Link from "next/link"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Linkedin, Twitter } from "lucide-react"
 
-const navigation = {
-  solutions: [
-    { name: "Route Optimization", href: "#route-optimization" },
-    { name: "Ghost Seat Management", href: "#ghost-seat" },
-    { name: "Vendor Integration", href: "#vendor-integration" },
-    { name: "Fleet Services", href: "#fleet-services" },
-  ],
-  company: [
-    { name: "About Us", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Contact", href: "/support" },
-  ],
-  legal: [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms of Service", href: "#" },
-    { name: "Cookie Policy", href: "#" },
-  ],
-}
+const navLinks = [
+  { name: "Platform", href: "#command-center" },
+  { name: "Solutions", href: "#predictive-logic" },
+  { name: "Security", href: "#institutional-trust" },
+  { name: "About", href: "#home" },
+]
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-[#060810] border-t border-white/[0.04]">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+
+        {/* Main row */}
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12">
+
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="md:max-w-xs">
             <Link href="#home" className="inline-block">
               <img
                 src="/traflinq_dark_no_tagline-Photoroom.png"
-                alt="TrafLinq Logo"
-                className="h-10 w-auto brightness-0 invert"
-                style={{ maxWidth: '180px' }}
+                alt="Traflinq"
+                className="h-9 w-auto"
+                style={{ maxWidth: '150px' }}
               />
             </Link>
-            <p className="mt-4 text-background/70 max-w-xs">
-              Smart mobility platform helping businesses cut commute costs through intelligent route planning and fleet management.
+            <p className="mt-3 text-sm text-white/30 leading-relaxed">
+              The Mobility OS.
             </p>
-            <div className="mt-6 space-y-3">
-              <div className="flex items-center gap-3 text-background/70">
-                <Mail className="h-5 w-5 text-primary" />
-                <span>contact@traflinq.com</span>
-              </div>
-              <div className="flex items-center gap-3 text-background/70">
-                <Phone className="h-5 w-5 text-primary" />
-                <span>+92 336 245 0386</span>
-              </div>
-              <div className="flex items-center gap-3 text-background/70">
-                <MapPin className="h-5 w-5 text-primary" />
-                <span>National Incubation Center, Karachi</span>
-              </div>
+          </div>
+
+          {/* Nav */}
+          <div className="flex flex-col sm:flex-row gap-10 sm:gap-16">
+            <div>
+              <p className="text-xs text-white/20 tracking-widest uppercase font-medium mb-4">Platform</p>
+              <ul className="space-y-3">
+                {navLinks.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-white/40 hover:text-white transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-xs text-white/20 tracking-widest uppercase font-medium mb-4">Connect</p>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/support" className="text-sm text-white/40 hover:text-white transition-colors">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors">
+                    <Linkedin className="h-3.5 w-3.5" />
+                    LinkedIn
+                  </Link>
+                </li>
+                <li>
+                  <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors">
+                    <Twitter className="h-3.5 w-3.5" />
+                    Twitter
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
-
-          {/* Solutions */}
-          <div>
-            <h3 className="text-sm font-semibold">Solutions</h3>
-            <ul className="mt-4 space-y-3">
-              {navigation.solutions.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-background/70 hover:text-primary transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="text-sm font-semibold">Company</h3>
-            <ul className="mt-4 space-y-3">
-              {navigation.company.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-background/70 hover:text-primary transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="text-sm font-semibold">Legal</h3>
-            <ul className="mt-4 space-y-3">
-              {navigation.legal.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-background/70 hover:text-primary transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-background/10">
-          <p className="text-sm text-background/50 text-center">
+        {/* Bottom bar */}
+        <div className="mt-16 pt-8 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-white/20">
             © {new Date().getFullYear()} Traflinq. All rights reserved.
           </p>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="text-xs text-white/20 hover:text-white/50 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="#" className="text-xs text-white/20 hover:text-white/50 transition-colors">
+              Terms of Service
+            </Link>
+          </div>
         </div>
+
       </div>
     </footer>
   )

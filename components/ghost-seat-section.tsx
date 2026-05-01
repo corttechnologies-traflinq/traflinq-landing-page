@@ -1,204 +1,199 @@
 "use client"
 
-import { Ghost, Eye, BarChart3, Zap } from "lucide-react"
+import { BarChart3, GitBranch } from "lucide-react"
 import { motion } from "framer-motion"
 
-const features = [
-  {
-    icon: Eye,
-    title: "Real-Time Tracking",
-    description: "Monitor seat occupancy live to avoid paying for empty rides across your entire fleet.",
-  },
+const bullets = [
   {
     icon: BarChart3,
-    title: "Smart Allocation",
-    description: "Automatically adjust vehicle assignments based on actual demand patterns.",
+    title: "Dynamic Load Balancing",
+    description: "Intelligent occupancy tracking to maximize asset utility and eliminate the cost of vacancy.",
   },
   {
-    icon: Zap,
-    title: "Instant Optimization",
-    description: "Reduce unused seats instantly with our intelligent seat management system.",
+    icon: GitBranch,
+    title: "Adaptive Corridors",
+    description: "Transit paths that evolve with the shifting pulse of your organization in real time.",
   },
 ]
 
 export function GhostSeatSection() {
-  const listVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
-  }
-
   return (
-    <section id="ghost-seat" className="py-24 sm:py-32 overflow-hidden">
+    <section id="predictive-logic" className="py-24 sm:py-32 bg-[#0a0d16] border-t border-white/[0.04] overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+          {/* Left: Visual — abstract architectural/motion representation */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative order-2 lg:order-1"
           >
-            <div className="mb-4 inline-flex items-center rounded-full bg-primary/10 px-4 py-1.5">
-              <Ghost className="mr-2 h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Ghost Seat Management</span>
+            <div className="absolute -inset-6 bg-blue-600/4 rounded-3xl blur-3xl" />
+            <div className="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden" style={{ height: '380px' }}>
+              <svg viewBox="0 0 560 380" className="w-full h-full">
+                <defs>
+                  <filter id="yieldGlow">
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                  </filter>
+                  <filter id="yieldGlowSm">
+                    <feGaussianBlur stdDeviation="2" result="blur" />
+                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                  </filter>
+                  <linearGradient id="barFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#fe8503" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="#fe8503" stopOpacity="0.2" />
+                  </linearGradient>
+                  <linearGradient id="barFillDim" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
+                    <stop offset="100%" stopColor="rgba(255,255,255,0.03)" />
+                  </linearGradient>
+                </defs>
+
+                {/* Background grid */}
+                <pattern id="yieldGrid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.025)" strokeWidth="0.5" />
+                </pattern>
+                <rect width="560" height="380" fill="url(#yieldGrid)" />
+
+                {/* Horizontal baseline */}
+                <line x1="60" y1="310" x2="520" y2="310" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+
+                {/* Y-axis labels */}
+                {[0, 25, 50, 75, 100].map((pct, i) => (
+                  <text key={i} x="50" y={310 - i * 52.5 + 4} textAnchor="end"
+                    fill="rgba(255,255,255,0.18)" fontSize="10" fontFamily="monospace">{pct}%</text>
+                ))}
+
+                {/* Occupancy bars — before optimization */}
+                {[
+                  { x: 80,  h: 105, label: "Mon" },
+                  { x: 140, h: 126, label: "Tue" },
+                  { x: 200, h: 84,  label: "Wed" },
+                  { x: 260, h: 147, label: "Thu" },
+                  { x: 320, h: 63,  label: "Fri" },
+                ].map((bar, i) => (
+                  <g key={i}>
+                    <motion.rect
+                      x={bar.x} y={310 - bar.h} width="28" height={bar.h} rx="3"
+                      fill="url(#barFillDim)"
+                      initial={{ scaleY: 0, originY: 1 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: "easeOut" }}
+                      style={{ transformOrigin: `${bar.x + 14}px 310px` }}
+                    />
+                    <text x={bar.x + 14} y="328" textAnchor="middle"
+                      fill="rgba(255,255,255,0.2)" fontSize="9" fontFamily="monospace">{bar.label}</text>
+                  </g>
+                ))}
+
+                {/* Divider */}
+                <line x1="370" y1="40" x2="370" y2="330" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="4 3" />
+                <text x="375" y="55" fill="rgba(254,133,3,0.35)" fontSize="9" fontFamily="monospace" letterSpacing="1">AFTER TRAFLINQ</text>
+
+                {/* Optimized bars — after */}
+                {[
+                  { x: 385, h: 210, label: "Mon" },
+                  { x: 435, h: 231, label: "Tue" },
+                  { x: 485, h: 220, label: "Wed" },
+                ].map((bar, i) => (
+                  <g key={i}>
+                    <motion.rect
+                      x={bar.x} y={310 - bar.h} width="28" height={bar.h} rx="3"
+                      fill="url(#barFill)"
+                      filter="url(#yieldGlowSm)"
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, delay: 0.5 + i * 0.12, ease: "easeOut" }}
+                      style={{ transformOrigin: `${bar.x + 14}px 310px` }}
+                    />
+                    <text x={bar.x + 14} y="328" textAnchor="middle"
+                      fill="rgba(254,133,3,0.4)" fontSize="9" fontFamily="monospace">{bar.label}</text>
+                  </g>
+                ))}
+
+                {/* Occupancy % label on optimized bars */}
+                {[
+                  { x: 385, h: 210, pct: "91%" },
+                  { x: 435, h: 231, pct: "96%" },
+                  { x: 485, h: 220, pct: "94%" },
+                ].map((bar, i) => (
+                  <motion.text
+                    key={i}
+                    x={bar.x + 14} y={310 - bar.h - 8}
+                    textAnchor="middle"
+                    fill="#fe8503" fontSize="11" fontWeight="bold" fontFamily="monospace"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.9 + i * 0.12 }}
+                  >{bar.pct}</motion.text>
+                ))}
+
+                {/* Annotation line showing "avg 44% → 94%" */}
+                <motion.line
+                  x1="80" y1="163" x2="330" y2="163"
+                  stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="5 3"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.8 }}
+                />
+                <text x="200" y="155" textAnchor="middle" fill="rgba(255,255,255,0.15)" fontSize="9" fontFamily="monospace">Avg. 44% occupancy</text>
+
+                {/* Left label */}
+                <text x="200" y="370" textAnchor="middle" fill="rgba(255,255,255,0.15)" fontSize="9" fontFamily="monospace" letterSpacing="1">BEFORE</text>
+              </svg>
+
+              <div className="absolute bottom-3 right-4">
+                <span className="text-[9px] text-white/20 tracking-widest uppercase font-mono">Occupancy Analysis — Q2 2026</span>
+              </div>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
-              Eliminate Empty Seats, Maximize Savings
+          </motion.div>
+
+          {/* Right: Copy */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+            className="order-1 lg:order-2"
+          >
+            <span className="text-xs text-primary/60 tracking-widest uppercase font-medium">Core Pillar 02</span>
+            <p className="mt-2 text-sm text-white/30 tracking-wide">Predictive Logic</p>
+            <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight">
+              Engineered for Yield.
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Efficiently track and reduce unused seats to save money on fleet expenses. 
-              Our ghost seat management ensures you never pay for empty rides.
+            <p className="mt-6 text-lg leading-8 text-white/45">
+              Our system ensures your transit resources are utilized at their highest potential. By aligning capacity with real-time demand, Traflinq mitigates the cost of vacancy before it impacts your bottom line.
             </p>
 
-            <motion.div 
-              variants={listVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="mt-10 space-y-6"
-            >
-              {features.map((feature) => (
-                <motion.div variants={itemVariants} key={feature.title} className="flex gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                    <feature.icon className="h-6 w-6 text-primary" />
+            <div className="mt-10 space-y-6">
+              {bullets.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.15 }}
+                  className="flex gap-4"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+                    <item.icon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-foreground">{feature.title}</h3>
-                    <p className="mt-1 text-muted-foreground">{feature.description}</p>
+                    <h3 className="text-base font-semibold text-white">{item.title}</h3>
+                    <p className="mt-1 text-sm text-white/40">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Right Visual */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-primary/5 rounded-3xl blur-2xl" />
-            <div className="relative bg-white/80 backdrop-blur-md rounded-2xl border border-gray-100 p-8 shadow-2xl shadow-primary/5">
-              <div className="flex items-center justify-between mb-6">
-                <h4 className="font-semibold text-foreground">Seat Occupancy Dashboard</h4>
-                <motion.span 
-                  animate={{ opacity: [1, 0.5, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-xs text-primary font-semibold flex items-center gap-1"
-                >
-                  <span className="h-2 w-2 rounded-full bg-primary" /> Live
-                </motion.span>
-              </div>
-              
-              {/* Shuttle visualization */}
-              <div className="space-y-4">
-                <div className="p-4 bg-secondary/30 border border-secondary/50 rounded-xl hover:bg-secondary/50 transition-colors">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium text-foreground">Shuttle A - Route 1</span>
-                    <span className="text-sm text-primary font-semibold">85% Full</span>
-                  </div>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {[1,2,3,4,5,6,7,8,9,10,11,12].map((seat, i) => (
-                      <motion.div 
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ delay: i * 0.05, type: "spring" }}
-                        viewport={{ once: true }}
-                        key={seat}
-                        className={`h-6 w-6 rounded ${seat <= 10 ? 'bg-primary shadow-sm shadow-primary/20' : 'bg-border/50'}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="p-4 bg-secondary/30 border border-secondary/50 rounded-xl hover:bg-secondary/50 transition-colors">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium text-foreground">Shuttle B - Route 2</span>
-                    <span className="text-sm text-primary font-semibold">100% Full</span>
-                  </div>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {[1,2,3,4,5,6,7,8,9,10,11,12].map((seat, i) => (
-                      <motion.div 
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ delay: (i * 0.05) + 0.3, type: "spring" }}
-                        viewport={{ once: true }}
-                        key={seat}
-                        className="h-6 w-6 rounded bg-primary shadow-sm shadow-primary/20"
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <div className="p-4 bg-secondary/30 border border-secondary/50 rounded-xl hover:bg-secondary/50 transition-colors relative overflow-hidden">
-                  <motion.div 
-                    initial={{ x: "-100%" }}
-                    whileInView={{ x: "100%" }}
-                    transition={{ duration: 1.5, delay: 1 }}
-                    viewport={{ once: true }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent skew-x-12"
-                  />
-                  <div className="flex items-center justify-between mb-3 relative z-10">
-                    <span className="text-sm font-medium text-foreground">Shuttle C - Route 3</span>
-                    <span className="text-sm text-muted-foreground font-semibold">50% Full</span>
-                  </div>
-                  <div className="flex gap-1.5 flex-wrap relative z-10">
-                    {[1,2,3,4,5,6,7,8,9,10,11,12].map((seat, i) => (
-                      <motion.div 
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ delay: (i * 0.05) + 0.6, type: "spring" }}
-                        viewport={{ once: true }}
-                        key={seat}
-                        className={`h-6 w-6 rounded ${seat <= 6 ? 'bg-primary shadow-sm shadow-primary/20' : 'bg-border/50'}`}
-                      />
-                    ))}
-                  </div>
-                  <motion.p 
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.2 }}
-                    viewport={{ once: true }}
-                    className="mt-3 text-xs text-primary font-medium flex items-center gap-1 relative z-10"
-                  >
-                    <Zap className="h-3 w-3" /> Optimization suggested: Merge with Route 1
-                  </motion.p>
-                </div>
-              </div>
-
-              {/* Summary */}
-              <div className="mt-6 pt-6 border-t border-border">
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  {[
-                    { value: "36", label: "Total Seats", color: "text-foreground" },
-                    { value: "28", label: "Occupied", color: "text-primary" },
-                    { value: "78%", label: "Efficiency", color: "text-foreground" }
-                  ].map((stat, i) => (
-                    <motion.div 
-                      key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.5 + (i * 0.1) }}
-                      viewport={{ once: true }}
-                    >
-                      <p className={`text-2xl font-bold ${stat.color}`}>{stat.value}</p>
-                      <p className="text-xs text-muted-foreground">{stat.label}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>
