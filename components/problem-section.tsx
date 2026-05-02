@@ -1,6 +1,25 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { Database, DollarSign, TrendingUp } from "lucide-react"
+
+const pillars = [
+  {
+    icon: Database,
+    label: "Eliminate Data Silos",
+    desc: "Consolidate vendors, routes, and billing into one source of truth.",
+  },
+  {
+    icon: DollarSign,
+    label: "Mitigate Fiscal Leakage",
+    desc: "Stop the drain of unverified expenses with automated audit trails.",
+  },
+  {
+    icon: TrendingUp,
+    label: "Drive Operational Excellence",
+    desc: "Move from reactive management to predictive orchestration.",
+  },
+]
 
 export function ProblemSection() {
   return (
@@ -15,32 +34,16 @@ export function ProblemSection() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <span className="text-xs text-primary/60 tracking-widest uppercase font-medium">The Problem</span>
+            <span className="text-xs text-primary/60 tracking-widest uppercase font-medium">The Strategic Gap</span>
             <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight">
-              Beyond Static Logistics.
+              Beyond Fragmented Mobility.
             </h2>
             <p className="mt-6 text-lg leading-8 text-white/45">
-              Traditional transport models operate with inherent blind spots. When systems are fragmented, fiscal leakage is inevitable. Traflinq replaces guesswork with automated governance.
+              Corporate transport is often a black box of unverified data and unoptimized spend. Traflinq replaces manual oversight with automated governance, ensuring every mile driven aligns with your strategic bottom line.
             </p>
 
-            <div className="mt-12 space-y-5">
-              {[
-                {
-                  label: "Fragmented Systems",
-                  desc: "Siloed data creates operational dead zones — no single source of truth.",
-                  before: true,
-                },
-                {
-                  label: "Fiscal Leakage",
-                  desc: "Unused capacity and untracked trips silently drain budgets.",
-                  before: true,
-                },
-                {
-                  label: "Automated Governance",
-                  desc: "Traflinq closes every loop — from booking to billing to compliance.",
-                  before: false,
-                },
-              ].map((item, i) => (
+            <div className="mt-12 space-y-6">
+              {pillars.map((item, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, x: -20 }}
@@ -49,24 +52,12 @@ export function ProblemSection() {
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.12 }}
                   className="flex items-start gap-4"
                 >
-                  <div
-                    className={`mt-1 h-5 w-5 shrink-0 rounded-full flex items-center justify-center ${
-                      item.before
-                        ? "bg-white/[0.05] border border-white/10"
-                        : "bg-primary/20 border border-primary/40"
-                    }`}
-                  >
-                    {item.before ? (
-                      <span className="text-white/20 text-[10px]">✕</span>
-                    ) : (
-                      <span className="text-primary text-[10px]">✓</span>
-                    )}
+                  <div className="mt-0.5 h-11 w-11 shrink-0 rounded-xl flex items-center justify-center bg-primary/10 border border-primary/20">
+                    <item.icon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className={`text-sm font-semibold ${item.before ? "text-white/40" : "text-white"}`}>
-                      {item.label}
-                    </p>
-                    <p className="text-sm text-white/30 mt-0.5">{item.desc}</p>
+                    <p className="text-sm font-semibold text-white">{item.label}</p>
+                    <p className="text-sm text-white/40 mt-0.5">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}

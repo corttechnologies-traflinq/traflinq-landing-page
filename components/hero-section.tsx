@@ -31,7 +31,7 @@ export function HeroSection() {
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs text-primary/80 tracking-widest uppercase font-medium">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                Institutional Mobility Intelligence
+                Enterprise Mobility Infrastructure
               </span>
             </motion.div>
 
@@ -41,8 +41,8 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-[4.25rem] leading-[1.05]"
             >
-              The Intelligence Layer for{" "}
-              <span className="text-primary">Managed Mobility.</span>
+              The Operating System for{" "}
+              <span className="text-primary">Corporate Mobility.</span>
             </motion.h1>
 
             <motion.p
@@ -51,7 +51,7 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.35 }}
               className="mt-8 text-lg leading-8 text-white/45 max-w-xl"
             >
-              Traflinq is the architectural foundation for corporate transit. We provide the logic, oversight, and telemetry required to orchestrate workforce movement at an institutional scale.
+              Centralize fragmented transport operations into a single intelligence layer. Orchestrate enterprise movement, eliminate cost leakage, and achieve total visibility through a unified platform.
             </motion.p>
 
             <motion.div
@@ -64,7 +64,7 @@ export function HeroSection() {
                 size="lg"
                 className="bg-primary text-white hover:bg-primary/90 px-8 gap-2 shadow-lg shadow-primary/20 text-sm tracking-wide"
               >
-                Request a Strategic Briefing
+                Request Enterprise Demo
                 <ArrowRight className="h-4 w-4" />
               </Button>
               <Button

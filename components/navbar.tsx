@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button"
 
 const navItems = [
   { name: "Platform", href: "#command-center" },
-  { name: "Solutions", href: "#predictive-logic" },
+  { name: "Solutions", href: "#command-center" },
   { name: "Security", href: "#institutional-trust" },
-  { name: "About", href: "#home" },
+  { name: "About", href: "#about" },
 ]
 
 export function Navbar() {
@@ -24,9 +24,9 @@ export function Navbar() {
             <Image
               src="/traflinq_dark_no_tagline-Photoroom.png"
               alt="Traflinq"
-              width={160}
-              height={40}
-              className="h-10 w-auto"
+              width={220}
+              height={56}
+              className="h-14 w-auto"
               priority
             />
           </Link>

@@ -5,10 +5,7 @@ import { HeroSection } from "@/components/hero-section"
 // Below-the-fold sections: code-split for faster initial load
 const ProblemSection = dynamic(() => import("@/components/problem-section").then(m => ({ default: m.ProblemSection })))
 const RouteOptimizationSection = dynamic(() => import("@/components/route-optimization-section").then(m => ({ default: m.RouteOptimizationSection })))
-const GhostSeatSection = dynamic(() => import("@/components/ghost-seat-section").then(m => ({ default: m.GhostSeatSection })))
-const MobileIntegrationSection = dynamic(() => import("@/components/mobile-integration-section").then(m => ({ default: m.MobileIntegrationSection })))
-const FleetServicesSection = dynamic(() => import("@/components/fleet-services-section").then(m => ({ default: m.FleetServicesSection })))
-const LeakageCalculator = dynamic(() => import("@/components/leakage-calculator").then(m => ({ default: m.LeakageCalculator })))
+const AboutSection = dynamic(() => import("@/components/about-section").then(m => ({ default: m.AboutSection })))
 const OperationalSuccessReports = dynamic(() => import("@/components/operational-success-reports").then(m => ({ default: m.OperationalSuccessReports })))
 const CTASection = dynamic(() => import("@/components/cta-section").then(m => ({ default: m.CTASection })))
 const Footer = dynamic(() => import("@/components/footer").then(m => ({ default: m.Footer })))
@@ -20,10 +17,7 @@ export default function Home() {
       <HeroSection />
       <ProblemSection />
       <RouteOptimizationSection />
-      <GhostSeatSection />
-      <LeakageCalculator />
-      <MobileIntegrationSection />
-      <FleetServicesSection />
+      <AboutSection />
       <OperationalSuccessReports />
       <CTASection />
       <Footer />
