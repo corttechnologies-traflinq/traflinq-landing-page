@@ -306,7 +306,7 @@ function IsometricMap() {
           <line x1="261" y1="335" x2="283" y2="363" stroke="#fe8503" strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="285" y="373" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="start"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            DISTRIBUTION CENTER
+            TRAFLINQ HQ
           </text>
           <text x="285" y="384" fontSize="8" fontWeight="800" fill="#fe8503" letterSpacing="0.14em" textAnchor="start" opacity="0.95"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.85)", strokeWidth: 2.5, strokeLinejoin: "round" }}>
