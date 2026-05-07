@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/hero-section"
 const ProblemSection = dynamic(() => import("@/components/problem-section").then(m => ({ default: m.ProblemSection })))
 const RouteOptimizationSection = dynamic(() => import("@/components/route-optimization-section").then(m => ({ default: m.RouteOptimizationSection })))
 const AboutSection = dynamic(() => import("@/components/about-section").then(m => ({ default: m.AboutSection })))
+const TeamSection = dynamic(() => import("@/components/team-section").then(m => ({ default: m.TeamSection })))
 const OperationalSuccessReports = dynamic(() => import("@/components/operational-success-reports").then(m => ({ default: m.OperationalSuccessReports })))
 const CTASection = dynamic(() => import("@/components/cta-section").then(m => ({ default: m.CTASection })))
 const Footer = dynamic(() => import("@/components/footer").then(m => ({ default: m.Footer })))
@@ -18,6 +19,7 @@ export default function Home() {
       <ProblemSection />
       <RouteOptimizationSection />
       <AboutSection />
+      <TeamSection />
       <OperationalSuccessReports />
       <CTASection />
       <Footer />

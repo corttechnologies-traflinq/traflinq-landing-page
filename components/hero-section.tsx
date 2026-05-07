@@ -402,11 +402,11 @@ function IsometricMap() {
           <line x1="261" y1="335" x2="283" y2="363" stroke="#fe8503" strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="285" y="373" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="start"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            TRAFLINQ HQ
+            HEAD QUARTER / PLANT
           </text>
           <text x="285" y="384" fontSize="8" fontWeight="800" fill="#fe8503" letterSpacing="0.14em" textAnchor="start" opacity="0.95"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.85)", strokeWidth: 2.5, strokeLinejoin: "round" }}>
-            HUB
+            WORK / DESTINATION
           </text>
         </g>
 
@@ -417,11 +417,7 @@ function IsometricMap() {
           <line x1="397" y1="318" x2="419" y2="286" stroke={CAR_COLORS[0].body} strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="421" y="282" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="start"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            ZONE A
-          </text>
-          <text x="421" y="293" fontSize="8" fontWeight="800" fill={CAR_COLORS[0].body} letterSpacing="0.14em" textAnchor="start" opacity="0.95"
-            style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.85)", strokeWidth: 2.5, strokeLinejoin: "round" }}>
-            LAST-MILE
+            ROUTE A
           </text>
         </g>
 
@@ -432,11 +428,7 @@ function IsometricMap() {
           <line x1="87" y1="324" x2="65" y2="292" stroke={CAR_COLORS[1].body} strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="63" y="288" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="end"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            ZONE B
-          </text>
-          <text x="63" y="299" fontSize="8" fontWeight="800" fill={CAR_COLORS[1].body} letterSpacing="0.14em" textAnchor="end" opacity="0.95"
-            style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.85)", strokeWidth: 2.5, strokeLinejoin: "round" }}>
-            LAST-MILE
+            ROUTE B
           </text>
         </g>
 
@@ -447,11 +439,7 @@ function IsometricMap() {
           <line x1="252" y1="234" x2="274" y2="202" stroke={CAR_COLORS[2].body} strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="276" y="198" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="start"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            ZONE C
-          </text>
-          <text x="276" y="209" fontSize="8" fontWeight="800" fill={CAR_COLORS[2].body} letterSpacing="0.14em" textAnchor="start" opacity="0.95"
-            style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.85)", strokeWidth: 2.5, strokeLinejoin: "round" }}>
-            LAST-MILE
+            ROUTE C
           </text>
         </g>
 
@@ -472,9 +460,9 @@ function IsometricMap() {
 
         {/* Car legend */}
         {[
-          { label: "Zone A Car", color: CAR_COLORS[0].body, x: 10, y: 455 },
-          { label: "Zone B Car", color: CAR_COLORS[1].body, x: 90, y: 455 },
-          { label: "Zone C Car", color: CAR_COLORS[2].body, x: 170, y: 455 },
+          { label: "Route A", color: CAR_COLORS[0].body, x: 10, y: 455 },
+          { label: "Route B", color: CAR_COLORS[1].body, x: 90, y: 455 },
+          { label: "Route C", color: CAR_COLORS[2].body, x: 170, y: 455 },
         ].map((item) => (
           <g key={item.label}>
             <circle cx={item.x + 5} cy={item.y - 3} r="4" fill={item.color} opacity="0.9" />
