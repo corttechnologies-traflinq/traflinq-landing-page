@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronRight } from "lucide-react"
 import { motion, useAnimationFrame } from "framer-motion"
 import { useRef, useState, useCallback } from "react"
+import Link from "next/link"
+
+const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Waypoint { x: number; y: number }
@@ -537,21 +540,25 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.5 }}
               className="mt-12 flex flex-col sm:flex-row items-start gap-4"
             >
-              <Button
-                size="lg"
-                className="bg-[#fe8503] text-white hover:bg-[#fe8503]/90 px-8 gap-2 shadow-lg shadow-[#fe8503]/20 text-sm tracking-wide"
-              >
-                Request Enterprise Demo
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button
-                size="lg"
-                variant="ghost"
-                className="text-white/50 hover:text-white hover:bg-white/5 gap-1.5 px-6 text-sm tracking-wide"
-              >
-                Explore the Platform
-                <ChevronRight className="h-4 w-4" />
-              </Button>
+              <Link href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
+                <Button
+                  size="lg"
+                  className="bg-[#fe8503] text-white hover:bg-[#fe8503]/90 px-8 gap-2 shadow-lg shadow-[#fe8503]/20 text-sm tracking-wide"
+                >
+                  Request Enterprise Demo
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="#briefing">
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="text-white/50 hover:text-white hover:bg-white/5 gap-1.5 px-6 text-sm tracking-wide"
+                >
+                  Explore the Platform
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
 

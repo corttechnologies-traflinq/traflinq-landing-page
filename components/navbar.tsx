@@ -3,8 +3,10 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
 
 const navItems = [
   { name: "Platform", href: "#command-center" },
@@ -59,13 +61,16 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Button
-            variant="outline"
-            className="border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary transition-all text-sm tracking-wide"
-          >
-            Request a Briefing
-          </Button>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
+          <Link href="#briefing">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary transition-all text-xs tracking-wide"
+            >
+              Request a Briefing
+            </Button>
+          </Link>
         </div>
       </nav>
 
@@ -82,10 +87,12 @@ export function Navbar() {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-4">
-              <Button className="w-full bg-primary text-white hover:bg-primary/90">
-                Request a Briefing
-              </Button>
+            <div className="pt-4 space-y-3">
+              <Link href="#briefing" className="block w-full" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="w-full bg-primary text-white hover:bg-primary/90">
+                  Request a Briefing
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
