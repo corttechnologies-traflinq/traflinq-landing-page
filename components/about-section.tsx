@@ -24,12 +24,12 @@ export function AboutSection() {
             Based at the intersection of logistics and software engineering, our team is dedicated to eliminating fiscal leakage and providing total visibility for the world's most complex organizations.
           </p>
 
-          <div className="mt-10 flex items-center gap-8">
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-6">
             <div>
               <p className="text-3xl font-bold text-white tracking-tight">99.9%</p>
               <p className="text-[10px] text-white/20 uppercase tracking-widest mt-1 font-semibold">System Uptime</p>
             </div>
-            <div className="h-10 w-px bg-white/10" />
+            <div className="hidden sm:block h-10 w-px bg-white/10" />
             <div>
               <p className="text-3xl font-bold text-white tracking-tight">Zero</p>
               <p className="text-[10px] text-white/20 uppercase tracking-widest mt-1 font-semibold">Data Silos</p>

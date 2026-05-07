@@ -297,7 +297,7 @@ export function BriefingFormSection() {
                   initial={{ opacity: 0, scale: 0.97 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="rounded-2xl border border-primary/20 bg-primary/[0.04] p-10 flex flex-col items-start gap-6"
+                  className="rounded-2xl border border-primary/20 bg-primary/[0.04] p-6 sm:p-10 flex flex-col items-start gap-6"
                 >
                   <div className="h-14 w-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
                     <CheckCircle2 className="h-7 w-7 text-primary" />

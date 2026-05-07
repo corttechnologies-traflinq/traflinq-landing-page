@@ -210,7 +210,7 @@ function IsometricMap() {
 
   return (
     <div
-      className="relative w-full aspect-[530/560] lg:aspect-auto lg:h-full min-h-[540px] rounded-3xl border overflow-hidden"
+      className="relative w-full aspect-[530/560] lg:aspect-auto lg:h-full min-h-[400px] sm:min-h-[540px] rounded-3xl border overflow-hidden"
       style={{
         background: "radial-gradient(at 50% 30%, rgba(254,133,3,0.15) 0%, #080b14 70%)",
         borderColor: "rgba(255,255,255,0.06)",
@@ -519,7 +519,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-[4.25rem] leading-[1.05]"
+              className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-[4.25rem] leading-[1.1] sm:leading-[1.05]"
             >
               The Operating System for{" "}
               <span className="text-[#fe8503]">Corporate Mobility.</span>
