@@ -123,21 +123,29 @@ const CAR_COLORS = [
   { body: "#a78bfa", top: "#c4b5fd", head: "#f0ebff" }, // Zone C – violet
 ]
 
-// ─── Car component ────────────────────────────────────────────────────────────
-interface CarProps {
-  waypoints: Waypoint[]
-  progress: number
-  color: typeof CAR_COLORS[0]
-  opacity?: number
+function getCarOpacity(t: number) {
+  const distToDest = Math.abs(t - 0.5) // 0 = at destination
+  const distToHub = Math.min(t, 1 - t) // 0 = at hub start/end
+
+  const fadeRange = 0.07 // how wide the fade zone is
+
+  // Fade near destination (entering/exiting building)
+  const destFade = distToDest < fadeRange ? distToDest / fadeRange : 1
+  // Fade near hub (entering/exiting hub)
+  const hubFade = distToHub < fadeRange ? distToHub / fadeRange : 1
+
+  return Math.min(destFade, hubFade)
 }
 
-function Car({ waypoints, progress, color, opacity = 1 }: CarProps) {
+function Car({ waypoints, progress, color }: CarProps) {
   const pos = getPositionOnPath(waypoints, progress)
   const angle = getAngle(waypoints, progress)
+  const op = getCarOpacity(progress)
+
   return (
     <g
       transform={`translate(${pos.x},${pos.y}) rotate(${angle})`}
-      opacity={opacity}
+      opacity={op}
       style={{ filter: "drop-shadow(0 0 6px " + color.body + "88)" }}
     >
       <ellipse cx="0" cy="8" rx="11" ry="3.5" fill="#000" opacity="0.4" style={{ filter: "blur(2px)" }} />
@@ -284,6 +292,20 @@ function IsometricMap() {
         style={{ opacity: transitioning ? 0.3 : 1, transition: "opacity 0.4s ease" }}
       >
         <defs>
+          {/* Building clip paths */}
+          <clipPath id="clip-hub">
+            <polygon points="216,345 261,371 306,345 261,319" />
+          </clipPath>
+          <clipPath id="clip-a">
+            <polygon points="380,323 397,333 414,323 397,313" />
+          </clipPath>
+          <clipPath id="clip-b">
+            <polygon points="70,329 87,339 104,329 87,319" />
+          </clipPath>
+          <clipPath id="clip-c">
+            <polygon points="235,239 252,249 269,239 252,229" />
+          </clipPath>
+
           <linearGradient id="grad-top-secondary" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#D1FAE5" /><stop offset="100%" stopColor="#6EE7B7" />
           </linearGradient>
@@ -306,26 +328,13 @@ function IsometricMap() {
 
         {/* Platform */}
         <g pointerEvents="none">
-          <ellipse cx="200" cy="195" rx="300" ry="60" fill="#fe8503" opacity="0.04" />
           <ellipse cx="280" cy="500" rx="200" ry="8" fill="#000" opacity="0.38" style={{ filter: "blur(8px)" }} />
           <path d="M 242 458 L 484 318 L 484 350 L 242 490 Z" fill="#04060e" stroke="#fe8503" strokeOpacity="0.12" strokeWidth="1" />
           <path d="M 0 318 L 242 458 L 242 490 L 0 350 Z" fill="#1c1a0a" stroke="#fe8503" strokeOpacity="0.18" strokeWidth="1" />
           <path d="M 242 458 L 484 318 L 242 178 L 0 318 Z" fill="#0d0a02" stroke="#fe8503" strokeOpacity="0.38" strokeWidth="1.2" />
           <line x1="242" y1="458" x2="484" y2="318" stroke="#fe8503" strokeOpacity="0.7" strokeWidth="2" />
           <line x1="242" y1="458" x2="0" y2="318" stroke="#fe8503" strokeOpacity="0.65" strokeWidth="2" />
-          <line x1="242" y1="178" x2="0" y2="318" stroke="white" strokeOpacity="0.10" strokeWidth="0.8" />
-          <line x1="242" y1="178" x2="484" y2="318" stroke="white" strokeOpacity="0.08" strokeWidth="0.8" />
           <line x1="242" y1="458" x2="242" y2="490" stroke="#fe8503" strokeOpacity="0.55" strokeWidth="1.8" />
-          <line x1="484" y1="318" x2="484" y2="350" stroke="#000" strokeOpacity="0.60" strokeWidth="1.2" />
-          <line x1="0" y1="318" x2="0" y2="350" stroke="#fe8503" strokeOpacity="0.25" strokeWidth="1" />
-          <g opacity="0.18">
-            {[24,48,72,96,120,144,168,192,216].map((offset, i) => (
-              <line key={`sg${i}`} x1={242-offset} y1={458-offset*0.578} x2={484-offset} y2={318-offset*0.578} stroke="#fe8503" strokeWidth="0.5" />
-            ))}
-            {[24,48,72,96,120,144,168,192,216].map((offset, i) => (
-              <line key={`sg2${i}`} x1={242+offset} y1={458-offset*0.578} x2={0+offset} y2={318-offset*0.578} stroke="#fe8503" strokeWidth="0.5" />
-            ))}
-          </g>
         </g>
 
         {/* Roads */}
@@ -346,10 +355,32 @@ function IsometricMap() {
           </g>
         ))}
 
-        {/* Buildings */}
+        {/* Buildings BOTTOM layer (side/back faces) */}
         {/* Hub */}
-        <g transform="translate(261,335)">
+        <g transform="translate(261,335)" pointerEvents="none">
           <polygon points="-45,10 -17.3,26 -17.3,-9 -45,-25" fill="url(#grad-side-hub)" />
+        </g>
+        {/* Zone A */}
+        <g transform="translate(397,318)" pointerEvents="none">
+          <polygon points="-17.3,3 -5.2,10 -5.2,-15 -17.3,-22" fill="url(#grad-side-secondary)" />
+        </g>
+        {/* Zone B */}
+        <g transform="translate(87,324)" pointerEvents="none">
+          <polygon points="-17.3,3 -5.2,10 -5.2,-15 -17.3,-22" fill="url(#grad-side-secondary)" />
+        </g>
+        {/* Zone C */}
+        <g transform="translate(252,234)" pointerEvents="none">
+          <polygon points="-17.3,3 -5.2,10 -5.2,-15 -17.3,-22" fill="url(#grad-side-secondary)" />
+        </g>
+
+        {/* Animated Cars - between back and front faces */}
+        <Car waypoints={routes[0]} progress={progresses[0]} color={CAR_COLORS[0]} />
+        <Car waypoints={routes[1]} progress={progresses[1]} color={CAR_COLORS[1]} />
+        <Car waypoints={routes[2]} progress={progresses[2]} color={CAR_COLORS[2]} />
+
+        {/* Buildings FRONT layer (front faces + top) */}
+        {/* Hub */}
+        <g transform="translate(261,335)" pointerEvents="none">
           <polygon points="-17.3,26 45,-10 45,-45 -17.3,-9" fill="url(#grad-front-hub)" />
           <polygon points="-17.3,-9 45,-45 17.3,-61 -45,-25" fill="url(#grad-top-hub)" />
           <polyline points="-17.3,-9 45,-45 17.3,-61 -45,-25 -17.3,-9" fill="none" stroke="white" strokeOpacity="0.15" strokeWidth="0.6" />
@@ -360,8 +391,7 @@ function IsometricMap() {
         </g>
 
         {/* Zone A */}
-        <g transform="translate(397,318)">
-          <polygon points="-17.3,3 -5.2,10 -5.2,-15 -17.3,-22" fill="url(#grad-side-secondary)" />
+        <g transform="translate(397,318)" pointerEvents="none">
           <polygon points="-5.2,10 17.3,-3 17.3,-28 -5.2,-15" fill="url(#grad-front-secondary)" />
           <polygon points="-5.2,-15 17.3,-28 5.2,-35 -17.3,-22" fill="url(#grad-top-secondary)" />
           <polyline points="-5.2,-15 17.3,-28 5.2,-35 -17.3,-22 -5.2,-15" fill="none" stroke="white" strokeOpacity="0.15" strokeWidth="0.5" />
@@ -371,8 +401,7 @@ function IsometricMap() {
         </g>
 
         {/* Zone B */}
-        <g transform="translate(87,324)">
-          <polygon points="-17.3,3 -5.2,10 -5.2,-15 -17.3,-22" fill="url(#grad-side-secondary)" />
+        <g transform="translate(87,324)" pointerEvents="none">
           <polygon points="-5.2,10 17.3,-3 17.3,-28 -5.2,-15" fill="url(#grad-front-secondary)" />
           <polygon points="-5.2,-15 17.3,-28 5.2,-35 -17.3,-22" fill="url(#grad-top-secondary)" />
           <polyline points="-5.2,-15 17.3,-28 5.2,-35 -17.3,-22 -5.2,-15" fill="none" stroke="white" strokeOpacity="0.15" strokeWidth="0.5" />
@@ -382,8 +411,7 @@ function IsometricMap() {
         </g>
 
         {/* Zone C */}
-        <g transform="translate(252,234)">
-          <polygon points="-17.3,3 -5.2,10 -5.2,-15 -17.3,-22" fill="url(#grad-side-secondary)" />
+        <g transform="translate(252,234)" pointerEvents="none">
           <polygon points="-5.2,10 17.3,-3 17.3,-28 -5.2,-15" fill="url(#grad-front-secondary)" />
           <polygon points="-5.2,-15 17.3,-28 5.2,-35 -17.3,-22" fill="url(#grad-top-secondary)" />
           <polyline points="-5.2,-15 17.3,-28 5.2,-35 -17.3,-22 -5.2,-15" fill="none" stroke="white" strokeOpacity="0.15" strokeWidth="0.5" />
@@ -391,11 +419,6 @@ function IsometricMap() {
           <polygon points="-3.6,1.1 2.4,-2.4 2.4,-8.4 -3.6,-4.9" fill="#FDE68A" opacity="0.9" />
           <polygon points="10.1,-6.8 16.1,-10.3 16.1,-16.3 10.1,-12.8" fill="#FDE68A" opacity="0.9" />
         </g>
-
-        {/* Animated Cars */}
-        <Car waypoints={routes[0]} progress={progresses[0]} color={CAR_COLORS[0]} />
-        <Car waypoints={routes[1]} progress={progresses[1]} color={CAR_COLORS[1]} />
-        <Car waypoints={routes[2]} progress={progresses[2]} color={CAR_COLORS[2]} />
 
         {/* Location Labels */}
         {/* Hub */}
@@ -449,13 +472,11 @@ function IsometricMap() {
         {/* Route length indicator badges */}
         {isBefore ? (
           <g>
-            {/* Before: warning badges */}
             <rect x="160" y="408" width="164" height="18" rx="9" fill="rgba(50,0,0,0.92)" stroke="#ef4444" strokeOpacity="0.7" strokeWidth="1" />
             <text x="242" y="420.5" fontSize="8.5" fontWeight="700" fill="#ef4444" textAnchor="middle" letterSpacing="0.05em">3× LONGER ROUTES — NO OPTIMIZATION</text>
           </g>
         ) : (
           <g>
-            {/* After: success badges */}
             <rect x="168" y="408" width="148" height="18" rx="9" fill="rgba(0,30,0,0.92)" stroke="#22c55e" strokeOpacity="0.7" strokeWidth="1" />
             <text x="242" y="420.5" fontSize="8.5" fontWeight="700" fill="#22c55e" textAnchor="middle" letterSpacing="0.05em">ROUTES OPTIMIZED — 60% SAVED</text>
           </g>
@@ -463,13 +484,13 @@ function IsometricMap() {
 
         {/* Car legend */}
         {[
-          { label: "Route A", color: CAR_COLORS[0].body, x: 10, y: 455 },
-          { label: "Route B", color: CAR_COLORS[1].body, x: 90, y: 455 },
-          { label: "Route C", color: CAR_COLORS[2].body, x: 170, y: 455 },
+          { label: "Route A", color: "#fe8503", x: 15, y: 452 },
+          { label: "Route B", color: "#22d3ee", x: 95, y: 452 },
+          { label: "Route C", color: "#a78bfa", x: 175, y: 452 },
         ].map((item) => (
-          <g key={item.label}>
-            <circle cx={item.x + 5} cy={item.y - 3} r="4" fill={item.color} opacity="0.9" />
-            <text x={item.x + 13} y={item.y} fontSize="7.5" fontWeight="700" fill="white" opacity="0.65" letterSpacing="0.06em"
+          <g key={item.label} pointerEvents="none">
+            <circle cx={item.x} cy={item.y} r="4" fill={item.color} opacity="0.9" />
+            <text x={item.x + 8} y={item.y + 4} fontSize="7.5" fontWeight="700" fill="white" opacity="0.65" letterSpacing="0.06em"
               style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.8)", strokeWidth: 2 }}>
               {item.label.toUpperCase()}
             </text>
