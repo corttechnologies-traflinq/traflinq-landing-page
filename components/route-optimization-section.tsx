@@ -2,6 +2,7 @@
 
 import { Monitor, BrainCircuit, Layers } from "lucide-react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 const pillars = [
   {
@@ -10,6 +11,7 @@ const pillars = [
     title: "The Command Center",
     description:
       "A high-fidelity dashboard designed for the modern enterprise. Monitor fleet health, map demand in real-time, and manage exceptions before they impact your operations.",
+    image: "/command-center-preview.png"
   },
   {
     icon: BrainCircuit,
@@ -17,13 +19,15 @@ const pillars = [
     title: "Fiscal Intelligence Engine",
     description:
       "Our proprietary logic identifies inefficiencies and cost-saving opportunities across your entire mobility stack. Achieve capital efficiency through data-driven resource allocation.",
+    image: "/fleet-data-preview.png"
   },
   {
     icon: Layers,
-    tag: "Enterprise-Grade Architecture",
-    title: "The Integration Layer",
+    tag: "Predictive Analytics",
+    title: "The Intelligence Layer",
     description:
-      "Built to scale. Traflinq integrates seamlessly with your existing ERP, HR, and security protocols, ensuring a frictionless deployment across regional or global offices.",
+      "Built to scale. Traflinq's intelligence layer processes vast datasets to provide predictive insights, ensuring your mobility strategy is always one step ahead.",
+    image: "/ai-insights-preview.png"
   },
 ]
 
@@ -62,31 +66,44 @@ export function RouteOptimizationSection() {
                 delay: i * 0.2, 
                 ease: [0.21, 0.45, 0.32, 0.9] 
               }}
-              className="relative group rounded-2xl border border-white/[0.07] bg-white/[0.025] p-8 overflow-hidden hover:border-primary/30 hover:bg-white/[0.04] transition-all duration-300"
+              className="relative group rounded-2xl border border-white/[0.07] bg-white/[0.025] p-8 overflow-hidden hover:border-primary/30 hover:bg-white/[0.04] transition-all duration-500"
             >
-              {/* Subtle glow on hover */}
-              <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-b from-primary/5 to-transparent" />
-
-              {/* Pillar number */}
-              <span className="text-[10px] text-white/15 tracking-widest uppercase font-medium">
-                0{i + 1}
-              </span>
-
-              {/* Icon */}
-              <div className="mt-4 h-12 w-12 rounded-xl flex items-center justify-center bg-primary/10 border border-primary/20">
-                <pillar.icon className="h-6 w-6 text-primary" />
+              {/* Dashboard Preview Background */}
+              <div className="absolute inset-0 z-0 opacity-[0.12] group-hover:opacity-[0.25] transition-opacity duration-700 pointer-events-none">
+                <Image
+                  src={pillar.image}
+                  alt={pillar.title}
+                  fill
+                  className="object-cover object-center scale-110 group-hover:scale-100 transition-transform duration-1000"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080b14] via-transparent to-transparent" />
               </div>
 
-              {/* Tag / tagline */}
-              <p className="mt-5 text-[11px] text-primary/60 tracking-widest uppercase font-medium">
-                {pillar.tag}
-              </p>
+              {/* Subtle glow on hover */}
+              <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
 
-              {/* Title */}
-              <h3 className="mt-2 text-xl font-bold text-white leading-snug">{pillar.title}</h3>
+              <div className="relative z-10">
+                {/* Pillar number */}
+                <span className="text-[10px] text-white/15 tracking-widest uppercase font-medium">
+                  0{i + 1}
+                </span>
 
-              {/* Description */}
-              <p className="mt-3 text-sm text-white/40 leading-6">{pillar.description}</p>
+                {/* Icon */}
+                <div className="mt-4 h-12 w-12 rounded-xl flex items-center justify-center bg-primary/10 border border-primary/20">
+                  <pillar.icon className="h-6 w-6 text-primary" />
+                </div>
+
+                {/* Tag / tagline */}
+                <p className="mt-5 text-[11px] text-primary/60 tracking-widest uppercase font-medium">
+                  {pillar.tag}
+                </p>
+
+                {/* Title */}
+                <h3 className="mt-2 text-xl font-bold text-white leading-snug">{pillar.title}</h3>
+
+                {/* Description */}
+                <p className="mt-3 text-sm text-white/40 leading-6">{pillar.description}</p>
+              </div>
             </motion.div>
           ))}
         </div>
