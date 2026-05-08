@@ -12,9 +12,7 @@ export default function PrivacyPolicy() {
       <div className="absolute top-0 left-0 w-[50%] h-[50%] bg-primary/6 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <Link href="/" className="inline-flex items-center gap-2 text-white/30 hover:text-primary transition-colors mb-8">
-          <ArrowLeft size={16} /> Back to Home
-        </Link>
+
 
         <div className="space-y-12">
           <header className="space-y-4">

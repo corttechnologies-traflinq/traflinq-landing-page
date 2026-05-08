@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 
 const navItems = [
-  { name: "Platform", href: "#command-center" },
-  { name: "Solutions", href: "#command-center" },
-  { name: "Security", href: "#institutional-trust" },
-  { name: "About", href: "#about" },
+  { name: "Platform", href: "/#command-center" },
+  { name: "Solutions", href: "/#command-center" },
+  { name: "Security", href: "/#institutional-trust" },
+  { name: "About", href: "/#about" },
 ]
 
 export function Navbar() {
@@ -34,7 +34,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <Link href="#home" className="-m-1.5 p-1.5 flex items-center">
+          <Link href="/#home" className="-m-1.5 p-1.5 flex items-center">
             <Image
               src="/traflinq_dark_no_tagline-Photoroom.png"
               alt="Traflinq"
@@ -74,7 +74,7 @@ export function Navbar() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
-          <Link href="#briefing">
+          <Link href="https://calendar.app.google/qeHQgMANfWNr77yz6" target="_blank" rel="noopener noreferrer">
             <Button
               variant="outline"
               size="sm"
@@ -117,7 +117,7 @@ export function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                <Link href="#briefing" className="block w-full" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="https://calendar.app.google/qeHQgMANfWNr77yz6" target="_blank" rel="noopener noreferrer" className="block w-full" onClick={() => setMobileMenuOpen(false)}>
                   <Button className="w-full bg-primary text-white hover:bg-primary/90 h-12 text-base font-bold">
                     Book a Demo
                   </Button>

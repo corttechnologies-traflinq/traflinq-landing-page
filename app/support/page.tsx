@@ -78,9 +78,7 @@ export default function SupportPage() {
       <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-primary/6 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <Link href="/" className="inline-flex items-center gap-2 text-white/30 hover:text-primary transition-colors mb-8">
-          <ArrowLeft size={16} /> Back to Home
-        </Link>
+
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left Column: Contact Info & Form */}
