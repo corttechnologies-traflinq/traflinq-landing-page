@@ -7,7 +7,7 @@ const pillars = [
   {
     icon: Database,
     label: "Eliminate Data Silos",
-    desc: "Consolidate vendors, routes, and billing into one source of truth.",
+    desc: "Consolidate vendors, routes, and billing into a unified source of truth.",
   },
   {
     icon: DollarSign,
@@ -89,12 +89,12 @@ export function ProblemSection() {
                 {/* ── Fragmented side (left) ── */}
                 {/* Scattered nodes */}
                 {[
-                  { cx: 60,  cy: 80  },
+                  { cx: 60, cy: 80 },
                   { cx: 100, cy: 200 },
-                  { cx: 50,  cy: 300 },
+                  { cx: 50, cy: 300 },
                   { cx: 130, cy: 130 },
-                  { cx: 90,  cy: 260 },
-                  { cx: 150, cy: 60  },
+                  { cx: 90, cy: 260 },
+                  { cx: 150, cy: 60 },
                 ].map((pt, i) => (
                   <motion.circle
                     key={`frag-${i}`}
@@ -150,7 +150,7 @@ export function ProblemSection() {
 
                 {/* Converging lines from scattered points to the unified line */}
                 {[
-                  { x1: 240, y1: 70,  x2: 310, y2: 180 },
+                  { x1: 240, y1: 70, x2: 310, y2: 180 },
                   { x1: 240, y1: 120, x2: 330, y2: 180 },
                   { x1: 240, y1: 180, x2: 240, y2: 180 },
                   { x1: 240, y1: 240, x2: 330, y2: 180 },
