@@ -122,23 +122,27 @@ export function BriefingFormSection() {
               Enterprise Enquiry
             </span>
             <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight">
-              Request a Briefing.
+              Request a Strategic Briefing.
             </h2>
             <p className="mt-6 text-base text-white/40 leading-relaxed max-w-md">
-              Share your requirements and our enterprise team will design a tailored session around your fleet scale, operational complexity, and savings targets.
+              Secure a focused session with our enterprise team to map your current transport spend against the Traflinq savings model. We design tailored sessions around your fleet scale, operational complexity, and specific savings targets.
             </p>
 
-            <div className="mt-10 flex flex-col gap-5">
+            <div className="mt-10 flex flex-col gap-6">
               {[
-                "Dedicated enterprise account team",
-                "Custom savings & ROI modelling",
-                "Response within 24 hours",
-              ].map((point) => (
-                <div key={point} className="flex items-start gap-3">
-                  <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
+                { title: "Strategic ROI Modelling", desc: "Detailed analysis of your current mobility spend vs. optimized Traflinq benchmarks." },
+                { title: "Operational Footprint Review", desc: "A deep-dive into your existing routes, vendor costs, and ghost seat leakage." },
+                { title: "Compliance & Governance", desc: "Mapping our automated auditing layers to your corporate governance requirements." },
+                { title: "Dedicated Implementation Team", desc: "Direct access to our enterprise specialists for a smooth deployment roadmap." },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-4">
+                  <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
                     <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                   </div>
-                  <p className="text-sm text-white/50 leading-relaxed">{point}</p>
+                  <div>
+                    <h4 className="text-sm font-bold text-white/90">{item.title}</h4>
+                    <p className="text-xs text-white/40 mt-1 leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -213,7 +217,7 @@ export function BriefingFormSection() {
                         <Label htmlFor="city" required>Primary City of Operation</Label>
                         <select id="city" value={form.city} onChange={(e) => set("city", e.target.value)}
                           required className={selectCls}>
-                          <option value="" disabled className="bg-[#0d1018]">Select city</option>
+                          <option value="" disabled className="bg-[#0d1018]">Select City</option>
                           {PAKISTAN_CITIES.map((c) => (
                             <option key={c} value={c} className="bg-[#0d1018]">{c}</option>
                           ))}
@@ -223,7 +227,7 @@ export function BriefingFormSection() {
                         <Label htmlFor="fleetSize" required>Fleet Size / No. of Commuters</Label>
                         <select id="fleetSize" value={form.fleetSize} onChange={(e) => set("fleetSize", e.target.value)}
                           required className={selectCls}>
-                          <option value="" disabled className="bg-[#0d1018]">Select range</option>
+                          <option value="" disabled className="bg-[#0d1018]">Select Range</option>
                           {FLEET_SIZES.map((s) => (
                             <option key={s} value={s} className="bg-[#0d1018]">{s}</option>
                           ))}
@@ -242,10 +246,10 @@ export function BriefingFormSection() {
                           className="overflow-hidden"
                         >
                           <Field>
-                            <Label htmlFor="cityOther" required>Please specify your city</Label>
+                            <Label htmlFor="cityOther" required>Please Specify Your City</Label>
                             <input id="cityOther" type="text" value={form.cityOther}
                               onChange={(e) => set("cityOther", e.target.value)}
-                              placeholder="Enter your city" required className={inputCls} />
+                              placeholder="Enter Your City" required className={inputCls} />
                           </Field>
                         </motion.div>
                       )}
@@ -259,7 +263,7 @@ export function BriefingFormSection() {
                       <Label htmlFor="primaryGoal" required>Primary Goal</Label>
                       <select id="primaryGoal" value={form.primaryGoal} onChange={(e) => set("primaryGoal", e.target.value)}
                         required className={selectCls}>
-                        <option value="" disabled className="bg-[#0d1018]">Select your primary goal</option>
+                        <option value="" disabled className="bg-[#0d1018]">Select Your Primary Goal</option>
                         {PRIMARY_GOALS.map((g) => (
                           <option key={g} value={g} className="bg-[#0d1018]">{g}</option>
                         ))}
@@ -277,10 +281,10 @@ export function BriefingFormSection() {
                           className="overflow-hidden mt-4"
                         >
                           <Field>
-                            <Label htmlFor="primaryGoalOther" required>Please specify your goal</Label>
+                            <Label htmlFor="primaryGoalOther" required>Please Specify Your Goal</Label>
                             <input id="primaryGoalOther" type="text" value={form.primaryGoalOther}
                               onChange={(e) => set("primaryGoalOther", e.target.value)}
-                              placeholder="Enter your goal" required className={inputCls} />
+                              placeholder="Enter Your Goal" required className={inputCls} />
                           </Field>
                         </motion.div>
                       )}

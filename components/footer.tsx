@@ -16,8 +16,6 @@ const footerColumns = [
     heading: "Solutions",
     links: [
       { name: "Enterprise Mobility", href: "#home" },
-      { name: "Logistics Partners", href: "#home" },
-      { name: "Cost Governance", href: "#command-center" },
     ],
   },
   {
@@ -25,7 +23,6 @@ const footerColumns = [
     links: [
       { name: "Vision & News", href: "#home" },
       { name: "System Status", href: "#home" },
-      { name: "Documentation (Coming Soon)", href: "#home" },
     ],
   },
   {
@@ -34,6 +31,7 @@ const footerColumns = [
       { name: "About Traflinq", href: "#home" },
       { name: "Careers", href: "#home" },
       { name: "Contact Sales", href: "/support" },
+      { name: "Schedule a Call", href: "https://calendar.app.google/qeHQgMANfWNr77yz6", external: true },
     ],
   },
 ]
@@ -94,6 +92,7 @@ export function Footer() {
                       <Link
                         href={link.href}
                         className="text-sm text-white/40 hover:text-white transition-colors leading-snug"
+                        {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       >
                         {link.name}
                       </Link>

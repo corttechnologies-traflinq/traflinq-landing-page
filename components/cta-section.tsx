@@ -51,19 +51,9 @@ export function CTASection() {
               className="bg-primary text-white hover:bg-primary/90 px-10 gap-2.5 shadow-xl shadow-primary/20 text-sm tracking-wide"
               asChild
             >
-              <Link href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
-                Schedule a Strategic Briefing
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/10 text-white/60 hover:text-white hover:border-white/20 px-8 text-sm tracking-wide bg-transparent"
-              asChild
-            >
               <Link href="#briefing">
-                Request Briefing Form
+                Request a Strategic Briefing
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
           </div>

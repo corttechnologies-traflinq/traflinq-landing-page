@@ -169,8 +169,10 @@ export default function SupportPage() {
             <div className="bg-primary/[0.04] border border-primary/20 p-8 rounded-3xl mt-12">
               <h3 className="text-xl font-bold mb-2 text-white">Still need help?</h3>
               <p className="text-white/45 mb-6">Our enterprise support team is available for custom integrations and large fleet management.</p>
-              <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary hover:text-white rounded-xl">
-                Schedule a call
+              <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary hover:text-white rounded-xl" asChild>
+                <a href="https://calendar.app.google/qeHQgMANfWNr77yz6" target="_blank" rel="noopener noreferrer">
+                  Schedule a call
+                </a>
               </Button>
             </div>
           </div>

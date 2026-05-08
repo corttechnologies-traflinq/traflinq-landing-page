@@ -23,7 +23,7 @@ export default function Home() {
       <AboutSection />
       <TeamSection />
       <OperationalSuccessReports />
-      <PlatformSection />
+      {/* <PlatformSection /> */}
       <BriefingFormSection />
       <CTASection />
       <Footer />
