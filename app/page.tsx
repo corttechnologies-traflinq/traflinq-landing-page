@@ -9,6 +9,7 @@ const AboutSection = dynamic(() => import("@/components/about-section").then(m =
 const TeamSection = dynamic(() => import("@/components/team-section").then(m => ({ default: m.TeamSection })))
 const OperationalSuccessReports = dynamic(() => import("@/components/operational-success-reports").then(m => ({ default: m.OperationalSuccessReports })))
 const PlatformSection = dynamic(() => import("@/components/platform-section").then(m => ({ default: m.PlatformSection })))
+const ClienteleSection = dynamic(() => import("@/components/clientele-section").then(m => ({ default: m.ClienteleSection })))
 const BriefingFormSection = dynamic(() => import("@/components/briefing-form-section").then(m => ({ default: m.BriefingFormSection })))
 const CTASection = dynamic(() => import("@/components/cta-section").then(m => ({ default: m.CTASection })))
 const Footer = dynamic(() => import("@/components/footer").then(m => ({ default: m.Footer })))
@@ -23,6 +24,7 @@ export default function Home() {
       <AboutSection />
       <TeamSection />
       <OperationalSuccessReports />
+      {/* <ClienteleSection /> */}
       {/* <PlatformSection /> */}
       <BriefingFormSection />
       <CTASection />
