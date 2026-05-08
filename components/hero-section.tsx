@@ -43,7 +43,7 @@ const HUB: Waypoint = { x: 261, y: 335 }
 
 // ─── Zone destinations ────────────────────────────────────────────────────────
 const ZONE_A: Waypoint = { x: 397, y: 318 }
-const ZONE_B: Waypoint = { x: 87,  y: 324 }
+const ZONE_B: Waypoint = { x: 87, y: 324 }
 const ZONE_C: Waypoint = { x: 252, y: 234 }
 
 // ─── AFTER Traflinq: Short direct straight paths ──────────────────────────────
@@ -95,9 +95,9 @@ const LONG_B: Waypoint[] = [
   HUB,
   { x: 261, y: 260 },  // go north first
   { x: 160, y: 248 },  // far northwest
-  { x: 60,  y: 280 },  // loop down-west
+  { x: 60, y: 280 },  // loop down-west
   ZONE_B,
-  { x: 60,  y: 280 },
+  { x: 60, y: 280 },
   { x: 160, y: 248 },
   { x: 261, y: 260 },
   HUB,
@@ -552,7 +552,7 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.35 }}
               className="mt-8 text-lg leading-8 text-white/45 max-w-xl"
             >
-              Centralize fragmented transport operations into a single intelligence layer. Orchestrate enterprise movement, eliminate cost leakage, and achieve total visibility through a unified platform.
+              Centralize fragmented transport operations into a single intelligence layer. Orchestrate enterprise movement, eliminate cost leakage, and achieve total visibility through a unified tech platform.
             </motion.p>
 
             <motion.div
