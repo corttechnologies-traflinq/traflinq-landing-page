@@ -15,6 +15,7 @@ const PRIMARY_GOALS = [
   "Compliance & Governance",
   "Employee Experience",
   "Multiple Goals",
+  "Other",
 ]
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -30,12 +31,13 @@ interface FormState {
   cityOther: string
   fleetSize: string
   primaryGoal: string
+  primaryGoalOther: string
 }
 
 const EMPTY: FormState = {
   name: "", role: "", email: "", phone: "",
   organization: "", country: "Pakistan", city: "", cityOther: "",
-  fleetSize: "", primaryGoal: "",
+  fleetSize: "", primaryGoal: "", primaryGoalOther: "",
 }
 
 // ─── Shared primitives ────────────────────────────────────────────────────────
@@ -89,6 +91,7 @@ export function BriefingFormSection() {
         body: JSON.stringify({
           ...form,
           city: form.city === "Other" ? (form.cityOther || "Other") : form.city,
+          primaryGoal: form.primaryGoal === "Other" ? (form.primaryGoalOther || "Other") : form.primaryGoal,
         }),
       })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -262,6 +265,26 @@ export function BriefingFormSection() {
                         ))}
                       </select>
                     </Field>
+
+                    {/* "Other" goal open field */}
+                    <AnimatePresence>
+                      {form.primaryGoal === "Other" && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="overflow-hidden mt-4"
+                        >
+                          <Field>
+                            <Label htmlFor="primaryGoalOther" required>Please specify your goal</Label>
+                            <input id="primaryGoalOther" type="text" value={form.primaryGoalOther}
+                              onChange={(e) => set("primaryGoalOther", e.target.value)}
+                              placeholder="Enter your goal" required className={inputCls} />
+                          </Field>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                   {/* ── Submit ── */}
