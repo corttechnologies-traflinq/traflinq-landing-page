@@ -210,7 +210,7 @@ function IsometricMap() {
 
   return (
     <div
-      className="relative w-full aspect-[530/560] lg:aspect-auto lg:h-full min-h-[400px] sm:min-h-[540px] rounded-3xl border overflow-hidden"
+      className="relative w-full aspect-[530/560] lg:aspect-auto lg:h-[600px] min-h-[320px] sm:min-h-[500px] rounded-3xl border overflow-hidden"
       style={{
         background: "radial-gradient(at 50% 30%, rgba(254,133,3,0.15) 0%, #080b14 70%)",
         borderColor: "rgba(255,255,255,0.06)",
@@ -485,17 +485,17 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-[#080b14]"
+      className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 overflow-hidden bg-[#080b14]"
     >
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="absolute top-1/3 right-1/4 w-[700px] h-[700px] bg-[#fe8503]/6 rounded-full blur-[140px]" />
-        <div className="absolute bottom-0 left-1/5 w-[500px] h-[500px] bg-orange-900/5 rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 right-1/4 w-[300px] sm:w-[700px] h-[300px] sm:h-[700px] bg-[#fe8503]/6 rounded-full blur-[100px] sm:blur-[140px]" />
+        <div className="absolute bottom-0 left-1/5 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-orange-900/5 rounded-full blur-[80px] sm:blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-32 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left: Copy */}
           <motion.div
@@ -519,7 +519,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-[4.25rem] leading-[1.1] sm:leading-[1.05]"
+              className="text-[2.5rem] sm:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-white leading-[1.1] sm:leading-[1.05]"
             >
               The Operating System for{" "}
               <span className="text-[#fe8503]">Corporate Mobility.</span>
@@ -538,7 +538,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="mt-12 flex flex-col sm:flex-row items-start gap-4"
+              className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-4"
             >
               <Link href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
                 <Button
