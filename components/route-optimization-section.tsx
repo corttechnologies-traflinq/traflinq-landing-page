@@ -54,10 +54,14 @@ export function RouteOptimizationSection() {
           {pillars.map((pillar, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                duration: 0.8, 
+                delay: i * 0.2, 
+                ease: [0.21, 0.45, 0.32, 0.9] 
+              }}
               className="relative group rounded-2xl border border-white/[0.07] bg-white/[0.025] p-8 overflow-hidden hover:border-primary/30 hover:bg-white/[0.04] transition-all duration-300"
             >
               {/* Subtle glow on hover */}

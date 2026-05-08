@@ -39,11 +39,11 @@ export function CTASection() {
             The Transition
           </p>
           <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.08]">
-            Focus on your core.{" "}
-            <span className="text-white/40">We'll handle the movement.</span>
+            Stop managing logistics and start{" "}
+            <span className="text-white/40">orchestrating movement.</span>
           </h2>
           <p className="mt-8 text-lg text-white/35 max-w-xl mx-auto leading-8">
-            Join the elite organizations redefining workforce transit.
+            Experience the operating system that powers enterprise mobility.
           </p>
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button

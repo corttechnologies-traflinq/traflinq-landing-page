@@ -80,7 +80,7 @@ export function Navbar() {
               size="sm"
               className="border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary transition-all text-xs tracking-wide h-9 px-5"
             >
-              Request a Briefing
+              Book a Demo
             </Button>
           </Link>
         </div>
@@ -119,7 +119,7 @@ export function Navbar() {
               >
                 <Link href="#briefing" className="block w-full" onClick={() => setMobileMenuOpen(false)}>
                   <Button className="w-full bg-primary text-white hover:bg-primary/90 h-12 text-base font-bold">
-                    Request a Briefing
+                    Book a Demo
                   </Button>
                 </Link>
               </motion.div>
