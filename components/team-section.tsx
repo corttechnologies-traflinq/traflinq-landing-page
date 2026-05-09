@@ -19,7 +19,7 @@ const leadership = [
     role: "Chief Technology Officer",
     bio: "Architect of the Traflinq intelligence layer, specializing in distributed systems and high-fidelity telemetry for resilient, mission-critical operations.",
     linkedin: "https://www.linkedin.com/in/hashirahmedkhan/",
-    image: "/hashir-cto-pro.png",
+    image: "/Gemini_Generated_Image_3svsc53svsc53svs.png",
     initial: "H",
   },
 ]
