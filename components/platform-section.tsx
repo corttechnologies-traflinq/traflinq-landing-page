@@ -25,7 +25,7 @@ const actions = [
     description:
       "A focused session with our enterprise team to map your current transport spend against the Traflinq savings model.",
     cta: "Fill in the Form",
-    href: "#briefing",
+    href: "/request-briefing",
     external: false,
     accent: "#a78bfa",
   },

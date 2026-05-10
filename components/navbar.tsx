@@ -12,6 +12,7 @@ const navItems = [
   { name: "Solutions", href: "/#command-center" },
   { name: "Security", href: "/#institutional-trust" },
   { name: "About", href: "/#about" },
+  { name: "Briefing", href: "/request-briefing" },
 ]
 
 export function Navbar() {

@@ -51,7 +51,7 @@ export function CTASection() {
               className="bg-primary text-white hover:bg-primary/90 px-10 gap-2.5 shadow-xl shadow-primary/20 text-sm tracking-wide"
               asChild
             >
-              <Link href="#briefing">
+              <Link href="/request-briefing">
                 Request a Strategic Briefing
                 <ArrowRight className="h-4 w-4" />
               </Link>

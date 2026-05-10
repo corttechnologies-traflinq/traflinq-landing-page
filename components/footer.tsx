@@ -16,6 +16,7 @@ const footerColumns = [
     heading: "Solutions",
     links: [
       { name: "Enterprise Mobility", href: "#home" },
+      { name: "Strategic Briefing", href: "/request-briefing" },
     ],
   },
   {
