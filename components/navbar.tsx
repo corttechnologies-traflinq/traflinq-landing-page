@@ -78,8 +78,8 @@ export function Navbar() {
           <Link href="https://calendar.app.google/qeHQgMANfWNr77yz6" target="_blank" rel="noopener noreferrer">
             <Button
               variant="outline"
-              size="sm"
-              className="border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary transition-all text-xs tracking-wide h-9 px-5"
+              size="lg"
+              className="border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary transition-all text-sm font-semibold tracking-wide h-11 px-8"
             >
               Book a Demo
             </Button>
