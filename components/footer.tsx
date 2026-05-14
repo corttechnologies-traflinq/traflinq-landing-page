@@ -6,31 +6,31 @@ const footerColumns = [
   {
     heading: "Platform",
     links: [
-      { name: "Platform Overview", href: "#home" },
-      { name: "The Intelligence Engine", href: "#command-center" },
-      { name: "Security & Compliance", href: "#institutional-trust" },
-      { name: "Integrations", href: "#command-center" },
+      { name: "Platform Overview", href: "/#home" },
+      { name: "The Intelligence Engine", href: "/#command-center" },
+      { name: "Security & Compliance", href: "/#institutional-trust" },
+      { name: "Integrations", href: "/#command-center" },
     ],
   },
   {
     heading: "Solutions",
     links: [
-      { name: "Enterprise Mobility", href: "#home" },
+      { name: "Enterprise Mobility", href: "/#home" },
       { name: "Strategic Briefing", href: "/request-briefing" },
     ],
   },
   {
     heading: "Resources",
     links: [
-      { name: "Vision & News", href: "#home" },
-      { name: "System Status", href: "#home" },
+      { name: "Vision & News", href: "/#home" },
+      { name: "System Status", href: "/#home" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { name: "About Traflinq", href: "#home" },
-      { name: "Careers", href: "#home" },
+      { name: "About Traflinq", href: "/#home" },
+      { name: "Careers", href: "/#home" },
       { name: "Contact Sales", href: "/support" },
       { name: "Schedule a Call", href: "https://calendar.app.google/qeHQgMANfWNr77yz6", external: true },
     ],
@@ -47,7 +47,7 @@ export function Footer() {
 
           {/* Brand */}
           <div className="lg:max-w-[280px] shrink-0">
-            <Link href="#home" className="inline-block -ml-4">
+            <Link href="/#home" className="inline-block -ml-4">
               <Image
                 src="/traflinq_dark_no_tagline-Photoroom.png"
                 alt="Traflinq"

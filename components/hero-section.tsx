@@ -570,7 +570,7 @@ export function HeroSection() {
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="#briefing">
+              <Link href="/#briefing">
                 <Button
                   size="lg"
                   variant="ghost"
