@@ -1,6 +1,12 @@
 "use client"
 
 import { useState } from "react"
+import {
+  getPhoneValidationError,
+  PHONE_MAX_LENGTH,
+  PHONE_PLACEHOLDER,
+  sanitizePhoneInput,
+} from "@/lib/phone"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, CheckCircle2, Download, Loader2 } from "lucide-react"
 
@@ -82,6 +88,11 @@ export function BriefingFormSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const phoneError = getPhoneValidationError(form.phone, { required: true })
+    if (phoneError) {
+      alert(phoneError)
+      return
+    }
     setSubmitting(true)
     try {
       const apiBase = process.env.NEXT_PUBLIC_API_URL ?? ""
@@ -90,6 +101,7 @@ export function BriefingFormSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
+          phone: form.phone.replace(/\D/g, ""),
           city: form.city === "Other" ? (form.cityOther || "Other") : form.city,
           primaryGoal: form.primaryGoal === "Other" ? (form.primaryGoalOther || "Other") : form.primaryGoal,
         }),
@@ -189,8 +201,8 @@ export function BriefingFormSection() {
                       </Field>
                       <Field>
                         <Label htmlFor="phone" required>Contact Number</Label>
-                        <input id="phone" type="tel" value={form.phone} onChange={(e) => set("phone", e.target.value)}
-                          placeholder="+92 300 000 0000" required className={inputCls} />
+                        <input id="phone" type="tel" inputMode="numeric" maxLength={PHONE_MAX_LENGTH} value={form.phone} onChange={(e) => set("phone", sanitizePhoneInput(e.target.value))}
+                          placeholder={PHONE_PLACEHOLDER} required className={inputCls} />
                       </Field>
                     </div>
                   </div>
