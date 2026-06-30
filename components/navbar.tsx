@@ -17,11 +17,11 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   const navItems = [
-    { name: t("platform"), href: "/#command-center" },
-    { name: t("solutions"), href: "/#command-center" },
-    { name: t("security"), href: "/#institutional-trust" },
-    { name: t("about"), href: "/#about" },
-    { name: t("briefing"), href: "/request-briefing" },
+    { id: "platform", name: t("platform"), href: "/#command-center" },
+    { id: "solutions", name: t("solutions"), href: "/#command-center" },
+    { id: "security", name: t("security"), href: "/#institutional-trust" },
+    { id: "about", name: t("about"), href: "/#about" },
+    { id: "briefing", name: t("briefing"), href: "/request-briefing" },
   ]
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export function Navbar() {
         <div className="hidden lg:flex lg:gap-x-10">
           {navItems.map((item) => (
             <Link
-              key={item.href}
+              key={item.id}
               href={item.href}
               className="text-sm font-medium text-white/50 hover:text-white transition-colors tracking-wide"
             >
@@ -124,7 +124,7 @@ export function Navbar() {
               </div>
               {navItems.map((item, i) => (
                 <motion.div
-                  key={item.href}
+                  key={item.id}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}

@@ -3,15 +3,21 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import {
+  getPhoneMaxLength,
+  getPhonePlaceholder,
   getPhoneValidationError,
-  PHONE_MAX_LENGTH,
-  PHONE_PLACEHOLDER,
+  type PhoneCountry,
   sanitizePhoneInput,
 } from "@/lib/phone"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, CheckCircle2, Download, Loader2 } from "lucide-react"
 
-const PAKISTAN_CITIES = ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Sukkur", "Nooriabad", "Other"]
+const COUNTRIES = ["Pakistan", "Saudi Arabia"] as const satisfies readonly PhoneCountry[]
+
+const CITIES_BY_COUNTRY: Record<PhoneCountry, readonly string[]> = {
+  Pakistan: ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Sukkur", "Nooriabad", "Other"],
+  "Saudi Arabia": ["Riyadh", "Jeddah", "Dammam", "Khobar", "Mecca", "Medina", "Other"],
+}
 const FLEET_SIZES = ["1 – 25", "26 – 50", "51 – 200", "200+"]
 const PRIMARY_GOALS = [
   "Cost Optimisation",
@@ -82,16 +88,32 @@ export function BriefingFormSection() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
+  const phoneCountry = (form.country === "Saudi Arabia" ? "Saudi Arabia" : "Pakistan") as PhoneCountry
+  const cities = CITIES_BY_COUNTRY[phoneCountry]
+
   const set = (id: keyof FormState, val: string) =>
     setForm((prev) => ({ ...prev, [id]: val }))
+
+  const setCountry = (country: string) => {
+    setForm((prev) => ({
+      ...prev,
+      country,
+      city: "",
+      cityOther: "",
+      phone: sanitizePhoneInput(prev.phone, country as PhoneCountry),
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const phoneError = getPhoneValidationError(form.phone, {
       required: true,
+      country: phoneCountry,
       messages: {
         required: tCommon("phoneRequired"),
-        invalid: tCommon("phoneInvalid"),
+        invalid: phoneCountry === "Saudi Arabia"
+          ? tCommon("phoneInvalidSaudiArabia")
+          : tCommon("phoneInvalidPakistan"),
       },
     })
     if (phoneError) {
@@ -198,8 +220,8 @@ export function BriefingFormSection() {
                       </Field>
                       <Field>
                         <Label htmlFor="phone" required>{t("fields.phone")}</Label>
-                        <input id="phone" type="tel" inputMode="numeric" maxLength={PHONE_MAX_LENGTH} value={form.phone} onChange={(e) => set("phone", sanitizePhoneInput(e.target.value))}
-                          placeholder={PHONE_PLACEHOLDER} required className={`${inputCls} ltr-content`} dir="ltr" />
+                        <input id="phone" type="tel" inputMode="numeric" maxLength={getPhoneMaxLength(phoneCountry)} value={form.phone} onChange={(e) => set("phone", sanitizePhoneInput(e.target.value, phoneCountry))}
+                          placeholder={getPhonePlaceholder(phoneCountry)} required className={`${inputCls} ltr-content`} dir="ltr" />
                       </Field>
                     </div>
                   </div>
@@ -214,9 +236,13 @@ export function BriefingFormSection() {
                       </Field>
                       <Field>
                         <Label htmlFor="country" required>{t("fields.country")}</Label>
-                        <select id="country" value={form.country} onChange={(e) => set("country", e.target.value)}
+                        <select id="country" value={form.country} onChange={(e) => setCountry(e.target.value)}
                           required className={selectCls}>
-                          <option value="Pakistan" className="bg-[#0d1018]">{t("countries.Pakistan")}</option>
+                          {COUNTRIES.map((country) => (
+                            <option key={country} value={country} className="bg-[#0d1018]">
+                              {t(`countries.${country}`)}
+                            </option>
+                          ))}
                         </select>
                       </Field>
                     </div>
@@ -226,7 +252,7 @@ export function BriefingFormSection() {
                         <select id="city" value={form.city} onChange={(e) => set("city", e.target.value)}
                           required className={selectCls}>
                           <option value="" disabled className="bg-[#0d1018]">{t("placeholders.selectCity")}</option>
-                          {PAKISTAN_CITIES.map((c) => (
+                          {cities.map((c) => (
                             <option key={c} value={c} className="bg-[#0d1018]">{t(`cities.${c}`)}</option>
                           ))}
                         </select>

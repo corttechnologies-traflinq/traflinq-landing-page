@@ -19,7 +19,8 @@
     },
     "validation": {
       "phoneRequired": "Phone number is required",
-      "phoneInvalid": "Phone number must be exactly 11 digits"
+      "phoneInvalidPakistan": "Enter a valid Pakistani mobile number (11 digits, e.g. 03001234567)",
+      "phoneInvalidSaudiArabia": "Enter a valid Saudi mobile number (10 digits, e.g. 0501234567)"
     }
   }
 }

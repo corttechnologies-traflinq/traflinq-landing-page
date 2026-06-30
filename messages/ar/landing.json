@@ -223,7 +223,8 @@
       "selectGoal": "اختر هدفك الرئيسي"
     },
     "countries": {
-      "Pakistan": "باكستان"
+      "Pakistan": "باكستان",
+      "Saudi Arabia": "المملكة العربية السعودية"
     },
     "cities": {
       "Karachi": "كراتشي",
@@ -232,6 +233,12 @@
       "Faisalabad": "فيصل آباد",
       "Sukkur": "سكّهر",
       "Nooriabad": "نوري آباد",
+      "Riyadh": "الرياض",
+      "Jeddah": "جدة",
+      "Dammam": "الدمام",
+      "Khobar": "الخبر",
+      "Mecca": "مكة",
+      "Medina": "المدينة المنورة",
       "Other": "أخرى"
     },
     "fleetSizes": {
