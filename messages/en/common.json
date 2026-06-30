@@ -1,0 +1,25 @@
+{
+  "common": {
+    "actions": {
+      "bookDemo": "Book a Demo",
+      "requestEnterpriseDemo": "Request Enterprise Demo",
+      "explorePlatform": "Explore the Platform",
+      "requestBriefing": "Request a Strategic Briefing",
+      "connect": "Connect"
+    },
+    "locale": {
+      "english": "EN",
+      "arabic": "عربي",
+      "switchToEnglish": "Switch to English",
+      "switchToArabic": "Switch to Arabic"
+    },
+    "misc": {
+      "toggleMenu": "Toggle menu",
+      "brandAlt": "Traflinq"
+    },
+    "validation": {
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Phone number must be exactly 11 digits"
+    }
+  }
+}

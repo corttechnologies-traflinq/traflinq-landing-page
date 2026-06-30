@@ -1,0 +1,25 @@
+{
+  "common": {
+    "actions": {
+      "bookDemo": "احجز عرضًا توضيحيًا",
+      "requestEnterpriseDemo": "اطلب عرضًا توضيحيًا للمؤسسات",
+      "explorePlatform": "استكشف المنصة",
+      "requestBriefing": "اطلب جلسة إحاطة استراتيجية",
+      "connect": "تواصل"
+    },
+    "locale": {
+      "english": "EN",
+      "arabic": "عربي",
+      "switchToEnglish": "التبديل إلى الإنجليزية",
+      "switchToArabic": "التبديل إلى العربية"
+    },
+    "misc": {
+      "toggleMenu": "فتح/إغلاق القائمة",
+      "brandAlt": "ترافلينك"
+    },
+    "validation": {
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalid": "يجب أن يتكون رقم الهاتف من 11 رقماً بالضبط"
+    }
+  }
+}

@@ -1,55 +1,17 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ArrowRight, Bell, Mail, Twitter, Linkedin, Github, Armchair, Handshake, Truck } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { useTranslations } from "next-intl"
+import { ArrowRight, Twitter, Linkedin, Github } from "lucide-react"
 
 export default function ComingSoon() {
-  const [email, setEmail] = useState("")
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  })
-
-  useEffect(() => {
-    const targetDate = new Date()
-    targetDate.setDate(targetDate.getDate() + 30)
-
-    const timer = setInterval(() => {
-      const now = new Date().getTime()
-      const distance = targetDate.getTime() - now
-
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
-      })
-    }, 1000)
-
-    return () => clearInterval(timer)
-  }, [])
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email) {
-      setIsSubmitted(true)
-      setEmail("")
-    }
-  }
+  const t = useTranslations("comingSoon")
 
   return (
     <div className="min-h-screen bg-white text-[#131313] flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Background Soft Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-10%] start-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] end-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Subtle Grid Pattern */}
       <div
         className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
@@ -59,52 +21,55 @@ export default function ComingSoon() {
       />
 
       <div className="z-10 max-w-4xl w-full text-center space-y-12">
-        {/* Logo */}
         <div className="flex justify-center mb-8">
           <img
             src="/traflinq_light_no_tagline-Photoroom.png"
-            alt="TrafLinq Logo"
+            alt={t("logoAlt")}
             className="h-16 w-auto"
           />
         </div>
 
-        {/* Hero Section */}
         <div className="space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            Launching Soon
+            {t("badge")}
           </div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-[#131313]">
-            Stop Overpaying for <span className="text-primary underline decoration-primary/20 decoration-8 underline-offset-8">Commute.</span>
+            {t.rich("title", {
+              highlight: (chunks) => (
+                <span className="text-primary underline decoration-primary/20 decoration-8 underline-offset-8">{chunks}</span>
+              ),
+            })}
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Traflinq's AI-driven route optimization is engineered to <span className="text-primary font-semibold">cut your commute costs by up to 40%</span>. We're putting money back in your pocket.
+            {t.rich("description", {
+              savings: (chunks) => <span className="text-primary font-semibold">{chunks}</span>,
+            })}
           </p>
         </div>
 
-        {/* Unique Savings Visualization */}
         <div className="max-w-2xl mx-auto bg-white border border-gray-100 shadow-xl shadow-primary/5 rounded-3xl p-8 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10">
-            <ArrowRight className="rotate-[-45deg] text-primary" size={48} />
+          <div className="absolute top-0 end-0 p-4 opacity-10">
+            <ArrowRight className="rotate-[-45deg] rtl:rotate-[135deg] text-primary" size={48} />
           </div>
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="text-left">
-              <div className="text-sm text-gray-400 uppercase tracking-widest mb-1">Projected Savings</div>
+            <div className="text-start">
+              <div className="text-sm text-gray-400 uppercase tracking-widest mb-1">{t("projectedSavings")}</div>
               <div className="text-5xl font-bold text-[#131313] flex items-baseline gap-2">
-                40% <span className="text-primary text-lg font-normal">Less Cost</span>
+                40% <span className="text-primary text-lg font-normal">{t("lessCost")}</span>
               </div>
               <div className="mt-4 flex items-center gap-2 text-sm text-primary/80">
-                <div className="flex -space-x-2">
+                <div className="flex -space-x-2 rtl:space-x-reverse">
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="w-6 h-6 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-[10px] text-primary font-bold">
                       {i}
                     </div>
                   ))}
                 </div>
-                Optimized Routes Active
+                {t("optimizedRoutes")}
               </div>
             </div>
             <div className="h-24 flex items-end gap-2 px-4">
@@ -119,7 +84,6 @@ export default function ComingSoon() {
           </div>
         </div>
 
-        {/* Social Links */}
         <div className="flex justify-center gap-6 pt-12 pb-12">
           <Link href="#" className="text-gray-400 hover:text-primary transition-colors">
             <Twitter size={24} />
@@ -133,10 +97,9 @@ export default function ComingSoon() {
         </div>
       </div>
 
-      {/* Footer Links - Moved inside the flow or with safe spacing */}
       <div className="mt-auto py-8 flex items-center gap-8 text-xs text-gray-400 z-10">
-        <Link href="/support" className="hover:text-primary transition-colors underline underline-offset-4">Support</Link>
-        <Link href="/privacy" className="hover:text-primary transition-colors underline underline-offset-4">Privacy Policy</Link>
+        <Link href="/support" className="hover:text-primary transition-colors underline underline-offset-4">{t("support")}</Link>
+        <Link href="/privacy" className="hover:text-primary transition-colors underline underline-offset-4">{t("privacy")}</Link>
       </div>
     </div>
   )

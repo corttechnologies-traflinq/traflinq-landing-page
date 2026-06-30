@@ -1,72 +1,75 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { Linkedin, Facebook } from "lucide-react"
-
-const footerColumns = [
-  {
-    heading: "Platform",
-    links: [
-      { name: "Platform Overview", href: "/#home" },
-      { name: "The Intelligence Engine", href: "/#command-center" },
-      { name: "Security & Compliance", href: "/#institutional-trust" },
-      { name: "Integrations", href: "/#command-center" },
-    ],
-  },
-  {
-    heading: "Solutions",
-    links: [
-      { name: "Enterprise Mobility", href: "/#home" },
-      { name: "Strategic Briefing", href: "/request-briefing" },
-    ],
-  },
-  {
-    heading: "Resources",
-    links: [
-      { name: "Vision & News", href: "/#home" },
-      { name: "System Status", href: "/#home" },
-    ],
-  },
-  {
-    heading: "Company",
-    links: [
-      { name: "About Traflinq", href: "/#home" },
-      { name: "Careers", href: "/#home" },
-      { name: "Contact Sales", href: "/support" },
-      { name: "Schedule a Call", href: "https://calendar.app.google/qeHQgMANfWNr77yz6", external: true },
-    ],
-  },
-]
+import { useTranslations } from "next-intl"
 
 export function Footer() {
+  const t = useTranslations("landing.footer")
+  const tCommon = useTranslations("common")
+
+  const footerColumns = [
+    {
+      heading: t("columns.platform.heading"),
+      links: [
+        { name: t("columns.platform.overview"), href: "/#home" },
+        { name: t("columns.platform.intelligenceEngine"), href: "/#command-center" },
+        { name: t("columns.platform.securityCompliance"), href: "/#institutional-trust" },
+        { name: t("columns.platform.integrations"), href: "/#command-center" },
+      ],
+    },
+    {
+      heading: t("columns.solutions.heading"),
+      links: [
+        { name: t("columns.solutions.enterpriseMobility"), href: "/#home" },
+        { name: t("columns.solutions.strategicBriefing"), href: "/request-briefing" },
+      ],
+    },
+    {
+      heading: t("columns.resources.heading"),
+      links: [
+        { name: t("columns.resources.visionNews"), href: "/#home" },
+        { name: t("columns.resources.systemStatus"), href: "/#home" },
+      ],
+    },
+    {
+      heading: t("columns.company.heading"),
+      links: [
+        { name: t("columns.company.about"), href: "/#home" },
+        { name: t("columns.company.careers"), href: "/#home" },
+        { name: t("columns.company.contactSales"), href: "/support" },
+        { name: t("columns.company.scheduleCall"), href: "https://calendar.app.google/qeHQgMANfWNr77yz6", external: true },
+      ],
+    },
+  ]
+
   return (
     <footer className="bg-[#060810] border-t border-white/[0.04]">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
 
-        {/* Top row: Brand + columns */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12">
 
-          {/* Brand */}
           <div className="lg:max-w-[280px] shrink-0">
-            <Link href="/#home" className="inline-block -ml-4">
+            <Link href="/#home" className="inline-block -ms-4">
               <Image
                 src="/traflinq_dark_no_tagline-Photoroom.png"
-                alt="Traflinq"
+                alt={tCommon("misc.brandAlt")}
                 width={240}
                 height={60}
                 className="h-16 w-auto"
               />
             </Link>
             <p className="mt-3 text-sm text-white/30 leading-relaxed">
-              The Operating System for Corporate Mobility.
+              {t("tagline")}
             </p>
-            {/* Social links */}
             <div className="mt-5 flex items-center gap-3">
               <Link
                 href="https://www.linkedin.com/company/traflinq/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-white/40 hover:text-white hover:border-white/20 transition-colors"
-                aria-label="Traflinq on LinkedIn"
+                aria-label={t("social.linkedin")}
               >
                 <Linkedin className="h-4 w-4" />
               </Link>
@@ -75,14 +78,13 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-white/40 hover:text-white hover:border-white/20 transition-colors"
-                aria-label="Traflinq on Facebook"
+                aria-label={t("social.facebook")}
               >
                 <Facebook className="h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          {/* Nav columns */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 lg:gap-10">
             {footerColumns.map((col) => (
               <div key={col.heading}>
@@ -105,17 +107,16 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/20">
-            © {new Date().getFullYear()} Traflinq. All rights reserved.
+            {t("copyright", { year: new Date().getFullYear() })}
           </p>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="text-xs text-white/20 hover:text-white/50 transition-colors">
-              Privacy Policy
+              {t("privacyPolicy")}
             </Link>
             <Link href="/privacy" className="text-xs text-white/20 hover:text-white/50 transition-colors">
-              Terms of Service
+              {t("termsOfService")}
             </Link>
           </div>
         </div>

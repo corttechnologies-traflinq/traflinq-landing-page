@@ -1,0 +1,396 @@
+{
+  "landing": {
+    "nav": {
+      "platform": "Platform",
+      "solutions": "Solutions",
+      "security": "Security",
+      "about": "About",
+      "briefing": "Briefing"
+    },
+    "hero": {
+      "badge": "Enterprise Mobility Intelligence",
+      "titleLine1": "The Intelligence Layer for",
+      "titleHighlight": "Managed Mobility",
+      "description": "Traflinq is the architectural foundation for corporate transit. We provide the logic, oversight, and telemetry required to orchestrate workforce movement at an institutional scale.",
+      "map": {
+        "liveMap": "Live Map",
+        "before": "Before",
+        "traflinq": "Traflinq",
+        "inefficientRoutes": "Inefficient Routes",
+        "optimizedRoutes": "Optimized Routes",
+        "headquarter": "HQ",
+        "workDestination": "Work",
+        "routeA": "Route A",
+        "routeB": "Route B",
+        "routeC": "Route C",
+        "longerRoutes": "LONGER ROUTES",
+        "routesOptimized": "ROUTES OPTIMIZED",
+        "routeLegendA": "Zone A",
+        "routeLegendB": "Zone B",
+        "routeLegendC": "Zone C"
+      }
+    },
+    "problem": {
+      "eyebrow": "The Problem",
+      "title": "Corporate mobility is broken.",
+      "description": "Fragmented vendors, invisible costs, and reactive management create a black box that drains enterprise budgets.",
+      "pillars": {
+        "dataSilos": {
+          "label": "Eliminate Data Silos",
+          "desc": "Consolidate vendors, routes, and billing into a unified source of truth."
+        },
+        "fiscalLeakage": {
+          "label": "Mitigate Fiscal Leakage",
+          "desc": "Stop the drain of unverified expenses with automated audit trails."
+        },
+        "operationalExcellence": {
+          "label": "Drive Operational Excellence",
+          "desc": "Move from reactive management to predictive orchestration."
+        }
+      },
+      "viz": {
+        "fragmented": "FRAGMENTED",
+        "unified": "UNIFIED",
+        "beforeTraflinq": "Before Traflinq",
+        "afterTraflinq": "After Traflinq"
+      }
+    },
+    "tech": {
+      "eyebrow": "The Platform",
+      "title": "Three pillars. One operating system.",
+      "description": "Command, fiscal control, and intelligence — unified in a single enterprise-grade mobility layer.",
+      "pillars": {
+        "commandCenter": {
+          "tag": "Command Center",
+          "title": "Live Operational Command",
+          "description": "Real-time visibility across routes, vehicles, and passengers from a single institutional dashboard."
+        },
+        "fiscalEngine": {
+          "tag": "Fiscal Engine",
+          "title": "Automated Cost Auditing",
+          "description": "Every trip, every invoice, every vendor — verified, reconciled, and benchmarked automatically."
+        },
+        "intelligenceLayer": {
+          "tag": "Intelligence Layer",
+          "title": "AI-Powered Optimization",
+          "description": "Predictive routing, ghost seat detection, and savings insights that compound month over month."
+        }
+      }
+    },
+    "about": {
+      "eyebrow": "About Traflinq",
+      "title": "Built for institutional scale.",
+      "description": "Traflinq was born from a simple observation: corporate transport is an operational black box. We built the first Intelligence Layer for mobility to bridge the gap between fragmented logistics and enterprise strategic goals.",
+      "descriptionSecondary": "Headquartered in Pakistan with a vision for MENA expansion, we serve enterprises that demand transparency, control, and measurable ROI from every commute.",
+      "stats": {
+        "uptime": "Platform Uptime",
+        "dataSilos": "Data Silos"
+      }
+    },
+    "team": {
+      "eyebrow": "Leadership",
+      "title": "The team behind the platform.",
+      "members": {
+        "aqeel": {
+          "role": "Chief Executive Officer",
+          "bio": "Enterprise mobility strategist with deep experience in corporate transit operations and vendor management across Pakistan's largest employers."
+        },
+        "hashir": {
+          "role": "Chief Technology Officer",
+          "bio": "Full-stack architect and AI systems engineer building the proprietary routing and fiscal engines that power Traflinq's intelligence layer."
+        }
+      }
+    },
+    "trust": {
+      "eyebrow": "Institutional Trust",
+      "titleLine1": "Enterprise-grade security",
+      "titleLine2": "by design.",
+      "description": "Your mobility data is among your most sensitive operational assets. Traflinq is built with the governance, encryption, and audit controls that enterprise compliance teams require.",
+      "pillars": {
+        "dataSovereignty": {
+          "title": "Data Sovereignty",
+          "description": "Your data stays yours. Full tenant isolation with configurable retention policies and export controls."
+        },
+        "uptime": {
+          "title": "99.9% Uptime SLA",
+          "description": "Mission-critical infrastructure with redundant failover and real-time health monitoring."
+        },
+        "globalScalability": {
+          "title": "Global Scalability",
+          "description": "Architected for MENA expansion — from Karachi to Riyadh, deploy at 100 or 10,000 commuters."
+        }
+      },
+      "badges": {
+        "encryption": "End-to-End Encryption",
+        "accessControls": "Role-Based Access",
+        "auditLogging": "Immutable Audit Logs",
+        "soc2": "SOC 2 Ready",
+        "zeroTrust": "Zero Trust Architecture"
+      }
+    },
+    "cta": {
+      "eyebrow": "The Transition",
+      "title": "Stop managing logistics and start",
+      "titleMuted": "orchestrating movement.",
+      "description": "Experience the operating system that powers enterprise mobility."
+    },
+    "footer": {
+      "tagline": "The Operating System for Corporate Mobility.",
+      "social": {
+        "linkedin": "Traflinq on LinkedIn",
+        "facebook": "Traflinq on Facebook"
+      },
+      "copyright": "© {year} Traflinq. All rights reserved.",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "columns": {
+        "platform": {
+          "heading": "Platform",
+          "overview": "Platform Overview",
+          "intelligenceEngine": "The Intelligence Engine",
+          "securityCompliance": "Security & Compliance",
+          "integrations": "Integrations"
+        },
+        "solutions": {
+          "heading": "Solutions",
+          "enterpriseMobility": "Enterprise Mobility",
+          "strategicBriefing": "Strategic Briefing"
+        },
+        "resources": {
+          "heading": "Resources",
+          "visionNews": "Vision & News",
+          "systemStatus": "System Status"
+        },
+        "company": {
+          "heading": "Company",
+          "about": "About Traflinq",
+          "careers": "Careers",
+          "contactSales": "Contact Sales",
+          "scheduleCall": "Schedule a Call"
+        }
+      }
+    }
+  },
+  "briefing": {
+    "badge": "Enterprise Enquiry",
+    "title": "Request a Strategic Briefing.",
+    "description": "Secure a focused session with our enterprise team to map your current transport spend against the Traflinq savings model. We design tailored sessions around your fleet scale, operational complexity, and specific savings targets.",
+    "benefits": {
+      "roi": {
+        "title": "Strategic ROI Modelling",
+        "desc": "Detailed analysis of your current mobility spend vs. optimized Traflinq benchmarks."
+      },
+      "footprint": {
+        "title": "Operational Footprint Review",
+        "desc": "A deep-dive into your existing routes, vendor costs, and ghost seat leakage."
+      },
+      "compliance": {
+        "title": "Compliance & Governance",
+        "desc": "Mapping our automated auditing layers to your corporate governance requirements."
+      },
+      "implementation": {
+        "title": "Dedicated Implementation Team",
+        "desc": "Direct access to our enterprise specialists for a smooth deployment roadmap."
+      }
+    },
+    "sections": {
+      "person": "The Person",
+      "operation": "The Operation",
+      "need": "The Need"
+    },
+    "fields": {
+      "name": "Name",
+      "role": "Role / Title",
+      "email": "Work Email",
+      "phone": "Contact Number",
+      "organization": "Organization Name",
+      "country": "Country of Operation",
+      "city": "Primary City of Operation",
+      "cityOther": "Please Specify Your City",
+      "fleetSize": "Fleet Size / No. of Commuters",
+      "primaryGoal": "Primary Goal",
+      "primaryGoalOther": "Please Specify Your Goal"
+    },
+    "placeholders": {
+      "name": "Jane Smith",
+      "role": "Head of Operations",
+      "email": "jane@company.com",
+      "organization": "Acme Corp",
+      "cityOther": "Enter Your City",
+      "primaryGoalOther": "Enter Your Goal",
+      "selectCity": "Select City",
+      "selectRange": "Select Range",
+      "selectGoal": "Select Your Primary Goal"
+    },
+    "countries": {
+      "Pakistan": "Pakistan"
+    },
+    "cities": {
+      "Karachi": "Karachi",
+      "Lahore": "Lahore",
+      "Islamabad": "Islamabad",
+      "Faisalabad": "Faisalabad",
+      "Sukkur": "Sukkur",
+      "Nooriabad": "Nooriabad",
+      "Other": "Other"
+    },
+    "fleetSizes": {
+      "1 – 25": "1 – 25",
+      "26 – 50": "26 – 50",
+      "51 – 200": "51 – 200",
+      "200+": "200+"
+    },
+    "goals": {
+      "Cost Optimisation": "Cost Optimisation",
+      "Route & Fleet Automation": "Route & Fleet Automation",
+      "Real-Time Tracking & Visibility": "Real-Time Tracking & Visibility",
+      "Compliance & Governance": "Compliance & Governance",
+      "Employee Experience": "Employee Experience",
+      "Multiple Goals": "Multiple Goals",
+      "Other": "Other"
+    },
+    "submit": "Submit Briefing Request",
+    "submitting": "Submitting…",
+    "privacyNote": "By submitting, you agree to our <privacyLink>Privacy Policy</privacyLink>. We never share your data.",
+    "submitError": "Something went wrong. Please try again or email us directly.",
+    "success": {
+      "title": "Request Received",
+      "message": "Your briefing request has been received. Our enterprise team will review your requirements and reach out within <hours>24 hours</hours>.",
+      "meanwhile": "In the meantime",
+      "downloadProfile": "Download our Company Profile",
+      "pdf": "(PDF)",
+      "downloadDesc": "A deep-dive into how Traflinq reduces your corporate transport spend — available shortly."
+    }
+  },
+  "support": {
+    "badge": "Get in Touch",
+    "title": "How can we <highlight>help you</highlight>?",
+    "description": "Have questions about Traflinq? Our team is here to support your journey towards smarter mobility.",
+    "emailUs": "Email Us",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "namePlaceholder": "John Doe",
+      "emailPlaceholder": "john@example.com",
+      "subjectPlaceholder": "General Inquiry",
+      "messagePlaceholder": "Tell us how we can help...",
+      "send": "Send Message"
+    },
+    "success": {
+      "title": "Message Sent!",
+      "message": "Thank you for reaching out. Our support team will get back to you within 24 hours.",
+      "sendAnother": "Send another message"
+    },
+    "errors": {
+      "submitFailed": "Failed to submit form. Please try again.",
+      "serverError": "An error occurred. Please check if the server is running."
+    },
+    "faqTitle": "Frequently Asked Questions",
+    "faqs": {
+      "optimize": {
+        "question": "How does Traflinq optimize my commute?",
+        "answer": "Traflinq uses advanced AI algorithms to analyze real-time traffic data, historical patterns, and vehicle capacity to find the most efficient routes and schedules, reducing both time and cost."
+      },
+      "integrate": {
+        "question": "Can I integrate Traflinq with my existing fleet?",
+        "answer": "Yes! Traflinq is designed with vendor integration in mind. Our platform can connect with most modern fleet management systems via our robust API."
+      },
+      "ghostSeat": {
+        "question": "What is Ghost Seat Management?",
+        "answer": "Ghost Seat Management identifies and fills empty seats in existing commuter routes, maximizing vehicle utilization and significantly lowering the cost per passenger."
+      },
+      "security": {
+        "question": "Is my data secure?",
+        "answer": "Absolutely. We use industry-standard encryption and security protocols to ensure that all your fleet and passenger data remains private and protected."
+      }
+    },
+    "stillNeedHelp": {
+      "title": "Still need help?",
+      "description": "Our enterprise support team is available for custom integrations and large fleet management.",
+      "scheduleCall": "Schedule a call"
+    }
+  },
+  "privacy": {
+    "badge": "Legal",
+    "title": "Privacy Policy",
+    "effectiveDate": "Effective as of 2026-04-25",
+    "intro": "This privacy policy is applicable to the Traflinq app (hereinafter referred to as \"Application\") for mobile devices, which was developed by <company>Cort Technologies</company> (hereinafter referred to as \"Service Provider\") as a Free service. This service is provided \"AS IS\".",
+    "sections": {
+      "obtain": {
+        "title": "What information does the Application obtain and how is it used?",
+        "p1": "The Application acquires the information you supply when you download and register the Application. Registration with the Service Provider is not mandatory. However, bear in mind that you might not be able to utilize some of the features offered by the Application unless you register with them.",
+        "p2": "The Service Provider may also use the information you provided them to contact you from time to time to provide you with important information, required notices and marketing promotions."
+      },
+      "automatic": {
+        "title": "What information does the Application collect automatically?",
+        "p1": "In addition, the Application may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile devices unique device ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browsers you use, and information about the way you use the Application."
+      },
+      "location": {
+        "title": "Does the Application collect precise real time location information of the device?",
+        "p1": "This Application collects your device's location, which helps the Service Provider determine your approximate geographical location and make use of in below ways:",
+        "geolocation": "Geolocation Services:",
+        "geolocationDesc": "The Service Provider utilizes location data to provide features such as personalized content, relevant recommendations, and location-based services.",
+        "analytics": "Analytics and Improvements:",
+        "analyticsDesc": "Aggregated and anonymized location data helps the Service Provider to analyze user behavior, identify trends, and improve the overall performance and functionality of the Application.",
+        "thirdParty": "Third-Party Services:",
+        "thirdPartyDesc": "Periodically, the Service Provider may transmit anonymized location data to external services. These services assist them in enhancing the Application and optimizing their offerings."
+      },
+      "ai": {
+        "title": "Does the Application use Artificial Intelligence (AI) technologies?",
+        "p1": "The Application does not use Artificial Intelligence (AI) technologies to process your data or provide features."
+      },
+      "thirdParties": {
+        "title": "Do third parties see and/or have access to information obtained by the Application?",
+        "p1": "Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.",
+        "p2": "Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:",
+        "googlePlay": "Google Play Services",
+        "expo": "Expo",
+        "p3": "The Service Provider may disclose User Provided and Automatically Collected Information:",
+        "disclosure1": "as required by law, such as to comply with a subpoena, or similar legal process;",
+        "disclosure2": "when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;",
+        "disclosure3": "with their trusted services providers who work on their behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement."
+      },
+      "optOut": {
+        "title": "What are my opt-out rights?",
+        "p1": "You can halt all collection of information by the Application easily by uninstalling the Application. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network."
+      },
+      "retention": {
+        "title": "What is the data retention policy and how can you manage your information?",
+        "p1": "The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. The Service Provider will retain Automatically Collected information for up to 24 months and thereafter may store it in aggregate. If you'd like the Service Provider to delete User Provided Data that you have provided via the Application, please contact them at <email>corttechnologies562@gmail.com</email> and we will respond in a reasonable time."
+      },
+      "children": {
+        "title": "How does the Application address children's privacy?",
+        "p1": "The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13. The Application does not address anyone under the age of 13. In the case the Service Provider discover that a child under 13 has provided personal information, the Service Provider will immediately delete this from their servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact the Service Provider (<email>contact@traflinq.com</email>) so that they will be able to take the necessary actions."
+      },
+      "security": {
+        "title": "How is your information kept secure?",
+        "p1": "The Service Provider are concerned about safeguarding the confidentiality of your information. The Service Provider provide physical, electronic, and procedural safeguards to protect information we process and maintain. For example, we limit access to this information to authorized employees and contractors who need to know that information in order to operate, develop or improve their Application."
+      },
+      "changes": {
+        "title": "How will you be informed of changes to this Privacy Policy?",
+        "p1": "This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes."
+      },
+      "consent": {
+        "title": "How do you give your consent?",
+        "p1": "By using the Application, you are giving your consent to the Service Provider processing of your information as set forth in this Privacy Policy now and as amended by us. \"Processing,\" means using cookies on a computer/hand held device or using or touching information in any way, including, but not limited to, collecting, storing, deleting, using, combining and disclosing information."
+      },
+      "contact": {
+        "title": "How can you contact us?",
+        "p1": "If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at <email>contact@traflinq.com</email>"
+      }
+    }
+  },
+  "comingSoon": {
+    "badge": "Launching Soon",
+    "title": "Stop Overpaying for <highlight>Commute</highlight>.",
+    "description": "Traflinq's AI-driven route optimization is engineered to <savings>cut your commute costs by up to 40%</savings>. We're putting money back in your pocket.",
+    "projectedSavings": "Projected Savings",
+    "lessCost": "Less Cost",
+    "optimizedRoutes": "Optimized Routes Active",
+    "support": "Support",
+    "privacy": "Privacy Policy",
+    "logoAlt": "TrafLinq Logo"
+  }
+}
