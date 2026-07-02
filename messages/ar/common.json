@@ -1,0 +1,26 @@
+{
+  "common": {
+    "actions": {
+      "bookDemo": "احجز عرضًا توضيحيًا",
+      "requestEnterpriseDemo": "اطلب عرضًا توضيحيًا للمؤسسات",
+      "explorePlatform": "استكشف المنصة",
+      "requestBriefing": "اطلب جلسة إحاطة استراتيجية",
+      "connect": "تواصل"
+    },
+    "locale": {
+      "english": "EN",
+      "arabic": "عربي",
+      "switchToEnglish": "التبديل إلى الإنجليزية",
+      "switchToArabic": "التبديل إلى العربية"
+    },
+    "misc": {
+      "toggleMenu": "فتح/إغلاق القائمة",
+      "brandAlt": "ترافلينك"
+    },
+    "validation": {
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalidPakistan": "أدخل رقم جوال باكستاني صالح (11 رقماً، مثال: 03001234567)",
+      "phoneInvalidSaudiArabia": "أدخل رقم جوال سعودي صالح (10 أرقام، مثال: 0501234567)"
+    }
+  }
+}

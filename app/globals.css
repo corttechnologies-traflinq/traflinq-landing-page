@@ -124,6 +124,17 @@
   }
 }
 
+/* RTL typography and layout */
+html[dir="rtl"] body {
+  font-family: var(--font-noto-arabic), var(--font-geist), system-ui, sans-serif;
+}
+
+/* LTR content in RTL context (phone, email, URLs) */
+.ltr-content {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
 /* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

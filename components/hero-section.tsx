@@ -5,11 +5,19 @@ import { ArrowRight, ChevronRight } from "lucide-react"
 import { motion, useAnimationFrame } from "framer-motion"
 import { useRef, useState, useCallback } from "react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 
 const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Waypoint { x: number; y: number }
+
+interface CarProps {
+  waypoints: Waypoint[]
+  progress: number
+  color: { body: string; top: string; head: string }
+}
 
 // ─── Path helpers (straight segments only) ───────────────────────────────────
 function lerp(a: number, b: number, t: number) {
@@ -187,6 +195,7 @@ const DURATION = 12000 // ms
 
 // ─── IsometricMap ─────────────────────────────────────────────────────────────
 function IsometricMap() {
+  const t = useTranslations("landing.hero.map")
   const [mode, setMode] = useState<"before" | "after">("before")
   const [transitioning, setTransitioning] = useState(false)
   const [displayMode, setDisplayMode] = useState<"before" | "after">("before")
@@ -237,8 +246,8 @@ function IsometricMap() {
       </svg>
 
       {/* Top bar */}
-      <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-white/90 z-10">
-        <span>Live Map</span>
+      <div className="absolute top-4 start-4 end-4 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-white/90 z-10">
+        <span>{t("liveMap")}</span>
         {/* Toggle Switch */}
         <button
           onClick={handleSwitch}
@@ -257,7 +266,7 @@ function IsometricMap() {
               color: isBefore ? "white" : "rgba(255,255,255,0.38)",
             }}
           >
-            Before
+            {t("before")}
           </div>
           <div
             className="px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-[0.12em] transition-all duration-300"
@@ -266,13 +275,13 @@ function IsometricMap() {
               color: !isBefore ? "white" : "rgba(255,255,255,0.38)",
             }}
           >
-            Traflinq
+            {t("traflinq")}
           </div>
         </button>
       </div>
 
       {/* Mode label */}
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center z-10 pointer-events-none">
+      <div className="absolute bottom-4 inset-x-0 flex justify-center z-10 pointer-events-none">
         <div
           className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500"
           style={{
@@ -281,7 +290,7 @@ function IsometricMap() {
             color: isBefore ? "#ef4444" : "#fe8503",
           }}
         >
-          {isBefore ? "⚠ Inefficient Routes — Without Traflinq" : "✓ Optimized Routes — Traflinq Active"}
+          {isBefore ? t("inefficientRoutes") : t("optimizedRoutes")}
         </div>
       </div>
 
@@ -428,11 +437,11 @@ function IsometricMap() {
           <line x1="261" y1="335" x2="283" y2="363" stroke="#fe8503" strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="285" y="373" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="start"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            HEAD QUARTER / PLANT
+            {t("headquarter")}
           </text>
           <text x="285" y="384" fontSize="8" fontWeight="800" fill="#fe8503" letterSpacing="0.14em" textAnchor="start" opacity="0.95"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.85)", strokeWidth: 2.5, strokeLinejoin: "round" }}>
-            WORK / DESTINATION
+            {t("workDestination")}
           </text>
         </g>
 
@@ -443,7 +452,7 @@ function IsometricMap() {
           <line x1="397" y1="318" x2="419" y2="286" stroke={CAR_COLORS[0].body} strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="421" y="282" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="start"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            ROUTE A
+            {t("routeA")}
           </text>
         </g>
 
@@ -454,7 +463,7 @@ function IsometricMap() {
           <line x1="87" y1="324" x2="65" y2="292" stroke={CAR_COLORS[1].body} strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="63" y="288" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="end"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            ROUTE B
+            {t("routeB")}
           </text>
         </g>
 
@@ -465,7 +474,7 @@ function IsometricMap() {
           <line x1="252" y1="234" x2="274" y2="202" stroke={CAR_COLORS[2].body} strokeWidth="1" strokeDasharray="2 2" opacity="0.6" />
           <text x="276" y="198" fontSize="11" fontWeight="900" fill="white" letterSpacing="0.08em" textAnchor="start"
             style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.95)", strokeWidth: 4, strokeLinejoin: "round" }}>
-            ROUTE C
+            {t("routeC")}
           </text>
         </g>
 
@@ -473,26 +482,26 @@ function IsometricMap() {
         {isBefore ? (
           <g>
             <rect x="160" y="408" width="164" height="18" rx="9" fill="rgba(50,0,0,0.92)" stroke="#ef4444" strokeOpacity="0.7" strokeWidth="1" />
-            <text x="242" y="420.5" fontSize="8.5" fontWeight="700" fill="#ef4444" textAnchor="middle" letterSpacing="0.05em">3× LONGER ROUTES — NO OPTIMIZATION</text>
+            <text x="242" y="420.5" fontSize="8.5" fontWeight="700" fill="#ef4444" textAnchor="middle" letterSpacing="0.05em">{t("longerRoutes")}</text>
           </g>
         ) : (
           <g>
             <rect x="168" y="408" width="148" height="18" rx="9" fill="rgba(0,30,0,0.92)" stroke="#22c55e" strokeOpacity="0.7" strokeWidth="1" />
-            <text x="242" y="420.5" fontSize="8.5" fontWeight="700" fill="#22c55e" textAnchor="middle" letterSpacing="0.05em">ROUTES OPTIMIZED — 60% SAVED</text>
+            <text x="242" y="420.5" fontSize="8.5" fontWeight="700" fill="#22c55e" textAnchor="middle" letterSpacing="0.05em">{t("routesOptimized")}</text>
           </g>
         )}
 
         {/* Car legend */}
         {[
-          { label: "Route A", color: "#fe8503", x: 15, y: 452 },
-          { label: "Route B", color: "#22d3ee", x: 95, y: 452 },
-          { label: "Route C", color: "#a78bfa", x: 175, y: 452 },
+          { label: t("routeLegendA"), color: "#fe8503", x: 15, y: 452 },
+          { label: t("routeLegendB"), color: "#22d3ee", x: 95, y: 452 },
+          { label: t("routeLegendC"), color: "#a78bfa", x: 175, y: 452 },
         ].map((item) => (
           <g key={item.label} pointerEvents="none">
             <circle cx={item.x} cy={item.y} r="4" fill={item.color} opacity="0.9" />
             <text x={item.x + 8} y={item.y + 4} fontSize="7.5" fontWeight="700" fill="white" opacity="0.65" letterSpacing="0.06em"
               style={{ paintOrder: "stroke", stroke: "rgba(8,11,20,0.8)", strokeWidth: 2 }}>
-              {item.label.toUpperCase()}
+              {item.label}
             </text>
           </g>
         ))}
@@ -503,6 +512,12 @@ function IsometricMap() {
 
 // ─── Hero Section ─────────────────────────────────────────────────────────────
 export function HeroSection() {
+  const t = useTranslations("landing.hero")
+  const tCommon = useTranslations("common")
+  const pathname = usePathname()
+  const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
+  const basePath = isSaudiRoute ? "/sa" : ""
+
   return (
     <section
       id="home"
@@ -511,8 +526,8 @@ export function HeroSection() {
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="absolute top-1/3 right-1/4 w-[300px] sm:w-[700px] h-[300px] sm:h-[700px] bg-[#fe8503]/6 rounded-full blur-[100px] sm:blur-[140px]" />
-        <div className="absolute bottom-0 left-1/5 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-orange-900/5 rounded-full blur-[80px] sm:blur-[120px]" />
+        <div className="absolute top-1/3 end-1/4 w-[300px] sm:w-[700px] h-[300px] sm:h-[700px] bg-[#fe8503]/6 rounded-full blur-[100px] sm:blur-[140px]" />
+        <div className="absolute bottom-0 start-1/5 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-orange-900/5 rounded-full blur-[80px] sm:blur-[120px]" />
       </div>
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-32 w-full">
@@ -532,7 +547,7 @@ export function HeroSection() {
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-[#fe8503]/20 bg-[#fe8503]/5 px-4 py-1.5 text-xs text-[#fe8503]/80 tracking-widest uppercase font-medium">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#fe8503] animate-pulse" />
-                Enterprise Mobility Infrastructure
+                {t("badge")}
               </span>
             </motion.div>
 
@@ -542,8 +557,8 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-[2.5rem] sm:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-white leading-[1.1] sm:leading-[1.05]"
             >
-              The Operating System for{" "}
-              <span className="text-[#fe8503]">Corporate Mobility.</span>
+              {t("titleLine1")}{" "}
+              <span className="text-[#fe8503]">{t("titleHighlight")}</span>
             </motion.h1>
 
             <motion.p
@@ -552,7 +567,7 @@ export function HeroSection() {
               transition={{ duration: 0.7, delay: 0.35 }}
               className="mt-8 text-lg leading-8 text-white/45 max-w-xl"
             >
-              Centralize fragmented transport operations into a single intelligence layer. Orchestrate enterprise movement, eliminate cost leakage, and achieve total visibility through a unified tech platform.
+              {t("description")}
             </motion.p>
 
             <motion.div
@@ -566,17 +581,17 @@ export function HeroSection() {
                   size="lg"
                   className="bg-[#fe8503] text-white hover:bg-[#fe8503]/90 px-8 gap-2 shadow-lg shadow-[#fe8503]/20 text-sm tracking-wide"
                 >
-                  Request Enterprise Demo
+                  {tCommon("actions.requestEnterpriseDemo")}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/#briefing">
+              <Link href={`${basePath}/#briefing`}>
                 <Button
                   size="lg"
                   variant="ghost"
                   className="text-white/50 hover:text-white hover:bg-white/5 gap-1.5 px-6 text-sm tracking-wide"
                 >
-                  Explore the Platform
+                  {tCommon("actions.explorePlatform")}
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </Link>

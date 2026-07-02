@@ -1,15 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { LocaleProvider } from '@/components/locale-provider'
+import { geist, notoSansArabic } from './fonts'
 import './globals.css'
-
-const geist = Geist({
-  subsets: ["latin"],
-  display: 'swap',
-  preload: true,
-  variable: '--font-geist',
-});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -33,9 +27,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`dark bg-background ${geist.variable}`}>
+    <html lang="en" className={`dark bg-background ${geist.variable} ${notoSansArabic.variable}`}>
       <body className="font-sans antialiased">
-        {children}
+        <LocaleProvider>
+          {children}
+        </LocaleProvider>
         <Analytics />
         <SpeedInsights />
       </body>

@@ -1,0 +1,26 @@
+{
+  "common": {
+    "actions": {
+      "bookDemo": "Book a Demo",
+      "requestEnterpriseDemo": "Request Enterprise Demo",
+      "explorePlatform": "Explore the Platform",
+      "requestBriefing": "Request a Strategic Briefing",
+      "connect": "Connect"
+    },
+    "locale": {
+      "english": "EN",
+      "arabic": "عربي",
+      "switchToEnglish": "Switch to English",
+      "switchToArabic": "Switch to Arabic"
+    },
+    "misc": {
+      "toggleMenu": "Toggle menu",
+      "brandAlt": "Traflinq"
+    },
+    "validation": {
+      "phoneRequired": "Phone number is required",
+      "phoneInvalidPakistan": "Enter a valid Pakistani mobile number (11 digits, e.g. 03001234567)",
+      "phoneInvalidSaudiArabia": "Enter a valid Saudi mobile number (10 digits, e.g. 0501234567)"
+    }
+  }
+}

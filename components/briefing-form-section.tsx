@@ -1,18 +1,24 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 import {
+  getPhoneMaxLength,
+  getPhonePlaceholder,
   getPhoneValidationError,
-  PHONE_MAX_LENGTH,
-  PHONE_PLACEHOLDER,
+  type PhoneCountry,
   sanitizePhoneInput,
 } from "@/lib/phone"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, CheckCircle2, Download, Loader2 } from "lucide-react"
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+const COUNTRIES = ["Pakistan", "Saudi Arabia"] as const satisfies readonly PhoneCountry[]
 
-const PAKISTAN_CITIES = ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Sukkur", "Nooriabad", "Other"]
+const CITIES_BY_COUNTRY: Record<PhoneCountry, readonly string[]> = {
+  Pakistan: ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Sukkur", "Nooriabad", "Other"],
+  "Saudi Arabia": ["Riyadh", "Jeddah", "Dammam", "Khobar", "Mecca", "Medina", "Other"],
+}
 const FLEET_SIZES = ["1 – 25", "26 – 50", "51 – 200", "200+"]
 const PRIMARY_GOALS = [
   "Cost Optimisation",
@@ -24,7 +30,7 @@ const PRIMARY_GOALS = [
   "Other",
 ]
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+const BENEFIT_KEYS = ["roi", "footprint", "compliance", "implementation"] as const
 
 interface FormState {
   name: string
@@ -46,8 +52,6 @@ const EMPTY: FormState = {
   fleetSize: "", primaryGoal: "", primaryGoalOther: "",
 }
 
-// ─── Shared primitives ────────────────────────────────────────────────────────
-
 const inputCls =
   "rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all w-full"
 
@@ -57,7 +61,7 @@ const selectCls =
 function Label({ htmlFor, children, required }: { htmlFor: string; children: React.ReactNode; required?: boolean }) {
   return (
     <label htmlFor={htmlFor} className="text-[11px] font-bold uppercase tracking-widest text-white/40">
-      {children}{required && <span className="text-primary ml-0.5">*</span>}
+      {children}{required && <span className="text-primary ms-0.5">*</span>}
     </label>
   )
 }
@@ -79,16 +83,43 @@ function SectionHeading({ number, title }: { number: string; title: string }) {
 }
 
 export function BriefingFormSection() {
+  const t = useTranslations("briefing")
+  const tCommon = useTranslations("common.validation")
   const [form, setForm] = useState<FormState>(EMPTY)
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const pathname = usePathname()
+  const isSaudiRoute = pathname === "/sa/request-briefing" || pathname.startsWith("/sa/")
+  const basePath = isSaudiRoute ? "/sa" : ""
+
+  const phoneCountry = (form.country === "Saudi Arabia" ? "Saudi Arabia" : "Pakistan") as PhoneCountry
+  const cities = CITIES_BY_COUNTRY[phoneCountry]
 
   const set = (id: keyof FormState, val: string) =>
     setForm((prev) => ({ ...prev, [id]: val }))
 
+  const setCountry = (country: string) => {
+    setForm((prev) => ({
+      ...prev,
+      country,
+      city: "",
+      cityOther: "",
+      phone: sanitizePhoneInput(prev.phone, country as PhoneCountry),
+    }))
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const phoneError = getPhoneValidationError(form.phone, { required: true })
+    const phoneError = getPhoneValidationError(form.phone, {
+      required: true,
+      country: phoneCountry,
+      messages: {
+        required: tCommon("phoneRequired"),
+        invalid: phoneCountry === "Saudi Arabia"
+          ? tCommon("phoneInvalidSaudiArabia")
+          : tCommon("phoneInvalidPakistan"),
+      },
+    })
     if (phoneError) {
       alert(phoneError)
       return
@@ -110,7 +141,7 @@ export function BriefingFormSection() {
       setSubmitted(true)
     } catch (err) {
       console.error("Lead submission failed:", err)
-      alert("Something went wrong. Please try again or email us directly.")
+      alert(t("submitError"))
     } finally {
       setSubmitting(false)
     }
@@ -123,7 +154,6 @@ export function BriefingFormSection() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left: Copy */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -131,36 +161,30 @@ export function BriefingFormSection() {
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <span className="text-xs text-primary/60 tracking-widest uppercase font-medium">
-              Enterprise Enquiry
+              {t("badge")}
             </span>
             <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight">
-              Request a Strategic Briefing.
+              {t("title")}
             </h2>
             <p className="mt-6 text-base text-white/40 leading-relaxed max-w-md">
-              Secure a focused session with our enterprise team to map your current transport spend against the Traflinq savings model. We design tailored sessions around your fleet scale, operational complexity, and specific savings targets.
+              {t("description")}
             </p>
 
             <div className="mt-10 flex flex-col gap-6">
-              {[
-                { title: "Strategic ROI Modelling", desc: "Detailed analysis of your current mobility spend vs. optimized Traflinq benchmarks." },
-                { title: "Operational Footprint Review", desc: "A deep-dive into your existing routes, vendor costs, and ghost seat leakage." },
-                { title: "Compliance & Governance", desc: "Mapping our automated auditing layers to your corporate governance requirements." },
-                { title: "Dedicated Implementation Team", desc: "Direct access to our enterprise specialists for a smooth deployment roadmap." },
-              ].map((item) => (
-                <div key={item.title} className="flex items-start gap-4">
+              {BENEFIT_KEYS.map((key) => (
+                <div key={key} className="flex items-start gap-4">
                   <div className="mt-1 h-5 w-5 flex-shrink-0 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center">
                     <div className="h-1.5 w-1.5 rounded-full bg-primary" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white/90">{item.title}</h4>
-                    <p className="text-xs text-white/40 mt-1 leading-relaxed">{item.desc}</p>
+                    <h4 className="text-sm font-bold text-white/90">{t(`benefits.${key}.title`)}</h4>
+                    <p className="text-xs text-white/40 mt-1 leading-relaxed">{t(`benefits.${key}.desc`)}</p>
                   </div>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Right: Form / Success */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -178,76 +202,77 @@ export function BriefingFormSection() {
                   onSubmit={handleSubmit}
                   className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-8 flex flex-col gap-7"
                 >
-                  {/* ── Section 1: The Person ── */}
                   <div className="flex flex-col gap-5">
-                    <SectionHeading number="1" title="The Person" />
+                    <SectionHeading number="1" title={t("sections.person")} />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <Field>
-                        <Label htmlFor="name" required>Name</Label>
+                        <Label htmlFor="name" required>{t("fields.name")}</Label>
                         <input id="name" type="text" value={form.name} onChange={(e) => set("name", e.target.value)}
-                          placeholder="Jane Smith" required className={inputCls} />
+                          placeholder={t("placeholders.name")} required className={inputCls} />
                       </Field>
                       <Field>
-                        <Label htmlFor="role" required>Role / Title</Label>
+                        <Label htmlFor="role" required>{t("fields.role")}</Label>
                         <input id="role" type="text" value={form.role} onChange={(e) => set("role", e.target.value)}
-                          placeholder="Head of Operations" required className={inputCls} />
+                          placeholder={t("placeholders.role")} required className={inputCls} />
                       </Field>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <Field>
-                        <Label htmlFor="email" required>Work Email</Label>
+                        <Label htmlFor="email" required>{t("fields.email")}</Label>
                         <input id="email" type="email" value={form.email} onChange={(e) => set("email", e.target.value)}
-                          placeholder="jane@company.com" required className={inputCls} />
+                          placeholder={t("placeholders.email")} required className={`${inputCls} ltr-content`} dir="ltr" />
                       </Field>
                       <Field>
-                        <Label htmlFor="phone" required>Contact Number</Label>
-                        <input id="phone" type="tel" inputMode="numeric" maxLength={PHONE_MAX_LENGTH} value={form.phone} onChange={(e) => set("phone", sanitizePhoneInput(e.target.value))}
-                          placeholder={PHONE_PLACEHOLDER} required className={inputCls} />
+                        <Label htmlFor="phone" required>{t("fields.phone")}</Label>
+                        <input id="phone" type="tel" inputMode="numeric" maxLength={getPhoneMaxLength(phoneCountry)} value={form.phone} onChange={(e) => set("phone", sanitizePhoneInput(e.target.value, phoneCountry))}
+                          placeholder={getPhonePlaceholder(phoneCountry)} required className={`${inputCls} ltr-content`} dir="ltr" />
                       </Field>
                     </div>
                   </div>
 
-                  {/* ── Section 2: The Operation ── */}
                   <div className="flex flex-col gap-5">
-                    <SectionHeading number="2" title="The Operation" />
+                    <SectionHeading number="2" title={t("sections.operation")} />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <Field>
-                        <Label htmlFor="organization" required>Organization Name</Label>
+                        <Label htmlFor="organization" required>{t("fields.organization")}</Label>
                         <input id="organization" type="text" value={form.organization} onChange={(e) => set("organization", e.target.value)}
-                          placeholder="Acme Corp" required className={inputCls} />
+                          placeholder={t("placeholders.organization")} required className={inputCls} />
                       </Field>
                       <Field>
-                        <Label htmlFor="country" required>Country of Operation</Label>
-                        <select id="country" value={form.country} onChange={(e) => set("country", e.target.value)}
+                        <Label htmlFor="country" required>{t("fields.country")}</Label>
+                        <select id="country" value={form.country} onChange={(e) => setCountry(e.target.value)}
                           required className={selectCls}>
-                          <option value="Pakistan" className="bg-[#0d1018]">Pakistan</option>
+                          {COUNTRIES.map((country) => (
+                            <option key={country} value={country} className="bg-[#0d1018]">
+                              {t(`countries.${country}`)}
+                            </option>
+                          ))}
                         </select>
                       </Field>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <Field>
-                        <Label htmlFor="city" required>Primary City of Operation</Label>
+                        <Label htmlFor="city" required>{t("fields.city")}</Label>
                         <select id="city" value={form.city} onChange={(e) => set("city", e.target.value)}
                           required className={selectCls}>
-                          <option value="" disabled className="bg-[#0d1018]">Select City</option>
-                          {PAKISTAN_CITIES.map((c) => (
-                            <option key={c} value={c} className="bg-[#0d1018]">{c}</option>
+                          <option value="" disabled className="bg-[#0d1018]">{t("placeholders.selectCity")}</option>
+                          {cities.map((c) => (
+                            <option key={c} value={c} className="bg-[#0d1018]">{t(`cities.${c}`)}</option>
                           ))}
                         </select>
                       </Field>
                       <Field>
-                        <Label htmlFor="fleetSize" required>Fleet Size / No. of Commuters</Label>
+                        <Label htmlFor="fleetSize" required>{t("fields.fleetSize")}</Label>
                         <select id="fleetSize" value={form.fleetSize} onChange={(e) => set("fleetSize", e.target.value)}
                           required className={selectCls}>
-                          <option value="" disabled className="bg-[#0d1018]">Select Range</option>
+                          <option value="" disabled className="bg-[#0d1018]">{t("placeholders.selectRange")}</option>
                           {FLEET_SIZES.map((s) => (
-                            <option key={s} value={s} className="bg-[#0d1018]">{s}</option>
+                            <option key={s} value={s} className="bg-[#0d1018]">{t(`fleetSizes.${s}`)}</option>
                           ))}
                         </select>
                       </Field>
                     </div>
 
-                    {/* "Other" city open field */}
                     <AnimatePresence>
                       {form.city === "Other" && (
                         <motion.div
@@ -258,31 +283,29 @@ export function BriefingFormSection() {
                           className="overflow-hidden"
                         >
                           <Field>
-                            <Label htmlFor="cityOther" required>Please Specify Your City</Label>
+                            <Label htmlFor="cityOther" required>{t("fields.cityOther")}</Label>
                             <input id="cityOther" type="text" value={form.cityOther}
                               onChange={(e) => set("cityOther", e.target.value)}
-                              placeholder="Enter Your City" required className={inputCls} />
+                              placeholder={t("placeholders.cityOther")} required className={inputCls} />
                           </Field>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
 
-                  {/* ── Section 3: The Need ── */}
                   <div className="flex flex-col gap-5">
-                    <SectionHeading number="3" title="The Need" />
+                    <SectionHeading number="3" title={t("sections.need")} />
                     <Field>
-                      <Label htmlFor="primaryGoal" required>Primary Goal</Label>
+                      <Label htmlFor="primaryGoal" required>{t("fields.primaryGoal")}</Label>
                       <select id="primaryGoal" value={form.primaryGoal} onChange={(e) => set("primaryGoal", e.target.value)}
                         required className={selectCls}>
-                        <option value="" disabled className="bg-[#0d1018]">Select Your Primary Goal</option>
+                        <option value="" disabled className="bg-[#0d1018]">{t("placeholders.selectGoal")}</option>
                         {PRIMARY_GOALS.map((g) => (
-                          <option key={g} value={g} className="bg-[#0d1018]">{g}</option>
+                          <option key={g} value={g} className="bg-[#0d1018]">{t(`goals.${g}`)}</option>
                         ))}
                       </select>
                     </Field>
 
-                    {/* "Other" goal open field */}
                     <AnimatePresence>
                       {form.primaryGoal === "Other" && (
                         <motion.div
@@ -293,17 +316,16 @@ export function BriefingFormSection() {
                           className="overflow-hidden mt-4"
                         >
                           <Field>
-                            <Label htmlFor="primaryGoalOther" required>Please Specify Your Goal</Label>
+                            <Label htmlFor="primaryGoalOther" required>{t("fields.primaryGoalOther")}</Label>
                             <input id="primaryGoalOther" type="text" value={form.primaryGoalOther}
                               onChange={(e) => set("primaryGoalOther", e.target.value)}
-                              placeholder="Enter Your Goal" required className={inputCls} />
+                              placeholder={t("placeholders.primaryGoalOther")} required className={inputCls} />
                           </Field>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
 
-                  {/* ── Submit ── */}
                   <button
                     type="submit"
                     disabled={submitting}
@@ -312,22 +334,24 @@ export function BriefingFormSection() {
                     {submitting ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Submitting…
+                        {t("submitting")}
                       </>
                     ) : (
                       <>
-                        Submit Briefing Request
-                        <ArrowRight className="h-4 w-4" />
+                        {t("submit")}
+                        <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                       </>
                     )}
                   </button>
 
                   <p className="text-center text-[11px] text-white/20 leading-relaxed">
-                    By submitting, you agree to our{" "}
-                    <a href="/privacy" className="text-primary/60 hover:text-primary underline underline-offset-2 transition-colors">
-                      Privacy Policy
-                    </a>
-                    . We never share your data.
+                    {t.rich("privacyNote", {
+                      privacyLink: (chunks) => (
+                        <a href={`${basePath}/privacy`} className="text-primary/60 hover:text-primary underline underline-offset-2 transition-colors">
+                          {chunks}
+                        </a>
+                      ),
+                    } as Record<string, (chunks: React.ReactNode) => React.ReactNode>)}
                   </p>
                 </motion.form>
               ) : (
@@ -344,11 +368,12 @@ export function BriefingFormSection() {
 
                   <div>
                     <h3 className="text-2xl font-bold text-white tracking-tight">
-                      Request Received
+                      {t("success.title")}
                     </h3>
                     <p className="mt-4 text-base text-white/50 leading-relaxed">
-                      Your briefing request has been received. Our enterprise team will review your requirements and reach out within{" "}
-                      <span className="text-white font-semibold">24 hours</span>.
+                      {t.rich("success.message", {
+                        hours: (chunks) => <span className="text-white font-semibold">{chunks}</span>,
+                      })}
                     </p>
                   </div>
 
@@ -356,21 +381,21 @@ export function BriefingFormSection() {
 
                   <div className="flex flex-col gap-2">
                     <p className="text-xs text-white/30 uppercase tracking-widest font-bold">
-                      In the meantime
+                      {t("success.meanwhile")}
                     </p>
                     <a
                       href="#"
                       className="group inline-flex items-center gap-2.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-                      aria-label="Download Traflinq Company Profile"
+                      aria-label={t("success.downloadProfile")}
                     >
                       <div className="h-9 w-9 flex items-center justify-center rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary/20 transition-colors">
                         <Download className="h-4 w-4" />
                       </div>
-                      Download our Company Profile
-                      <span className="text-[10px] text-white/20 font-normal ml-1">(PDF)</span>
+                      {t("success.downloadProfile")}
+                      <span className="text-[10px] text-white/20 font-normal ms-1">{t("success.pdf")}</span>
                     </a>
-                    <p className="text-xs text-white/20 leading-relaxed pl-11">
-                      A deep-dive into how Traflinq reduces your corporate transport spend — available shortly.
+                    <p className="text-xs text-white/20 leading-relaxed ps-11">
+                      {t("success.downloadDesc")}
                     </p>
                   </div>
                 </motion.div>
