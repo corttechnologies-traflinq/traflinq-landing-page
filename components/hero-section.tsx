@@ -6,6 +6,7 @@ import { motion, useAnimationFrame } from "framer-motion"
 import { useRef, useState, useCallback } from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 
 const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
 
@@ -513,6 +514,9 @@ function IsometricMap() {
 export function HeroSection() {
   const t = useTranslations("landing.hero")
   const tCommon = useTranslations("common")
+  const pathname = usePathname()
+  const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
+  const basePath = isSaudiRoute ? "/sa" : ""
 
   return (
     <section
@@ -581,7 +585,7 @@ export function HeroSection() {
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/#briefing">
+              <Link href={`${basePath}/#briefing`}>
                 <Button
                   size="lg"
                   variant="ghost"

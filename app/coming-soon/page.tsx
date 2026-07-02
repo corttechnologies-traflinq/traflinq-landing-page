@@ -3,9 +3,13 @@
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { ArrowRight, Twitter, Linkedin, Github } from "lucide-react"
+import { usePathname } from "next/navigation"
 
 export default function ComingSoon() {
   const t = useTranslations("comingSoon")
+  const pathname = usePathname()
+  const isSaudiRoute = pathname === "/sa/coming-soon" || pathname.startsWith("/sa/")
+  const basePath = isSaudiRoute ? "/sa" : ""
 
   return (
     <div className="min-h-screen bg-white text-[#131313] flex flex-col items-center justify-center p-6 relative overflow-hidden">
@@ -98,8 +102,8 @@ export default function ComingSoon() {
       </div>
 
       <div className="mt-auto py-8 flex items-center gap-8 text-xs text-gray-400 z-10">
-        <Link href="/support" className="hover:text-primary transition-colors underline underline-offset-4">{t("support")}</Link>
-        <Link href="/privacy" className="hover:text-primary transition-colors underline underline-offset-4">{t("privacy")}</Link>
+        <Link href={`${basePath}/support`} className="hover:text-primary transition-colors underline underline-offset-4">{t("support")}</Link>
+        <Link href={`${basePath}/privacy`} className="hover:text-primary transition-colors underline underline-offset-4">{t("privacy")}</Link>
       </div>
     </div>
   )

@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { NextIntlClientProvider } from "next-intl";
+import { usePathname } from "next/navigation";
 import {
   defaultLocale,
   isRtlLocale,
@@ -44,19 +45,26 @@ function applyDocumentLocale(locale: Locale) {
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(defaultLocale);
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/");
 
   useEffect(() => {
-    const initial = readStoredLocale();
+    // Only /sa pages are locale-switchable. Everywhere else is forced to English.
+    const initial = isSaudiRoute ? readStoredLocale() : defaultLocale;
     setLocaleState(initial);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(LOCALE_STORAGE_KEY, initial);
+    }
     applyDocumentLocale(initial);
     setMounted(true);
-  }, []);
+  }, [isSaudiRoute]);
 
   const setLocale = useCallback((next: Locale) => {
+    if (!isSaudiRoute) return;
     setLocaleState(next);
     localStorage.setItem(LOCALE_STORAGE_KEY, next);
     applyDocumentLocale(next);
-  }, []);
+  }, [isSaudiRoute]);
 
   const toggleLocale = useCallback(() => {
     setLocale(locale === "en" ? "ar" : "en");

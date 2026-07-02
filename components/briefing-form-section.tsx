@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 import {
   getPhoneMaxLength,
   getPhonePlaceholder,
@@ -87,6 +88,9 @@ export function BriefingFormSection() {
   const [form, setForm] = useState<FormState>(EMPTY)
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const pathname = usePathname()
+  const isSaudiRoute = pathname === "/sa/request-briefing" || pathname.startsWith("/sa/")
+  const basePath = isSaudiRoute ? "/sa" : ""
 
   const phoneCountry = (form.country === "Saudi Arabia" ? "Saudi Arabia" : "Pakistan") as PhoneCountry
   const cities = CITIES_BY_COUNTRY[phoneCountry]
@@ -343,7 +347,7 @@ export function BriefingFormSection() {
                   <p className="text-center text-[11px] text-white/20 leading-relaxed">
                     {t.rich("privacyNote", {
                       privacyLink: (chunks) => (
-                        <a href="/privacy" className="text-primary/60 hover:text-primary underline underline-offset-2 transition-colors">
+                        <a href={`${basePath}/privacy`} className="text-primary/60 hover:text-primary underline underline-offset-2 transition-colors">
                           {chunks}
                         </a>
                       ),

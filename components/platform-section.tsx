@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Calendar, Play, MonitorPlay } from "lucide-react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
 
@@ -32,6 +33,15 @@ const actions = [
 ]
 
 export function PlatformSection() {
+  const pathname = usePathname()
+  const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
+  const basePath = isSaudiRoute ? "/sa" : ""
+
+  const resolvedActions = actions.map((a) => ({
+    ...a,
+    href: a.external ? a.href : `${basePath}${a.href}`,
+  }))
+
   return (
     <section
       id="platform"
@@ -59,7 +69,7 @@ export function PlatformSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Action Cards */}
-          {actions.map((item, i) => (
+          {resolvedActions.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 30 }}

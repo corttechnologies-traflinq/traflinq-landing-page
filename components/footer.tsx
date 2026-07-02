@@ -4,41 +4,45 @@ import Link from "next/link"
 import Image from "next/image"
 import { Linkedin, Facebook } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 
 export function Footer() {
   const t = useTranslations("landing.footer")
   const tCommon = useTranslations("common")
+  const pathname = usePathname()
+  const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
+  const basePath = isSaudiRoute ? "/sa" : ""
 
   const footerColumns = [
     {
       heading: t("columns.platform.heading"),
       links: [
-        { name: t("columns.platform.overview"), href: "/#home" },
-        { name: t("columns.platform.intelligenceEngine"), href: "/#command-center" },
-        { name: t("columns.platform.securityCompliance"), href: "/#institutional-trust" },
-        { name: t("columns.platform.integrations"), href: "/#command-center" },
+        { name: t("columns.platform.overview"), href: `${basePath}/#home` },
+        { name: t("columns.platform.intelligenceEngine"), href: `${basePath}/#command-center` },
+        { name: t("columns.platform.securityCompliance"), href: `${basePath}/#institutional-trust` },
+        { name: t("columns.platform.integrations"), href: `${basePath}/#command-center` },
       ],
     },
     {
       heading: t("columns.solutions.heading"),
       links: [
-        { name: t("columns.solutions.enterpriseMobility"), href: "/#home" },
-        { name: t("columns.solutions.strategicBriefing"), href: "/request-briefing" },
+        { name: t("columns.solutions.enterpriseMobility"), href: `${basePath}/#home` },
+        { name: t("columns.solutions.strategicBriefing"), href: `${basePath}/request-briefing` },
       ],
     },
     {
       heading: t("columns.resources.heading"),
       links: [
-        { name: t("columns.resources.visionNews"), href: "/#home" },
-        { name: t("columns.resources.systemStatus"), href: "/#home" },
+        { name: t("columns.resources.visionNews"), href: `${basePath}/#home` },
+        { name: t("columns.resources.systemStatus"), href: `${basePath}/#home` },
       ],
     },
     {
       heading: t("columns.company.heading"),
       links: [
-        { name: t("columns.company.about"), href: "/#home" },
-        { name: t("columns.company.careers"), href: "/#home" },
-        { name: t("columns.company.contactSales"), href: "/support" },
+        { name: t("columns.company.about"), href: `${basePath}/#home` },
+        { name: t("columns.company.careers"), href: `${basePath}/#home` },
+        { name: t("columns.company.contactSales"), href: `${basePath}/support` },
         { name: t("columns.company.scheduleCall"), href: "https://calendar.app.google/qeHQgMANfWNr77yz6", external: true },
       ],
     },
@@ -51,7 +55,7 @@ export function Footer() {
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12">
 
           <div className="lg:max-w-[280px] shrink-0">
-            <Link href="/#home" className="inline-block -ms-4">
+            <Link href={`${basePath}/#home`} className="inline-block -ms-4">
               <Image
                 src="/traflinq_dark_no_tagline-Photoroom.png"
                 alt={tCommon("misc.brandAlt")}
@@ -112,10 +116,10 @@ export function Footer() {
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-xs text-white/20 hover:text-white/50 transition-colors">
+            <Link href={`${basePath}/privacy`} className="text-xs text-white/20 hover:text-white/50 transition-colors">
               {t("privacyPolicy")}
             </Link>
-            <Link href="/privacy" className="text-xs text-white/20 hover:text-white/50 transition-colors">
+            <Link href={`${basePath}/privacy`} className="text-xs text-white/20 hover:text-white/50 transition-colors">
               {t("termsOfService")}
             </Link>
           </div>

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { useLocale } from "@/lib/locale-context"
+import { usePathname } from "next/navigation"
 
 export function Navbar() {
   const t = useTranslations("landing.nav")
@@ -15,13 +16,16 @@ export function Navbar() {
   const { locale, setLocale } = useLocale()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+  const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
+  const basePath = isSaudiRoute ? "/sa" : ""
 
   const navItems = [
-    { id: "platform", name: t("platform"), href: "/#command-center" },
-    { id: "solutions", name: t("solutions"), href: "/#command-center" },
-    { id: "security", name: t("security"), href: "/#institutional-trust" },
-    { id: "about", name: t("about"), href: "/#about" },
-    { id: "briefing", name: t("briefing"), href: "/request-briefing" },
+    { id: "platform", name: t("platform"), href: `${basePath}/#command-center` },
+    { id: "solutions", name: t("solutions"), href: `${basePath}/#command-center` },
+    { id: "security", name: t("security"), href: `${basePath}/#institutional-trust` },
+    { id: "about", name: t("about"), href: `${basePath}/#about` },
+    { id: "briefing", name: t("briefing"), href: `${basePath}/request-briefing` },
   ]
 
   useEffect(() => {
@@ -40,7 +44,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <Link href="/#home" className="-m-1.5 p-1.5 flex items-center">
+          <Link href={`${basePath}/#home`} className="-m-1.5 p-1.5 flex items-center">
             <Image
               src="/traflinq_dark_no_tagline-Photoroom.png"
               alt={tCommon("misc.brandAlt")}
@@ -80,16 +84,18 @@ export function Navbar() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
-          <button
-            type="button"
-            onClick={() => setLocale(locale === "en" ? "ar" : "en")}
-            className="rounded-md px-2 py-1.5 text-xs font-bold text-white/50 hover:text-white hover:bg-white/5 transition-colors"
-            title={locale === "en" ? tCommon("locale.switchToArabic") : tCommon("locale.switchToEnglish")}
-          >
-            <span className={locale === "en" ? "text-white" : "text-white/40"}>{tCommon("locale.english")}</span>
-            <span className="mx-1.5 text-white/20">|</span>
-            <span className={locale === "ar" ? "text-white" : "text-white/40"}>{tCommon("locale.arabic")}</span>
-          </button>
+          {isSaudiRoute && (
+            <button
+              type="button"
+              onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+              className="rounded-md px-2 py-1.5 text-xs font-bold text-white/50 hover:text-white hover:bg-white/5 transition-colors"
+              title={locale === "en" ? tCommon("locale.switchToArabic") : tCommon("locale.switchToEnglish")}
+            >
+              <span className={locale === "en" ? "text-white" : "text-white/40"}>{tCommon("locale.english")}</span>
+              <span className="mx-1.5 text-white/20">|</span>
+              <span className={locale === "ar" ? "text-white" : "text-white/40"}>{tCommon("locale.arabic")}</span>
+            </button>
+          )}
           <Link href="https://calendar.app.google/qeHQgMANfWNr77yz6" target="_blank" rel="noopener noreferrer">
             <Button
               variant="outline"
@@ -111,17 +117,19 @@ export function Navbar() {
             className="lg:hidden overflow-hidden bg-[#080b14] border-t border-white/5"
           >
             <div className="space-y-1 px-6 pb-8 pt-4">
-              <div className="pb-4 border-b border-white/5">
-                <button
-                  type="button"
-                  onClick={() => setLocale(locale === "en" ? "ar" : "en")}
-                  className="rounded-md px-2 py-1.5 text-sm font-bold text-white/50 hover:text-white transition-colors"
-                >
-                  <span className={locale === "en" ? "text-white" : "text-white/40"}>{tCommon("locale.english")}</span>
-                  <span className="mx-1.5 text-white/20">|</span>
-                  <span className={locale === "ar" ? "text-white" : "text-white/40"}>{tCommon("locale.arabic")}</span>
-                </button>
-              </div>
+              {isSaudiRoute && (
+                <div className="pb-4 border-b border-white/5">
+                  <button
+                    type="button"
+                    onClick={() => setLocale(locale === "en" ? "ar" : "en")}
+                    className="rounded-md px-2 py-1.5 text-sm font-bold text-white/50 hover:text-white transition-colors"
+                  >
+                    <span className={locale === "en" ? "text-white" : "text-white/40"}>{tCommon("locale.english")}</span>
+                    <span className="mx-1.5 text-white/20">|</span>
+                    <span className={locale === "ar" ? "text-white" : "text-white/40"}>{tCommon("locale.arabic")}</span>
+                  </button>
+                </div>
+              )}
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.id}
