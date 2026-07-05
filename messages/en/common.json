@@ -21,6 +21,29 @@
       "phoneRequired": "Phone number is required",
       "phoneInvalidPakistan": "Enter a valid Pakistani mobile number (11 digits, e.g. 03001234567)",
       "phoneInvalidSaudiArabia": "Enter a valid Saudi mobile number (10 digits, e.g. 0501234567)"
+    },
+    "explore": {
+      "title": "Explore the Company Portal",
+      "subtitle": "Enter your details to get instant access to a short trial (72 hours).",
+      "cta": "Get instant access",
+      "successTitle": "Check your email",
+      "successSubtitle": "We sent your portal login details. Use them to sign in and start your 72-hour trial.",
+      "goToLogin": "Go to portal login",
+      "bookDemo": "Book a demo",
+      "fields": {
+        "name": "Name",
+        "email": "Work email",
+        "role": "Role / Title",
+        "organization": "Organization",
+        "country": "Country",
+        "phone": "Phone"
+      },
+      "placeholders": {
+        "name": "Jane Smith",
+        "email": "name@company.com",
+        "role": "Head of Operations",
+        "organization": "Acme Corp"
+      }
     }
   }
 }
