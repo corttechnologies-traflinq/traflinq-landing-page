@@ -13,6 +13,14 @@ type TrialResponse = {
 
 const COUNTRIES = ["Pakistan", "Saudi Arabia"] as const satisfies readonly PhoneCountry[]
 
+type TrialModules = "pool" | "shuttle" | "both"
+
+const MODULE_OPTIONS: { value: TrialModules; labelKey: string; hintKey: string }[] = [
+  { value: "pool", labelKey: "pool", hintKey: "poolHint" },
+  { value: "shuttle", labelKey: "shuttle", hintKey: "shuttleHint" },
+  { value: "both", labelKey: "both", hintKey: "bothHint" },
+]
+
 function getApiBase(): string {
   return process.env.NEXT_PUBLIC_API_URL ?? ""
 }
@@ -35,6 +43,7 @@ export function ExploreGate() {
     organization: "",
     country: "Pakistan" as PhoneCountry,
     phone: "",
+    modules: "pool" as TrialModules,
   })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -78,6 +87,7 @@ export function ExploreGate() {
           phone: form.phone.replace(/\D/g, ""),
           organization: form.organization || undefined,
           country: form.country || undefined,
+          modules: form.modules,
         }),
       })
 
@@ -179,6 +189,34 @@ export function ExploreGate() {
                     inputMode="numeric"
                     required
                   />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-[11px] font-bold uppercase tracking-widest text-white/40">{t("fields.modules")}</label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {MODULE_OPTIONS.map((opt) => {
+                    const selected = form.modules === opt.value
+                    return (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => setForm((p) => ({ ...p, modules: opt.value }))}
+                        className={`rounded-xl border px-4 py-3 text-left transition-all ${
+                          selected
+                            ? "border-primary/60 bg-primary/10"
+                            : "border-white/10 bg-white/[0.03] hover:border-white/20"
+                        }`}
+                      >
+                        <div className={`text-sm font-bold ${selected ? "text-primary" : "text-white"}`}>
+                          {t(`modules.${opt.labelKey}`)}
+                        </div>
+                        <div className="mt-1 text-xs text-white/40 leading-snug">
+                          {t(`modules.${opt.hintKey}`)}
+                        </div>
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
 

@@ -9,7 +9,7 @@
     },
     "locale": {
       "english": "EN",
-      "arabic": "عربي",
+      "arabic": "العربية",
       "switchToEnglish": "Switch to English",
       "switchToArabic": "Switch to Arabic"
     },
@@ -36,7 +36,16 @@
         "role": "Role / Title",
         "organization": "Organization",
         "country": "Country",
-        "phone": "Phone"
+        "phone": "Phone",
+        "modules": "What would you like to try?"
+      },
+      "modules": {
+        "pool": "Pool (chauffeur)",
+        "poolHint": "Self-managed pool cars and chauffeur bookings",
+        "shuttle": "Shuttle",
+        "shuttleHint": "Routes, employee commute, and shuttle trips",
+        "both": "Both",
+        "bothHint": "Full trial — pool and shuttle (up to 6 employees)"
       },
       "placeholders": {
         "name": "Jane Smith",
