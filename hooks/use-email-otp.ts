@@ -48,8 +48,13 @@ export function useEmailOtp({ email, translationNamespace = "briefing.otp" }: Us
 
     const domain = email.split('@')[1]?.toLowerCase()
     const blockedDomains = [
+      // Competitors / Restricted
       'yango.com', 'indrive.com', 'bykea.com', 'buscaro.com',
-      'truckitin.com', 'oware.co', 'truckkr.com', 'truckker.pk'
+      'truckitin.com', 'oware.co', 'truckkr.com', 'truckker.pk',
+      // Free personal email providers
+      'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 
+      'icloud.com', 'aol.com', 'protonmail.com', 'mail.com', 
+      'zoho.com', 'yandex.com'
     ]
     if (domain && (blockedDomains.includes(domain) || domain.includes('moveit'))) {
       setOtpError(t("domainNotAllowed") || "This email domain is not allowed.")
