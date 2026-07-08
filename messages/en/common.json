@@ -52,6 +52,22 @@
         "email": "name@company.com",
         "role": "Head of Operations",
         "organization": "Acme Corp"
+      },
+      "otp": {
+        "verify": "Verify",
+        "sending": "Sending…",
+        "resend": "Resend",
+        "resendIn": "Resend in {seconds}s",
+        "otpPlaceholder": "Enter 6-digit code",
+        "confirm": "Confirm",
+        "confirming": "Verifying…",
+        "verified": "Verified",
+        "sent": "OTP sent to your email",
+        "expired": "OTP expired. Please resend.",
+        "invalid": "Invalid OTP. Please try again.",
+        "rateLimited": "OTP already sent. Please wait before resending.",
+        "error": "Failed to send OTP. Please try again.",
+        "emailRequired": "Please enter a valid email first"
       }
     }
   }

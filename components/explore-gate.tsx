@@ -2,8 +2,11 @@
 
 import { useMemo, useState } from "react"
 import { useTranslations } from "next-intl"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { getPhoneMaxLength, getPhonePlaceholder, getPhoneValidationError, sanitizePhoneInput, type PhoneCountry } from "@/lib/phone"
+import { useEmailOtp } from "@/hooks/use-email-otp"
+import { Check, Loader2 } from "lucide-react"
 
 type TrialResponse = {
   data: {
@@ -48,6 +51,19 @@ export function ExploreGate() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const {
+    emailVerified,
+    otpSent,
+    otpValue,
+    setOtpValue,
+    otpLoading,
+    otpError,
+    otpCountdown,
+    sendOtp,
+    verifyOtp,
+    t: tOtp,
+  } = useEmailOtp({ email: form.email, translationNamespace: "common.explore.otp" })
 
   const portalLoginUrl = useMemo(() => getPortalLoginUrl(), [])
   const phoneCountry = form.country
@@ -130,16 +146,73 @@ export function ExploreGate() {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold uppercase tracking-widest text-white/40">{t("fields.email")}</label>
-                  <input
-                    value={form.email}
-                    onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
-                    placeholder={t("placeholders.email")}
-                    className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all w-full ltr-content"
-                    dir="ltr"
-                    type="email"
-                    required
-                  />
+                  <div className="flex items-center justify-between">
+                    <label className="text-[11px] font-bold uppercase tracking-widest text-white/40">{t("fields.email")}</label>
+                    {emailVerified && (
+                      <span className="flex items-center gap-1 text-[10px] font-bold text-green-400 uppercase tracking-widest">
+                        <Check className="h-3 w-3" />
+                        {tOtp("verified")}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    <input
+                      value={form.email}
+                      onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+                      placeholder={t("placeholders.email")}
+                      className={`rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all w-full ltr-content ${emailVerified ? 'opacity-60 cursor-not-allowed' : ''}`}
+                      dir="ltr"
+                      type="email"
+                      required
+                      readOnly={emailVerified}
+                    />
+                    {!emailVerified && (
+                      <button
+                        type="button"
+                        onClick={sendOtp}
+                        disabled={otpLoading || otpCountdown > 0 || !form.email}
+                        className="whitespace-nowrap flex-shrink-0 px-4 py-3 rounded-xl bg-primary/10 border border-primary/20 text-primary text-sm font-bold hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                      >
+                        {otpLoading ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : otpCountdown > 0 ? (
+                          tOtp("resendIn", { seconds: otpCountdown })
+                        ) : otpSent ? (
+                          tOtp("resend")
+                        ) : (
+                          tOtp("verify")
+                        )}
+                      </button>
+                    )}
+                  </div>
+                  {otpError && (
+                    <span className="text-xs text-red-400 mt-1">{otpError}</span>
+                  )}
+                  {!emailVerified && otpSent && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="mt-2 flex gap-2"
+                    >
+                      <input
+                        type="text"
+                        value={otpValue}
+                        onChange={(e) => setOtpValue(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                        placeholder={tOtp("otpPlaceholder")}
+                        className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all flex-1 ltr-content tracking-widest text-center text-lg"
+                        dir="ltr"
+                        maxLength={6}
+                      />
+                      <button
+                        type="button"
+                        onClick={verifyOtp}
+                        disabled={otpLoading || otpValue.length !== 6}
+                        className="px-6 py-3 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary/90 disabled:opacity-50 transition-all"
+                      >
+                        {otpLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : tOtp("confirm")}
+                      </button>
+                    </motion.div>
+                  )}
                 </div>
               </div>
 
@@ -228,7 +301,7 @@ export function ExploreGate() {
 
               <Button
                 type="submit"
-                disabled={submitting}
+                disabled={submitting || !emailVerified}
                 className="mt-2 bg-primary text-white hover:bg-primary/90 h-11 font-bold"
               >
                 {submitting ? "…" : t("cta")}

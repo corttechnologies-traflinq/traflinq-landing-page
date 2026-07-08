@@ -11,7 +11,8 @@ import {
   sanitizePhoneInput,
 } from "@/lib/phone"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, CheckCircle2, Download, Loader2 } from "lucide-react"
+import { ArrowRight, CheckCircle2, Download, Loader2, Check } from "lucide-react"
+import { useEmailOtp } from "@/hooks/use-email-otp"
 
 const COUNTRIES = ["Pakistan", "Saudi Arabia"] as const satisfies readonly PhoneCountry[]
 
@@ -89,6 +90,19 @@ export function BriefingFormSection() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const pathname = usePathname()
+
+  const {
+    emailVerified,
+    otpSent,
+    otpValue,
+    setOtpValue,
+    otpLoading,
+    otpError,
+    otpCountdown,
+    sendOtp,
+    verifyOtp,
+    t: tOtp,
+  } = useEmailOtp({ email: form.email, translationNamespace: "briefing.otp" })
   const isSaudiRoute = pathname === "/sa/request-briefing" || pathname.startsWith("/sa/")
   const basePath = isSaudiRoute ? "/sa" : ""
 
@@ -218,9 +232,74 @@ export function BriefingFormSection() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <Field>
-                        <Label htmlFor="email" required>{t("fields.email")}</Label>
-                        <input id="email" type="email" value={form.email} onChange={(e) => set("email", e.target.value)}
-                          placeholder={t("placeholders.email")} required className={`${inputCls} ltr-content`} dir="ltr" />
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="email" required>{t("fields.email")}</Label>
+                          {emailVerified && (
+                            <span className="flex items-center gap-1 text-[10px] font-bold text-green-400 uppercase tracking-widest">
+                              <Check className="h-3 w-3" />
+                              {tOtp("verified")}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex gap-2">
+                          <input
+                            id="email"
+                            type="email"
+                            value={form.email}
+                            onChange={(e) => set("email", e.target.value)}
+                            placeholder={t("placeholders.email")}
+                            required
+                            readOnly={emailVerified}
+                            className={`${inputCls} ltr-content ${emailVerified ? 'opacity-60 cursor-not-allowed' : ''}`}
+                            dir="ltr"
+                          />
+                          {!emailVerified && (
+                            <button
+                              type="button"
+                              onClick={sendOtp}
+                              disabled={otpLoading || otpCountdown > 0 || !form.email}
+                              className="whitespace-nowrap flex-shrink-0 px-4 py-3 rounded-xl bg-primary/10 border border-primary/20 text-primary text-sm font-bold hover:bg-primary/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            >
+                              {otpLoading ? (
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                              ) : otpCountdown > 0 ? (
+                                tOtp("resendIn", { seconds: otpCountdown })
+                              ) : otpSent ? (
+                                tOtp("resend")
+                              ) : (
+                                tOtp("verify")
+                              )}
+                            </button>
+                          )}
+                        </div>
+                        {otpError && (
+                          <span className="text-xs text-red-400 mt-1">{otpError}</span>
+                        )}
+                        {!emailVerified && otpSent && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            className="mt-2 flex gap-2"
+                          >
+                            <input
+                              type="text"
+                              value={otpValue}
+                              onChange={(e) => setOtpValue(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                              placeholder={tOtp("otpPlaceholder")}
+                              className={`${inputCls} flex-1 ltr-content tracking-widest text-center text-lg`}
+                              dir="ltr"
+                              maxLength={6}
+                            />
+                            <button
+                              type="button"
+                              onClick={verifyOtp}
+                              disabled={otpLoading || otpValue.length !== 6}
+                              className="px-6 py-3 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary/90 disabled:opacity-50 transition-all"
+                            >
+                              {otpLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : tOtp("confirm")}
+                            </button>
+                          </motion.div>
+                        )}
                       </Field>
                       <Field>
                         <Label htmlFor="phone" required>{t("fields.phone")}</Label>
@@ -328,7 +407,7 @@ export function BriefingFormSection() {
 
                   <button
                     type="submit"
-                    disabled={submitting}
+                    disabled={submitting || !emailVerified}
                     className="w-full flex items-center justify-center gap-2.5 rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-white tracking-wide shadow-lg shadow-primary/20 hover:bg-primary/90 disabled:opacity-60 transition-all"
                   >
                     {submitting ? (
