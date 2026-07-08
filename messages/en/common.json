@@ -67,7 +67,8 @@
         "invalid": "Invalid OTP. Please try again.",
         "rateLimited": "OTP already sent. Please wait before resending.",
         "error": "Failed to send OTP. Please try again.",
-        "emailRequired": "Please enter a valid email first"
+        "emailRequired": "Please enter a valid email first",
+        "domainNotAllowed": "This email domain is not supported."
       }
     }
   }

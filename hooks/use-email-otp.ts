@@ -8,7 +8,7 @@ interface UseEmailOtpProps {
 
 export function useEmailOtp({ email, translationNamespace = "briefing.otp" }: UseEmailOtpProps) {
   const t = useTranslations(translationNamespace)
-  
+
   const [emailVerified, setEmailVerified] = useState(false)
   const [otpSent, setOtpSent] = useState(false)
   const [otpValue, setOtpValue] = useState("")
@@ -43,6 +43,16 @@ export function useEmailOtp({ email, translationNamespace = "briefing.otp" }: Us
     // Basic email validation regex
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setOtpError(t("emailRequired"))
+      return
+    }
+
+    const domain = email.split('@')[1]?.toLowerCase()
+    const blockedDomains = [
+      'yango.com', 'indrive.com', 'bykea.com', 'buscaro.com',
+      'truckitin.com', 'oware.co', 'truckkr.com', 'truckker.pk'
+    ]
+    if (domain && (blockedDomains.includes(domain) || domain.includes('moveit'))) {
+      setOtpError(t("domainNotAllowed") || "This email domain is not allowed.")
       return
     }
 
