@@ -185,8 +185,12 @@ export function ExploreGate() {
                       </button>
                     )}
                   </div>
-                  {otpError && (
+                  {otpError ? (
                     <span className="text-xs text-red-400 mt-1">{otpError}</span>
+                  ) : (
+                    !emailVerified && otpSent && (
+                      <span className="text-xs text-primary/80 mt-1">{tOtp("sent")}</span>
+                    )
                   )}
                   {!emailVerified && otpSent && (
                     <motion.div
