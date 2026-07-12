@@ -23,35 +23,57 @@
       "phoneInvalidSaudiArabia": "Enter a valid Saudi mobile number (10 digits, e.g. 0501234567)"
     },
     "explore": {
-      "title": "Explore the Company Portal",
-      "subtitle": "Enter your details to get instant access to a short trial (72 hours).",
+      "title": "Explore the Traflinq Savings Engine",
+      "subtitle": "Plug in your company details to launch your custom sandbox. See firsthand how organizations automate transit operations and reduce up to 30% of their transport costs.",
+      "formTitle": "Launch Your Interactive Sandbox",
       "cta": "Get instant access",
       "successTitle": "Check your email",
       "successSubtitle": "We sent your portal login details. Use them to sign in and start your 72-hour trial.",
       "goToLogin": "Go to portal login",
       "bookDemo": "Book a demo",
       "fields": {
-        "name": "Name",
-        "email": "Work email",
-        "role": "Role / Title",
-        "organization": "Organization",
-        "country": "Country",
-        "phone": "Phone",
-        "modules": "What would you like to try?"
-      },
-      "modules": {
-        "pool": "Pool (chauffeur)",
-        "poolHint": "Self-managed pool cars and chauffeur bookings",
-        "shuttle": "Shuttle",
-        "shuttleHint": "Routes, employee commute, and shuttle trips",
-        "both": "Both",
-        "bothHint": "Full trial — pool and shuttle (up to 6 employees)"
+        "name": "Full Name",
+        "email": "Work Email",
+        "organization": "Company Name",
+        "fleetSize": "Fleet Size / Type"
       },
       "placeholders": {
         "name": "Jane Smith",
         "email": "name@company.com",
-        "role": "Head of Operations",
-        "organization": "Acme Corp"
+        "organization": "Acme Corp",
+        "fleetSize": "Select fleet size or type"
+      },
+      "video": {
+        "placeholder": "Video coming soon",
+        "poolTitle": "Chauffeur & Pool Cars demo",
+        "shuttleTitle": "Employee Shuttles demo",
+        "tabs": {
+          "pool": "Chauffeur & Pool Cars",
+          "shuttle": "Employee Shuttles"
+        },
+        "pool": {
+          "heading": "Eliminate Leakage & Automate Bookings",
+          "description": "Watch how integrating your current vendors, using our driver companion apps, and connecting live tracker APIs ensures 0% overbilling. See how easy it is to digitally book pool cars, track every kilometer, and automate maintenance updates."
+        },
+        "shuttle": {
+          "heading": "Put Shuttle Operations on Autopilot",
+          "description": "Watch how our AI-powered engine observes vendor operations for 20–25 days to automatically optimize physical routes, audit vehicle capacity limits, and uncover hidden cost savings at every pickup stop."
+        }
+      },
+      "benefits": {
+        "title": "Why Global Fleets Switch to Traflinq",
+        "overbilling": {
+          "title": "0% Overbilling",
+          "description": "We track each and every kilometer via proprietary mobile endpoints and live API tracker integrations, ensuring absolute zero vendor leakage."
+        },
+        "optimization": {
+          "title": "AI-Powered Optimization",
+          "description": "Our intelligent routing engine continuously audits vehicle capacity and ride patterns to optimize expenditures at every point."
+        },
+        "control": {
+          "title": "Centralized Fleet Control",
+          "description": "From external vendor management to internal pool car digital bookings and maintenance to-do jobs—manage it all from a single dashboard."
+        }
       },
       "otp": {
         "verify": "Verify",
