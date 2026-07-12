@@ -54,17 +54,26 @@ function getVideoEmbedUrl(tab: VideoTab): string | null {
   return url?.trim() || null
 }
 
+function isDirectVideoUrl(url: string): boolean {
+  return /\.(mp4|webm|ogg|mov)(\?|#|$)/i.test(url)
+}
+
 function toEmbedSrc(url: string): string {
   if (url.includes("youtube.com/watch")) {
     const id = new URL(url).searchParams.get("v")
-    return id ? `https://www.youtube.com/embed/${id}` : url
+    return id ? `https://www.youtube.com/embed/${id}?autoplay=0&rel=0` : url
   }
   if (url.includes("youtu.be/")) {
     const id = url.split("youtu.be/")[1]?.split(/[?#]/)[0]
-    return id ? `https://www.youtube.com/embed/${id}` : url
+    return id ? `https://www.youtube.com/embed/${id}?autoplay=0&rel=0` : url
   }
-  if (url.includes("youtube.com/embed/") || url.includes("player.vimeo.com")) {
-    return url
+  if (url.includes("youtube.com/embed/")) {
+    const separator = url.includes("?") ? "&" : "?"
+    return `${url}${separator}autoplay=0&rel=0`
+  }
+  if (url.includes("player.vimeo.com")) {
+    const separator = url.includes("?") ? "&" : "?"
+    return `${url}${separator}autoplay=0`
   }
   return url
 }
@@ -90,13 +99,29 @@ function VideoEmbed({ tab }: { tab: VideoTab }) {
     )
   }
 
+  if (isDirectVideoUrl(embedUrl)) {
+    return (
+      <div className="aspect-video w-full overflow-hidden rounded-xl border border-white/[0.07] bg-black">
+        <video
+          key={tab}
+          src={embedUrl}
+          controls
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-contain bg-black"
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="aspect-video w-full overflow-hidden rounded-xl border border-white/[0.07] bg-black">
       <iframe
+        key={tab}
         src={toEmbedSrc(embedUrl)}
         title={tab === "pool" ? t("poolTitle") : t("shuttleTitle")}
         className="h-full w-full"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />
     </div>
