@@ -32,16 +32,27 @@
       "goToLogin": "الانتقال إلى تسجيل الدخول",
       "bookDemo": "احجز عرضًا توضيحيًا",
       "fields": {
-        "name": "الاسم الكامل",
+        "name": "الاسم",
         "email": "البريد الإلكتروني للعمل",
-        "organization": "اسم الشركة",
-        "fleetSize": "حجم / نوع الأسطول"
+        "role": "المنصب / المسمى",
+        "organization": "الجهة / الشركة",
+        "country": "الدولة",
+        "phone": "رقم الهاتف",
+        "modules": "ماذا تريد تجربته؟"
+      },
+      "modules": {
+        "pool": "الأسطول (سائق خاص)",
+        "poolHint": "سيارات الشركة وحجوزات السائق الذاتية",
+        "shuttle": "النقل الجماعي",
+        "shuttleHint": "المسارات وتنقل الموظفين ورحلات النقل",
+        "both": "كلاهما",
+        "bothHint": "تجربة كاملة — الأسطول والنقل (حتى 6 موظفين)"
       },
       "placeholders": {
         "name": "Jane Smith",
         "email": "name@company.com",
-        "organization": "Acme Corp",
-        "fleetSize": "اختر حجم أو نوع الأسطول"
+        "role": "مدير العمليات",
+        "organization": "Acme Corp"
       },
       "video": {
         "placeholder": "الفيديو قريبًا",

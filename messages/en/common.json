@@ -32,16 +32,27 @@
       "goToLogin": "Go to portal login",
       "bookDemo": "Book a demo",
       "fields": {
-        "name": "Full Name",
-        "email": "Work Email",
-        "organization": "Company Name",
-        "fleetSize": "Fleet Size / Type"
+        "name": "Name",
+        "email": "Work email",
+        "role": "Role / Title",
+        "organization": "Organization",
+        "country": "Country",
+        "phone": "Phone",
+        "modules": "What would you like to try?"
+      },
+      "modules": {
+        "pool": "Pool (chauffeur)",
+        "poolHint": "Self-managed pool cars and chauffeur bookings",
+        "shuttle": "Shuttle",
+        "shuttleHint": "Routes, employee commute, and shuttle trips",
+        "both": "Both",
+        "bothHint": "Full trial — pool and shuttle (up to 6 employees)"
       },
       "placeholders": {
         "name": "Jane Smith",
         "email": "name@company.com",
-        "organization": "Acme Corp",
-        "fleetSize": "Select fleet size or type"
+        "role": "Head of Operations",
+        "organization": "Acme Corp"
       },
       "video": {
         "placeholder": "Video coming soon",
@@ -57,7 +68,7 @@
         },
         "shuttle": {
           "heading": "Put Shuttle Operations on Autopilot",
-          "description": "Watch how our AI-powered engine observes vendor operations for 20–25 days to automatically optimize physical routes, audit vehicle capacity limits, and uncover hidden cost savings at every pickup stop."
+          "description": "Watch how our AI-powered engine observes vendor operations for 20–25 days to automatically optimize physical routes, audit vehicle utilization limits, and uncover hidden cost savings at every pickup stop."
         }
       },
       "benefits": {
