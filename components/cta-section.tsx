@@ -24,7 +24,8 @@ export function CTASection() {
           aria-hidden="true"
           width={600}
           height={200}
-          className="w-[600px] max-w-full opacity-[0.025] grayscale"
+          className="w-[600px] max-w-full h-auto opacity-[0.025] grayscale"
+          style={{ height: "auto" }}
         />
       </div>
 

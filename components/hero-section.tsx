@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronRight } from "lucide-react"
-import { motion, useAnimationFrame } from "framer-motion"
-import { useRef, useState, useCallback } from "react"
+import { motion, useAnimationFrame, useInView, useReducedMotion } from "framer-motion"
+import { useRef, useState, useCallback, useEffect, forwardRef } from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { usePathname } from "next/navigation"
@@ -40,6 +40,12 @@ function getAngle(waypoints: Waypoint[], t: number): number {
   const a = getPositionOnPath(waypoints, Math.max(0, t - eps))
   const b = getPositionOnPath(waypoints, Math.min(1, t + eps))
   return Math.atan2(b.y - a.y, b.x - a.x) * (180 / Math.PI)
+}
+
+function carTransform(waypoints: Waypoint[], t: number): string {
+  const pos = getPositionOnPath(waypoints, t)
+  const angle = getAngle(waypoints, t)
+  return `translate(${pos.x.toFixed(2)},${pos.y.toFixed(2)}) rotate(${angle.toFixed(2)})`
 }
 
 function pathToD(waypoints: Waypoint[]): string {
@@ -145,18 +151,16 @@ function getCarOpacity(t: number) {
   return Math.min(destFade, hubFade)
 }
 
-function Car({ waypoints, progress, color }: CarProps) {
-  const pos = getPositionOnPath(waypoints, progress)
-  const angle = getAngle(waypoints, progress)
+const Car = forwardRef<SVGGElement, CarProps>(function Car({ waypoints, progress, color }, ref) {
   const op = getCarOpacity(progress)
 
   return (
     <g
-      transform={`translate(${pos.x},${pos.y}) rotate(${angle})`}
+      ref={ref}
+      transform={carTransform(waypoints, progress)}
       opacity={op}
-      style={{ filter: "drop-shadow(0 0 6px " + color.body + "88)" }}
     >
-      <ellipse cx="0" cy="8" rx="11" ry="3.5" fill="#000" opacity="0.4" style={{ filter: "blur(2px)" }} />
+      <ellipse cx="0" cy="8" rx="11" ry="3.5" fill="#000" opacity="0.28" />
       <polygon points="-10,4 10,4 10,-2 -10,-2" fill="#1a0a00" opacity="0.85" />
       <polygon points="10,4 14,2 14,-4 10,-2" fill={color.body} opacity="0.95" />
       <polygon points="-10,-2 10,-2 14,-4 -6,-4" fill={color.top} />
@@ -168,7 +172,7 @@ function Car({ waypoints, progress, color }: CarProps) {
       <circle cx="7" cy="5" r="1.2" fill="#2a2840" />
     </g>
   )
-}
+})
 
 // ─── Road renderer (straight segments) ───────────────────────────────────────
 interface RoadProps {
@@ -183,7 +187,7 @@ function Road({ waypoints, color, opacity = 1 }: RoadProps) {
     <g opacity={opacity} pointerEvents="none">
       <path d={d} stroke="#0d0b04" strokeWidth="20" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       <path d={d} stroke="#1a1508" strokeWidth="14" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" />
-      <path d={d} stroke={color} strokeWidth="5" fill="none" opacity="0.12" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "blur(4px)" }} />
+      <path d={d} stroke={color} strokeWidth="5" fill="none" opacity="0.12" strokeLinecap="round" strokeLinejoin="round" />
       <path d={d} stroke={color} strokeWidth="1.5" strokeDasharray="5 8" strokeLinecap="round" fill="none" opacity="0.7" strokeLinejoin="round" />
     </g>
   )
@@ -200,12 +204,33 @@ function IsometricMap() {
   const [transitioning, setTransitioning] = useState(false)
   const [displayMode, setDisplayMode] = useState<"before" | "after">("before")
   const startTime = useRef<number | null>(null)
-  const [progresses, setProgresses] = useState([0, 0.33, 0.66])
+  const hydrated = useRef(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const carRefs = useRef<(SVGGElement | null)[]>([null, null, null])
+  const routesRef = useRef<Waypoint[][]>([LONG_A, LONG_B, LONG_C])
+  const inView = useInView(containerRef, { margin: "120px" })
+  const prefersReducedMotion = useReducedMotion()
+
+  const isBefore = displayMode === "before"
+  const routes = isBefore ? [LONG_A, LONG_B, LONG_C] : [SHORT_A, SHORT_B, SHORT_C]
+  routesRef.current = routes
+
+  useEffect(() => {
+    hydrated.current = true
+  }, [])
 
   useAnimationFrame((time) => {
+    if (!hydrated.current || !inView || prefersReducedMotion) return
     if (startTime.current === null) startTime.current = time
     const elapsed = time - startTime.current
-    setProgresses(OFFSETS.map(off => ((elapsed / DURATION) + off) % 1))
+    const currentRoutes = routesRef.current
+    for (let i = 0; i < OFFSETS.length; i++) {
+      const el = carRefs.current[i]
+      if (!el) continue
+      const progress = ((elapsed / DURATION) + OFFSETS[i]) % 1
+      el.setAttribute("transform", carTransform(currentRoutes[i], progress))
+      el.setAttribute("opacity", getCarOpacity(progress).toFixed(3))
+    }
   })
 
   const handleSwitch = useCallback(() => {
@@ -219,15 +244,10 @@ function IsometricMap() {
     }, 400)
   }, [mode, transitioning])
 
-  const isBefore = displayMode === "before"
-
-  const routes = isBefore
-    ? [LONG_A, LONG_B, LONG_C]
-    : [SHORT_A, SHORT_B, SHORT_C]
-
   return (
     <div
-      className="relative w-full aspect-[530/560] lg:aspect-auto lg:h-[600px] min-h-[320px] sm:min-h-[500px] rounded-3xl border overflow-hidden"
+      ref={containerRef}
+      className="relative w-full aspect-[530/560] lg:aspect-auto lg:h-[600px] min-h-[320px] sm:min-h-[500px] rounded-3xl border overflow-hidden [transform:translateZ(0)]"
       style={{
         background: "radial-gradient(at 50% 30%, rgba(254,133,3,0.15) 0%, #080b14 70%)",
         borderColor: "rgba(255,255,255,0.06)",
@@ -337,7 +357,7 @@ function IsometricMap() {
 
         {/* Platform */}
         <g pointerEvents="none">
-          <ellipse cx="280" cy="500" rx="200" ry="8" fill="#000" opacity="0.38" style={{ filter: "blur(8px)" }} />
+          <ellipse cx="280" cy="500" rx="200" ry="8" fill="#000" opacity="0.22" />
           <path d="M 242 458 L 484 318 L 484 350 L 242 490 Z" fill="#04060e" stroke="#fe8503" strokeOpacity="0.12" strokeWidth="1" />
           <path d="M 0 318 L 242 458 L 242 490 L 0 350 Z" fill="#1c1a0a" stroke="#fe8503" strokeOpacity="0.18" strokeWidth="1" />
           <path d="M 242 458 L 484 318 L 242 178 L 0 318 Z" fill="#0d0a02" stroke="#fe8503" strokeOpacity="0.38" strokeWidth="1.2" />
@@ -359,7 +379,7 @@ function IsometricMap() {
           { pts: "256.9,224.0 234.4,237.0 246.5,244.0 269.0,231.0" },
         ].map((z, i) => (
           <g key={i} pointerEvents="none">
-            <polygon points={z.pts} fill="#fe8503" opacity="0.10" style={{ filter: "blur(5px)" }} />
+            <polygon points={z.pts} fill="#fe8503" opacity="0.10" />
             <polygon points={z.pts} fill="#fe8503" fillOpacity="0.05" stroke="#fe8503" strokeOpacity="0.70" strokeWidth="1.2" strokeDasharray="5 4" />
           </g>
         ))}
@@ -383,9 +403,9 @@ function IsometricMap() {
         </g>
 
         {/* Animated Cars - between back and front faces */}
-        <Car waypoints={routes[0]} progress={progresses[0]} color={CAR_COLORS[0]} />
-        <Car waypoints={routes[1]} progress={progresses[1]} color={CAR_COLORS[1]} />
-        <Car waypoints={routes[2]} progress={progresses[2]} color={CAR_COLORS[2]} />
+        <Car ref={(el) => { carRefs.current[0] = el }} waypoints={routes[0]} progress={OFFSETS[0]} color={CAR_COLORS[0]} />
+        <Car ref={(el) => { carRefs.current[1] = el }} waypoints={routes[1]} progress={OFFSETS[1]} color={CAR_COLORS[1]} />
+        <Car ref={(el) => { carRefs.current[2] = el }} waypoints={routes[2]} progress={OFFSETS[2]} color={CAR_COLORS[2]} />
 
         {/* Buildings FRONT layer (front faces + top) */}
         {/* Hub */}
@@ -526,8 +546,8 @@ export function HeroSection() {
       {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="absolute top-1/3 end-1/4 w-[300px] sm:w-[700px] h-[300px] sm:h-[700px] bg-[#fe8503]/6 rounded-full blur-[100px] sm:blur-[140px]" />
-        <div className="absolute bottom-0 start-1/5 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-orange-900/5 rounded-full blur-[80px] sm:blur-[120px]" />
+        <div className="perf-blur absolute top-1/3 end-1/4 w-[300px] sm:w-[700px] h-[300px] sm:h-[700px] bg-[#fe8503]/6 rounded-full blur-[100px] sm:blur-[140px]" />
+        <div className="perf-blur absolute bottom-0 start-1/5 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-orange-900/5 rounded-full blur-[80px] sm:blur-[120px]" />
       </div>
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-32 w-full">

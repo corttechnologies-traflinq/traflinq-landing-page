@@ -82,6 +82,7 @@ export function DashboardShell({
                 width={140} 
                 height={35} 
                 className="h-10 w-auto object-contain"
+                style={{ width: "auto" }}
                 priority
               />
             </div>
@@ -96,6 +97,7 @@ export function DashboardShell({
                   src="/favicon.png" 
                   alt="Icon" 
                   fill 
+                  sizes="40px"
                   className="object-contain"
                   priority
                 />
@@ -184,7 +186,7 @@ export function DashboardShell({
         >
           <Menu size={24} />
         </button>
-        <Image src="/traflinq_dark_no_tagline-Photoroom.png" alt="TrafLinq" width={100} height={25} className="h-7 w-auto" />
+        <Image src="/traflinq_dark_no_tagline-Photoroom.png" alt="TrafLinq" width={100} height={25} className="h-7 w-auto" style={{ width: "auto" }} />
         <div className="w-10" />
       </header>
 

@@ -18,16 +18,16 @@
   --muted-foreground: #6b6b6b;
   --accent: #fe8503;
   --accent-foreground: #ffffff;
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --destructive: #dc2626;
+  --destructive-foreground: #dc2626;
   --border: #e5e5e5;
   --input: #e5e5e5;
   --ring: #fe8503;
   --chart-1: #fe8503;
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-2: #2a9d8f;
+  --chart-3: #264653;
+  --chart-4: #e9c46a;
+  --chart-5: #f4a261;
   --radius: 0.625rem;
   --sidebar: #ffffff;
   --sidebar-foreground: #131313;
@@ -54,16 +54,16 @@
   --muted-foreground: #a0a0a0;
   --accent: #fe8503;
   --accent-foreground: #ffffff;
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --destructive: #991b1b;
+  --destructive-foreground: #f87171;
   --border: #2a2a2a;
   --input: #2a2a2a;
   --ring: #fe8503;
   --chart-1: #fe8503;
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  --chart-2: #2dd4bf;
+  --chart-3: #f4a261;
+  --chart-4: #c084fc;
+  --chart-5: #fb7185;
   --sidebar: #1a1a1a;
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #fe8503;
@@ -119,8 +119,24 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    hanging-punctuation: first last;
+  }
   body {
     @apply bg-background text-foreground;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 }
 
@@ -132,7 +148,49 @@ html[dir="rtl"] body {
 /* LTR content in RTL context (phone, email, URLs) */
 .ltr-content {
   direction: ltr;
-  unicode-bidi: embed;
+  unicode-bidi: isolate;
+}
+
+/* iOS / Safari form controls — avoid zoom-on-focus and inner shadows */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 16px;
+}
+
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Solid fallback when backdrop-filter is unavailable (Firefox ESR / older Safari) */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-xl {
+    background-color: rgb(8 11 20 / 0.92);
+  }
+}
+
+/* Keep large glow orbs from forcing layout / extra compositing */
+.perf-blur {
+  contain: paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Firefox + standard scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 
 /* Custom Scrollbar */
@@ -148,4 +206,18 @@ html[dir="rtl"] body {
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

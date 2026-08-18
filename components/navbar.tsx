@@ -39,7 +39,7 @@ export function Navbar() {
   return (
     <header 
       className={`fixed top-0 inset-x-0 z-50 border-b transition-all duration-300 ${
-        scrolled ? "bg-[#080b14]/95 backdrop-blur-md border-white/10 py-3" : "bg-transparent border-transparent py-5"
+        scrolled ? "bg-[#080b14]/95 backdrop-blur-md supports-[backdrop-filter]:bg-[#080b14]/80 border-white/10 py-3" : "bg-transparent border-transparent py-5"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
@@ -51,6 +51,7 @@ export function Navbar() {
               width={180}
               height={46}
               className="h-10 sm:h-12 w-auto"
+              style={{ width: "auto" }}
               priority
             />
           </Link>

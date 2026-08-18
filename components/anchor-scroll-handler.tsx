@@ -15,19 +15,38 @@ export function AnchorScrollHandler() {
     }
 
     if (Object.keys(utmData).length > 0) {
-      sessionStorage.setItem("traflinq_utm", JSON.stringify(utmData))
+      try {
+        sessionStorage.setItem("traflinq_utm", JSON.stringify(utmData))
+      } catch {
+        // Safari private mode can throw on sessionStorage
+      }
     }
 
     if (window.location.hash !== "#self-audit") return
 
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
     const scrollToSection = () => {
       const section = document.getElementById("self-audit")
-      if (!section) return
-      section.scrollIntoView({ behavior: "smooth", block: "start" })
+      if (!section) return false
+      section.scrollIntoView({
+        behavior: prefersReduced ? "auto" : "smooth",
+        block: "start",
+      })
+      return true
     }
 
-    const timeoutId = window.setTimeout(scrollToSection, 100)
-    return () => window.clearTimeout(timeoutId)
+    if (scrollToSection()) return
+
+    let attempts = 0
+    const timer = window.setInterval(() => {
+      attempts += 1
+      if (scrollToSection() || attempts >= 20) {
+        window.clearInterval(timer)
+      }
+    }, 50)
+
+    return () => window.clearInterval(timer)
   }, [])
 
   return null

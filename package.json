@@ -8,6 +8,14 @@
     "start": "next start",
     "lint": "eslint ."
   },
+  "browserslist": [
+    "chrome >= 90",
+    "firefox >= 90",
+    "safari >= 15",
+    "ios_saf >= 15",
+    "edge >= 90",
+    "not dead"
+  ],
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "1.2.12",

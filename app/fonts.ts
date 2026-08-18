@@ -11,4 +11,7 @@ export const notoSansArabic = Noto_Sans_Arabic({
   variable: "--font-noto-arabic",
   subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
+  adjustFontFallback: true,
 });

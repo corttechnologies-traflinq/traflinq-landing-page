@@ -2,13 +2,17 @@ import type { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { LocaleProvider } from '@/components/locale-provider'
+import { MotionProvider } from '@/components/motion-provider'
 import { geist, notoSansArabic } from './fonts'
 import './globals.css'
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
   themeColor: '#080b14',
+  colorScheme: 'dark',
 }
 
 export const metadata: Metadata = {
@@ -30,7 +34,9 @@ export default function RootLayout({
     <html lang="en" className={`dark bg-background ${geist.variable} ${notoSansArabic.variable}`}>
       <body className="font-sans antialiased">
         <LocaleProvider>
-          {children}
+          <MotionProvider>
+            {children}
+          </MotionProvider>
         </LocaleProvider>
         <Analytics />
         <SpeedInsights />

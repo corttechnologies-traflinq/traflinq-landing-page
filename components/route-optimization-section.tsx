@@ -71,6 +71,7 @@ export function RouteOptimizationSection() {
                   src={pillar.image}
                   alt={pillar.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover object-center scale-110 group-hover:scale-100 transition-transform duration-1000"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#080b14] via-transparent to-transparent" />
