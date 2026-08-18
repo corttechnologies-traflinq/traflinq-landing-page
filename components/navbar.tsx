@@ -25,6 +25,7 @@ export function Navbar() {
     { id: "solutions", name: t("solutions"), href: `${basePath}/#command-center` },
     { id: "security", name: t("security"), href: `${basePath}/#institutional-trust` },
     { id: "about", name: t("about"), href: `${basePath}/#about` },
+    { id: "selfAudit", name: t("selfAudit"), href: `${basePath}/self-audit` },
     { id: "briefing", name: t("briefing"), href: `${basePath}/request-briefing` },
   ]
 

@@ -5,7 +5,8 @@
       "solutions": "Solutions",
       "security": "Security",
       "about": "About",
-      "briefing": "Briefing"
+      "briefing": "Briefing",
+      "selfAudit": "Self-Audit"
     },
     "hero": {
       "badge": "Enterprise Mobility Intelligence",
@@ -154,7 +155,8 @@
         "solutions": {
           "heading": "Solutions",
           "enterpriseMobility": "Enterprise Mobility",
-          "strategicBriefing": "Strategic Briefing"
+          "strategicBriefing": "Strategic Briefing",
+          "selfAudit": "Self-Audit"
         },
         "resources": {
           "heading": "Resources",
@@ -404,6 +406,29 @@
         "title": "How can you contact us?",
         "p1": "If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at <email>contact@traflinq.com</email>"
       }
+    }
+  },
+  "selfAudit": {
+    "badge": "Operational Review",
+    "title": "Run a <highlight>self-audit</highlight> of your mobility operations.",
+    "description": "Identify route leakage, utilization gaps, and billing blind spots before they become institutional waste.",
+    "cards": {
+      "leakage": {
+        "title": "Cost Leakage Check",
+        "description": "Review unverified vendor billing, ghost seats, and reconciliation gaps across your transport program."
+      },
+      "utilization": {
+        "title": "Fleet Utilization Review",
+        "description": "Spot underused routes, low occupancy patterns, and avoidable duplication in daily operations."
+      },
+      "governance": {
+        "title": "Governance Readiness",
+        "description": "Assess whether your current operating model supports auditability, visibility, and executive reporting."
+      }
+    },
+    "cta": {
+      "primary": "Request a Strategic Briefing",
+      "secondary": "Contact Sales"
     }
   },
   "comingSoon": {

@@ -27,6 +27,7 @@ export function Footer() {
       heading: t("columns.solutions.heading"),
       links: [
         { name: t("columns.solutions.enterpriseMobility"), href: `${basePath}/#home` },
+        { name: t("columns.solutions.selfAudit"), href: `${basePath}/self-audit` },
         { name: t("columns.solutions.strategicBriefing"), href: `${basePath}/request-briefing` },
       ],
     },
