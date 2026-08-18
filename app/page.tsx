@@ -21,10 +21,10 @@ export default function Home() {
       <AnchorScrollHandler />
       <Navbar />
       <HeroSection />
-      <SelfAuditSection />
       <ProblemSection />
       <RouteOptimizationSection />
       <AboutSection />
+      <SelfAuditSection />
       <TeamSection />
       <OperationalSuccessReports />
       {/* <ClienteleSection /> */}

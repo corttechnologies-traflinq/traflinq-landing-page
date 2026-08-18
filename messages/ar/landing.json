@@ -142,13 +142,15 @@
       "fields": {
         "monthlySpend": "الإنفاق الشهري ({currency})",
         "monthlySpendPlaceholder": "مثال: {example}",
-        "dailyCommuters": "الموظفون / المركبات اليومية",
-        "dailyCommutersPlaceholder": "مثال: 120"
+        "dailyEmployees": "الموظفون اليوميون المتنقلون",
+        "dailyEmployeesPlaceholder": "مثال: 120",
+        "dailyVehicles": "المركبات اليومية المتنقلة",
+        "dailyVehiclesPlaceholder": "مثال: 20"
       },
       "output": {
         "label": "التوفير السنوي المتوقع",
         "rateHint": "حتى 30%",
-        "emptyPrompt": "أدخل الرقمين لترى التوفير مباشرة.",
+        "emptyPrompt": "أدخل الإنفاق الشهري لترى التوفير مباشرة.",
         "monthlySavings": "التوفير الشهري التقديري",
         "costPerEmployeeDay": "التكلفة لكل موظف / يوم",
         "paybackPeriod": "فترة الاسترداد",

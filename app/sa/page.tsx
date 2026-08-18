@@ -21,10 +21,10 @@ export default function SaudiLanding() {
       <AnchorScrollHandler />
       <Navbar />
       <HeroSection />
-      <SelfAuditSection />
       <ProblemSection />
       <RouteOptimizationSection />
       <AboutSection />
+      <SelfAuditSection />
       <TeamSection />
       <OperationalSuccessReports />
       {/* <ClienteleSection /> */}

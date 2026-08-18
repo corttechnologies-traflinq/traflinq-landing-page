@@ -142,13 +142,15 @@
       "fields": {
         "monthlySpend": "Monthly Spend ({currency})",
         "monthlySpendPlaceholder": "e.g. {example}",
-        "dailyCommuters": "Daily Commuting Employees / Vehicles",
-        "dailyCommutersPlaceholder": "e.g. 120"
+        "dailyEmployees": "Daily Commuting Employees",
+        "dailyEmployeesPlaceholder": "e.g. 120",
+        "dailyVehicles": "Daily Commuting Vehicles",
+        "dailyVehiclesPlaceholder": "e.g. 20"
       },
       "output": {
         "label": "Projected Annual Savings",
         "rateHint": "up to 30%",
-        "emptyPrompt": "Enter both numbers to see your live savings.",
+        "emptyPrompt": "Enter your monthly spend to see your live savings.",
         "monthlySavings": "Est. monthly savings",
         "costPerEmployeeDay": "Cost per employee / day",
         "paybackPeriod": "Payback period",

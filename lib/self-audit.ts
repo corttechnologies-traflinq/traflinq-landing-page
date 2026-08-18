@@ -1,13 +1,6 @@
 const SAVINGS_RATE = 0.3
-const WORKDAYS_PER_MONTH = 22
 
 export type AuditCurrency = "PKR" | "USD" | "SAR"
-
-const ONBOARDING_COST_PER_COMMUTER: Record<AuditCurrency, number> = {
-  PKR: 2500,
-  USD: 9,
-  SAR: 33,
-}
 
 export const CURRENCY_EXAMPLES: Record<AuditCurrency, string> = {
   PKR: "500000",
@@ -27,25 +20,15 @@ export function calculateAnnualSavings(monthlySpend: number): number {
   return monthlySpend * 12 * SAVINGS_RATE
 }
 
-export function calculateAuditMetrics(
-  monthlySpend: number,
-  dailyCommuters: number,
-  currency: AuditCurrency,
-) {
+export function calculateAuditMetrics(monthlySpend: number) {
   const monthlySavings = monthlySpend * SAVINGS_RATE
   const annualSavings = monthlySavings * 12
   const optimizedMonthlySpend = monthlySpend - monthlySavings
-  const costPerEmployeeDay = monthlySpend / dailyCommuters / WORKDAYS_PER_MONTH
-  const dailySavings = monthlySavings / WORKDAYS_PER_MONTH
-  const onboardingCost = dailyCommuters * ONBOARDING_COST_PER_COMMUTER[currency]
-  const paybackDays = Math.max(7, Math.round(onboardingCost / dailySavings))
 
   return {
     monthlySavings,
     annualSavings,
     optimizedMonthlySpend,
-    costPerEmployeeDay,
-    paybackDays,
     savingsRate: SAVINGS_RATE,
   }
 }
@@ -55,6 +38,10 @@ export function formatMoney(amount: number, currency: AuditCurrency): string {
   return `${currency} ${Math.round(amount).toLocaleString(locale)}`
 }
 
-export function hasValidInputs(monthlySpend: number | null, dailyCommuters: number | null): boolean {
-  return monthlySpend !== null && dailyCommuters !== null
+export function hasValidInputs(
+  monthlySpend: number | null,
+  dailyEmployees: number | null,
+  dailyVehicles: number | null,
+): boolean {
+  return monthlySpend !== null && dailyEmployees !== null && dailyVehicles !== null
 }
