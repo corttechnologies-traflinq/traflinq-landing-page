@@ -150,7 +150,7 @@
       "output": {
         "label": "Projected Annual Savings",
         "rateHint": "up to 30%",
-        "emptyPrompt": "Enter your monthly spend to see your live savings.",
+        "emptyPrompt": "Enter monthly spend, employees, and vehicles to see your live savings.",
         "monthlySavings": "Est. monthly savings",
         "costPerEmployeeDay": "Cost per employee / day",
         "paybackPeriod": "Payback period",

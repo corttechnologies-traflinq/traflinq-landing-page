@@ -160,12 +160,13 @@ function AuditFormCard({
   const [dailyEmployees, setDailyEmployees] = useState<number | null>(null)
   const [dailyVehicles, setDailyVehicles] = useState<number | null>(null)
 
-  const metrics = monthlySpend !== null ? calculateAuditMetrics(monthlySpend) : null
+  const inputsComplete = hasValidInputs(monthlySpend, dailyEmployees, dailyVehicles)
+  const metrics = inputsComplete && monthlySpend !== null ? calculateAuditMetrics(monthlySpend) : null
   const money = (amount: number) => formatMoney(amount, currency)
 
   useEffect(() => {
-    onValidityChange(hasValidInputs(monthlySpend, dailyEmployees, dailyVehicles))
-  }, [monthlySpend, dailyEmployees, dailyVehicles, onValidityChange])
+    onValidityChange(inputsComplete)
+  }, [inputsComplete, onValidityChange])
 
   return (
     <>
