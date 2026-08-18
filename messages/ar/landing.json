@@ -140,8 +140,8 @@
       "title": "أجرِ تدقيقًا ذاتيًا في دقيقتين",
       "subtext": "اكتشف مقدار ما يمكن لشركتك توفيره في النقل المؤسسي — دون الحاجة إلى مكالمة مبيعات.",
       "fields": {
-        "monthlySpend": "الإنفاق الشهري (روبية باكستانية)",
-        "monthlySpendPlaceholder": "مثال: 500000",
+        "monthlySpend": "الإنفاق الشهري ({currency})",
+        "monthlySpendPlaceholder": "مثال: {example}",
         "dailyCommuters": "الموظفون / المركبات اليومية",
         "dailyCommutersPlaceholder": "مثال: 120"
       },

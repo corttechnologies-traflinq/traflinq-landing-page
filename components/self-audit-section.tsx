@@ -10,9 +10,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
   calculateAuditMetrics,
-  formatPkr,
+  CURRENCY_EXAMPLES,
+  formatMoney,
   hasValidInputs,
   parseNumericInput,
+  type AuditCurrency,
 } from "@/lib/self-audit"
 
 const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
@@ -28,6 +30,8 @@ export function SelfAuditSection() {
   const pathname = usePathname()
   const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
   const basePath = isSaudiRoute ? "/sa" : ""
+  const [localCurrency, setLocalCurrency] = useState<Exclude<AuditCurrency, "SAR">>("PKR")
+  const currency: AuditCurrency = isSaudiRoute ? "SAR" : localCurrency
 
   const [monthlySpendInput, setMonthlySpendInput] = useState("")
   const [dailyCommutersInput, setDailyCommutersInput] = useState("")
@@ -36,8 +40,9 @@ export function SelfAuditSection() {
   const dailyCommuters = useMemo(() => parseNumericInput(dailyCommutersInput), [dailyCommutersInput])
   const inputsValid = hasValidInputs(monthlySpend, dailyCommuters)
   const metrics = monthlySpend !== null && dailyCommuters !== null
-    ? calculateAuditMetrics(monthlySpend, dailyCommuters)
+    ? calculateAuditMetrics(monthlySpend, dailyCommuters, currency)
     : null
+  const money = (amount: number) => formatMoney(amount, currency)
 
   return (
     <section
@@ -77,9 +82,30 @@ export function SelfAuditSection() {
             className="flex h-full flex-col rounded-3xl border border-white/[0.07] bg-white/[0.025] p-8 backdrop-blur-sm"
           >
             <div className="space-y-5">
+              {!isSaudiRoute && (
+                <div className="flex justify-end">
+                  <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] p-0.5 text-xs font-bold">
+                    {(["PKR", "USD"] as const).map((code) => (
+                      <button
+                        key={code}
+                        type="button"
+                        onClick={() => setLocalCurrency(code)}
+                        className={`rounded-full px-3 py-1.5 transition-colors ${
+                          localCurrency === code
+                            ? "bg-primary text-white"
+                            : "text-white/40 hover:text-white"
+                        }`}
+                      >
+                        {code}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div className="space-y-2">
                 <label htmlFor="monthly-spend" className="text-sm font-medium text-white/70">
-                  {t("fields.monthlySpend")}
+                  {t("fields.monthlySpend", { currency })}
                 </label>
                 <Input
                   id="monthly-spend"
@@ -87,7 +113,7 @@ export function SelfAuditSection() {
                   type="text"
                   value={monthlySpendInput}
                   onChange={(e) => setMonthlySpendInput(e.target.value)}
-                  placeholder={t("fields.monthlySpendPlaceholder")}
+                  placeholder={t("fields.monthlySpendPlaceholder", { example: CURRENCY_EXAMPLES[currency] })}
                   className="h-12 border-white/10 bg-white/[0.03] text-white placeholder:text-white/20 focus:border-primary/50 ltr-content"
                   dir="ltr"
                 />
@@ -131,28 +157,28 @@ export function SelfAuditSection() {
                         </span>
                       </div>
                       <p className="mt-2 text-4xl font-bold tabular-nums text-primary sm:text-5xl">
-                        {formatPkr(metrics.annualSavings)}
+                        {money(metrics.annualSavings)}
                       </p>
                     </div>
 
                     <div className="space-y-3">
                       <SpendBar
                         label={t("output.before")}
-                        value={formatPkr(monthlySpend ?? 0)}
+                        value={money(monthlySpend ?? 0)}
                         width="100%"
                         tone="muted"
                       />
                       <SpendBar
                         label={t("output.after")}
-                        value={formatPkr(metrics.optimizedMonthlySpend)}
+                        value={money(metrics.optimizedMonthlySpend)}
                         width="70%"
                         tone="primary"
                       />
                     </div>
 
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                      <StatLine label={t("output.monthlySavings")} value={formatPkr(metrics.monthlySavings)} />
-                      <StatLine label={t("output.costPerEmployeeDay")} value={formatPkr(metrics.costPerEmployeeDay)} />
+                      <StatLine label={t("output.monthlySavings")} value={money(metrics.monthlySavings)} />
+                      <StatLine label={t("output.costPerEmployeeDay")} value={money(metrics.costPerEmployeeDay)} />
                       <StatLine
                         label={t("output.paybackPeriod")}
                         value={t("output.paybackDays", { days: metrics.paybackDays })}

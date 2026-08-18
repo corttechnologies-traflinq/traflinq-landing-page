@@ -140,8 +140,8 @@
       "title": "Run a 2-Minute Self-Audit",
       "subtext": "See how much your company can save on corporate transport—no sales call needed.",
       "fields": {
-        "monthlySpend": "Monthly Spend (PKR)",
-        "monthlySpendPlaceholder": "e.g. 500000",
+        "monthlySpend": "Monthly Spend ({currency})",
+        "monthlySpendPlaceholder": "e.g. {example}",
         "dailyCommuters": "Daily Commuting Employees / Vehicles",
         "dailyCommutersPlaceholder": "e.g. 120"
       },
