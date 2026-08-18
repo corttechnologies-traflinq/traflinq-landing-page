@@ -1,11 +1,5 @@
-import { SelfAuditPage } from "@/components/self-audit-page"
-import { Metadata } from "next"
+import { redirect } from "next/navigation"
 
-export const metadata: Metadata = {
-  title: "Self-Audit | Traflinq Saudi",
-  description: "Run a self-audit of your mobility operations to uncover leakage, utilization gaps, and governance blind spots.",
-}
-
-export default function SaudiSelfAuditRoute() {
-  return <SelfAuditPage />
+export default function SaudiSelfAuditRedirect() {
+  redirect("/sa/#self-audit")
 }
