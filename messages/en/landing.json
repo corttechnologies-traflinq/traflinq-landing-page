@@ -622,5 +622,33 @@
     "support": "Support",
     "privacy": "Privacy Policy",
     "logoAlt": "TrafLinq Logo"
+  },
+  "careers": {
+    "badge": "Careers",
+    "title": "Help us build how <highlight>enterprises move</highlight>.",
+    "description": "We're a small team building the unified mobility platform for corporate commutes and travel. Join early, own big problems and ship to real fleets.",
+    "openRoles": "Open roles",
+    "roles": {
+      "fullstack": {
+        "title": "Full Stack Founding Engineer",
+        "type": "Founding team",
+        "description": "Own product surfaces end to end — from the enterprise dashboard to the APIs behind it. You'll shape the architecture, ship fast and help set the engineering culture from day one."
+      },
+      "backend": {
+        "title": "Backend Engineer",
+        "type": "Engineering",
+        "description": "Design and scale the services behind routing, policy approvals, billing and vendor reconciliation. You care about clean APIs, data integrity and systems that stay reliable under load."
+      },
+      "mobile": {
+        "title": "React Native / Expo Developer",
+        "type": "Engineering",
+        "description": "Build the traveler and driver apps people use every day — live tracking, bookings and notifications that feel instant on any device."
+      }
+    },
+    "apply": "Apply by email",
+    "applyHeading": "How to apply",
+    "applyBody": "Email your CV and links to your work (GitHub, portfolio or LinkedIn) to <email>tech@traflinq.com</email> with the role in the subject line.",
+    "applyOther": "Don't see a perfect match? Write to us anyway and tell us what you'd like to build.",
+    "emailSubject": "Application — {role}"
   }
 }

@@ -42,7 +42,7 @@ export function Footer() {
       heading: t("columns.company.heading"),
       links: [
         { name: t("columns.company.about"), href: `${basePath}/#home` },
-        { name: t("columns.company.careers"), href: `${basePath}/#home` },
+        { name: t("columns.company.careers"), href: `${basePath}/careers` },
         { name: t("columns.company.contactSales"), href: `${basePath}/support` },
         { name: t("columns.company.scheduleCall"), href: "https://calendar.app.google/qeHQgMANfWNr77yz6", external: true },
       ],
