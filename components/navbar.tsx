@@ -23,6 +23,7 @@ export function Navbar() {
   const navItems = [
     { id: "platform", name: t("platform"), href: `${basePath}/#command-center` },
     { id: "solutions", name: t("solutions"), href: `${basePath}/#command-center` },
+    { id: "travel", name: t("travel"), href: `${basePath}/#travel` },
     { id: "security", name: t("security"), href: `${basePath}/#institutional-trust` },
     { id: "about", name: t("about"), href: `${basePath}/#about` },
     { id: "briefing", name: t("briefing"), href: `${basePath}/request-briefing` },

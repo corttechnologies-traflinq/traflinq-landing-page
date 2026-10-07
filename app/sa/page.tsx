@@ -7,6 +7,7 @@ import { AnchorScrollHandler } from "@/components/anchor-scroll-handler"
 const SelfAuditSection = dynamic(() => import("@/components/self-audit-section").then(m => ({ default: m.SelfAuditSection })))
 const ProblemSection = dynamic(() => import("@/components/problem-section").then(m => ({ default: m.ProblemSection })))
 const RouteOptimizationSection = dynamic(() => import("@/components/route-optimization-section").then(m => ({ default: m.RouteOptimizationSection })))
+const TravelSection = dynamic(() => import("@/components/travel-section").then(m => ({ default: m.TravelSection })))
 const AboutSection = dynamic(() => import("@/components/about-section").then(m => ({ default: m.AboutSection })))
 const TeamSection = dynamic(() => import("@/components/team-section").then(m => ({ default: m.TeamSection })))
 const OperationalSuccessReports = dynamic(() => import("@/components/operational-success-reports").then(m => ({ default: m.OperationalSuccessReports })))
@@ -23,6 +24,7 @@ export default function SaudiLanding() {
       <HeroSection />
       <ProblemSection />
       <RouteOptimizationSection />
+      <TravelSection />
       <AboutSection />
       <SelfAuditSection />
       <TeamSection />
