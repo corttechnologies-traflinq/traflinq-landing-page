@@ -632,23 +632,87 @@
       "fullstack": {
         "title": "Full Stack Founding Engineer",
         "type": "Founding team",
-        "description": "Own product surfaces end to end — from the enterprise dashboard to the APIs behind it. You'll shape the architecture, ship fast and help set the engineering culture from day one."
+        "description": "Own the Traflinq platform end to end — from the web dashboards our customers run their operations on, to the APIs and data behind them.",
+        "responsibilities": [
+          "Ship features across the Next.js web platform (admin, company and vendor portals) and the NestJS APIs behind it, from database schema to UI.",
+          "Build Traflinq Travel: multi-modal search, bookings, wallets, approval policies and invoicing.",
+          "Create live operational dashboards — maps, analytics charts and real-time trip tracking over WebSockets.",
+          "Shape architecture, code review standards, CI/CD and engineering culture as one of the first engineers.",
+          "Work directly with founders and customers to turn real operational problems into product."
+        ],
+        "requirements": [
+          "Strong TypeScript across React / Next.js and Node.js / NestJS, with products shipped end to end.",
+          "Solid PostgreSQL and Prisma (or similar ORM), REST API design, authentication and role-based permissions.",
+          "Experience with multi-tenant B2B SaaS, data-heavy dashboards or internal tools.",
+          "An ownership mindset: comfortable with ambiguity, moving fast and wearing several hats."
+        ],
+        "niceToHave": [
+          "Maps and geospatial work (Leaflet, routing)",
+          "Real-time systems",
+          "Internationalisation and RTL (English and Arabic)",
+          "Billing and invoicing systems"
+        ]
       },
       "backend": {
         "title": "Backend Engineer",
         "type": "Engineering",
-        "description": "Design and scale the services behind routing, policy approvals, billing and vendor reconciliation. You care about clean APIs, data integrity and systems that stay reliable under load."
+        "description": "Build and scale the services that run corporate commutes and travel — routing, live tracking, contracts, invoicing and vendor reconciliation.",
+        "responsibilities": [
+          "Design and extend NestJS services for bookings, shuttle trips and routes, contracts, vendors and the travel module (search, wallets, approvals).",
+          "Own the real-time location pipeline: Socket.IO gateways, geofencing, ETA calculation and distance accumulation, flushed safely to PostgreSQL.",
+          "Evolve a large Prisma / PostgreSQL schema with safe migrations, solid indexing and well-tuned queries.",
+          "Get money right: invoice generation (including PDFs), reconciliation against contracts and purchase orders, and fuel-variance detection.",
+          "Harden production: JWT auth, permission guards, rate limiting, distributed locks, scheduled jobs, monitoring and incident runbooks.",
+          "Integrate third-party services such as maps and distance providers, email, push notifications and cloud storage."
+        ],
+        "requirements": [
+          "Proven experience building production Node.js / TypeScript backends; NestJS experience strongly preferred.",
+          "Strong PostgreSQL and ORM skills: schema design, transactions, indexing and migrations.",
+          "Hands-on with Redis, WebSockets / Socket.IO, background jobs and concurrency control (idempotency, locking).",
+          "Care for data integrity, testing and reliability — especially where billing is involved."
+        ],
+        "niceToHave": [
+          "PostGIS / geospatial data",
+          "AWS (S3, RDS)",
+          "OpenAPI / Swagger",
+          "Event-driven design",
+          "AI-assisted analytics"
+        ]
       },
       "mobile": {
         "title": "React Native / Expo Developer",
         "type": "Engineering",
-        "description": "Build the traveler and driver apps people use every day — live tracking, bookings and notifications that feel instant on any device."
+        "description": "Build the Traflinq mobile app used by employees, chauffeurs and shuttle drivers every day — live tracking, rides, boarding and business travel.",
+        "responsibilities": [
+          "Build and maintain one role-based app with separate flows for employees, chauffeurs and shuttle drivers, using Expo Router.",
+          "Deliver ride requests and live trip tracking on maps, shuttle boarding with QR scanning, driver check-ins and business-travel booking.",
+          "Implement reliable background location tracking that balances accuracy and battery life.",
+          "Add real-time updates with Socket.IO and push notifications, with state that survives flaky networks (Redux Toolkit, redux-persist).",
+          "Ship through EAS: builds, over-the-air updates and App Store / Google Play releases.",
+          "Support English and Arabic with full RTL, and keep the app fast and accessible."
+        ],
+        "requirements": [
+          "Production React Native and Expo apps shipped to the App Store and Google Play, written in TypeScript.",
+          "Experience with Expo Router, Reanimated, Gesture Handler and react-native-maps.",
+          "Comfort with native permissions and device APIs: location (including background), camera, notifications and secure storage.",
+          "Experience with real-time features and apps that must work on unreliable connections."
+        ],
+        "niceToHave": [
+          "NativeWind / Tailwind",
+          "EAS and OTA updates",
+          "Biometric authentication",
+          "i18n and RTL",
+          "Config plugins and native modules"
+        ]
       }
     },
     "apply": "Apply by email",
     "applyHeading": "How to apply",
     "applyBody": "Email your CV and links to your work (GitHub, portfolio or LinkedIn) to <email>tech@traflinq.com</email> with the role in the subject line.",
     "applyOther": "Don't see a perfect match? Write to us anyway and tell us what you'd like to build.",
-    "emailSubject": "Application — {role}"
+    "emailSubject": "Application — {role}",
+    "responsibilitiesHeading": "What you'll do",
+    "requirementsHeading": "What we're looking for",
+    "niceToHaveHeading": "Nice to have"
   }
 }

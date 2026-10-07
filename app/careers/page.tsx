@@ -10,10 +10,23 @@ import { Footer } from "@/components/footer"
 const CAREERS_EMAIL = "tech@traflinq.com"
 
 const ROLES = [
-  { key: "fullstack", icon: Layers, stack: ["Next.js", "React", "NestJS", "TypeScript"] },
-  { key: "backend", icon: Server, stack: ["NestJS", "Prisma", "Redis", "TypeScript"] },
-  { key: "mobile", icon: Smartphone, stack: ["React Native", "Expo", "TypeScript"] },
+  { key: "fullstack", icon: Layers, stack: ["Next.js", "React", "NestJS", "PostgreSQL", "Prisma", "TypeScript"] },
+  { key: "backend", icon: Server, stack: ["NestJS", "PostgreSQL", "Prisma", "Redis", "Socket.IO", "TypeScript"] },
+  { key: "mobile", icon: Smartphone, stack: ["React Native", "Expo", "Expo Router", "Redux Toolkit", "TypeScript"] },
 ] as const
+
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-2.5">
+      {items.map((item) => (
+        <li key={item} className="flex gap-3 text-sm leading-6 text-white/50">
+          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 export default function CareersPage() {
   const t = useTranslations("careers")
@@ -61,40 +74,74 @@ export default function CareersPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
-                  className="flex flex-col gap-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 transition-colors hover:border-primary/30 hover:bg-white/[0.04] sm:p-8 md:flex-row md:items-center md:justify-between"
+                  className="flex flex-col gap-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 transition-colors hover:border-primary/30 hover:bg-white/[0.04] sm:p-8"
                 >
-                  <div className="flex gap-5">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/10">
-                      <Icon className="h-6 w-6 text-primary" />
+                  <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+                    <div className="flex gap-5">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-primary/10">
+                        <Icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-[11px] font-medium uppercase tracking-widest text-primary/60">
+                          {t(`roles.${key}.type`)}
+                        </p>
+                        <h3 className="mt-1 text-xl font-bold text-white">{title}</h3>
+                        <p className="mt-3 max-w-2xl text-sm leading-6 text-white/45">
+                          {t(`roles.${key}.description`)}
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {stack.map((s) => (
+                            <span
+                              key={s}
+                              className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-xs text-white/40"
+                              dir="ltr"
+                            >
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
+
+                    <Button asChild className="shrink-0 gap-2 bg-primary text-white hover:bg-primary/90">
+                      <a href={mailto(title)}>
+                        {t("apply")}
+                        <ArrowRight className="h-4 w-4 rtl:rotate-180" />
+                      </a>
+                    </Button>
+                  </div>
+
+                  <div className="grid gap-8 border-t border-white/[0.06] pt-6 md:grid-cols-2">
                     <div>
-                      <p className="text-[11px] font-medium uppercase tracking-widest text-primary/60">
-                        {t(`roles.${key}.type`)}
-                      </p>
-                      <h3 className="mt-1 text-xl font-bold text-white">{title}</h3>
-                      <p className="mt-3 max-w-2xl text-sm leading-6 text-white/45">
-                        {t(`roles.${key}.description`)}
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {stack.map((s) => (
-                          <span
-                            key={s}
-                            className="rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1 text-xs text-white/40"
-                            dir="ltr"
-                          >
-                            {s}
-                          </span>
-                        ))}
+                      <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/70">
+                        {t("responsibilitiesHeading")}
+                      </h4>
+                      <BulletList items={t.raw(`roles.${key}.responsibilities`) as string[]} />
+                    </div>
+                    <div className="space-y-8">
+                      <div>
+                        <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/70">
+                          {t("requirementsHeading")}
+                        </h4>
+                        <BulletList items={t.raw(`roles.${key}.requirements`) as string[]} />
+                      </div>
+                      <div>
+                        <h4 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/40">
+                          {t("niceToHaveHeading")}
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {(t.raw(`roles.${key}.niceToHave`) as string[]).map((item) => (
+                            <span
+                              key={item}
+                              className="rounded-full border border-dashed border-white/[0.12] px-3 py-1 text-xs text-white/40"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <Button asChild className="shrink-0 gap-2 bg-primary text-white hover:bg-primary/90">
-                    <a href={mailto(title)}>
-                      {t("apply")}
-                      <ArrowRight className="h-4 w-4 rtl:rotate-180" />
-                    </a>
-                  </Button>
                 </motion.article>
               )
             })}
