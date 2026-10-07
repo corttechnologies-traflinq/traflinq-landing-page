@@ -5,19 +5,28 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { usePathname } from "next/navigation"
-import { ArrowRight, ClipboardCheck, MapPin, Sparkles, Wallet } from "lucide-react"
+import { ArrowRight, Bus, ClipboardCheck, MapPin, Plane, Sparkles, Wallet } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import CountUp from "@/components/CountUp"
 import {
-  calculateAuditMetrics,
+  calculateCommuteMetrics,
+  calculateTravelMetrics,
   CURRENCY_EXAMPLES,
+  TRAVEL_CURRENCY_EXAMPLES,
   formatMoney,
   hasValidInputs,
   parseNumericInput,
   type AuditCurrency,
+  type AuditMode,
 } from "@/lib/self-audit"
 
 const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
+
+const MODES = [
+  { key: "commute", icon: Bus },
+  { key: "travel", icon: Plane },
+] as const
 
 const PILLAR_KEYS = [
   { key: "cost", icon: Wallet },
@@ -31,6 +40,8 @@ export function SelfAuditSection() {
   const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
   const basePath = isSaudiRoute ? "/sa" : ""
   const [inputsValid, setInputsValid] = useState(false)
+  const [mode, setMode] = useState<AuditMode>("commute")
+  const [localCurrency, setLocalCurrency] = useState<Exclude<AuditCurrency, "SAR">>("PKR")
 
   return (
     <section
@@ -59,6 +70,28 @@ export function SelfAuditSection() {
           <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-white/45">
             {t("subtext")}
           </p>
+
+          <div
+            role="tablist"
+            aria-label={t("title")}
+            className="mx-auto mt-6 inline-flex flex-wrap items-center justify-center gap-1 rounded-full border border-white/10 bg-white/[0.03] p-1"
+          >
+            {MODES.map(({ key, icon: Icon }) => (
+              <button
+                key={key}
+                type="button"
+                role="tab"
+                aria-selected={mode === key}
+                onClick={() => setMode(key)}
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-wide transition-colors sm:text-sm ${
+                  mode === key ? "bg-primary text-white" : "text-white/45 hover:text-white"
+                }`}
+              >
+                <Icon className="h-4 w-4" />
+                {t(`modes.${key}`)}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         <div className="relative grid items-stretch gap-5 lg:grid-cols-2">
@@ -69,7 +102,14 @@ export function SelfAuditSection() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="flex h-full flex-col rounded-3xl border border-white/[0.07] bg-white/[0.025] p-5 sm:p-6 backdrop-blur-sm"
           >
-            <AuditFormCard isSaudiRoute={isSaudiRoute} onValidityChange={setInputsValid} />
+            <AuditFormCard
+              key={mode}
+              mode={mode}
+              isSaudiRoute={isSaudiRoute}
+              localCurrency={localCurrency}
+              onCurrencyChange={setLocalCurrency}
+              onValidityChange={setInputsValid}
+            />
           </motion.div>
 
           <motion.div
@@ -93,9 +133,9 @@ export function SelfAuditSection() {
                       <Icon className="h-3.5 w-3.5 text-primary" />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-sm font-semibold text-white">{t(`pillars.${key}.title`)}</h3>
+                      <h3 className="text-sm font-semibold text-white">{t(`${mode}.pillars.${key}.title`)}</h3>
                       <p className="mt-0.5 text-sm leading-snug text-white/45">
-                        {t(`pillars.${key}.description`)}
+                        {t(`${mode}.pillars.${key}.description`)}
                       </p>
                     </div>
                   </div>
@@ -143,30 +183,97 @@ export function SelfAuditSection() {
 }
 
 function AuditFormCard({
+  mode,
   isSaudiRoute,
+  localCurrency,
+  onCurrencyChange,
   onValidityChange,
 }: {
+  mode: AuditMode
   isSaudiRoute: boolean
+  localCurrency: Exclude<AuditCurrency, "SAR">
+  onCurrencyChange: (currency: Exclude<AuditCurrency, "SAR">) => void
   onValidityChange: (valid: boolean) => void
 }) {
   const t = useTranslations("landing.selfAuditFlow")
-  const [localCurrency, setLocalCurrency] = useState<Exclude<AuditCurrency, "SAR">>("PKR")
   const currency: AuditCurrency = isSaudiRoute ? "SAR" : localCurrency
+  const examples = mode === "commute" ? CURRENCY_EXAMPLES : TRAVEL_CURRENCY_EXAMPLES
 
   const [monthlySpendInput, setMonthlySpendInput] = useState("")
-  const [dailyEmployeesInput, setDailyEmployeesInput] = useState("")
-  const [dailyVehiclesInput, setDailyVehiclesInput] = useState("")
+  const [secondInput, setSecondInput] = useState("")
+  const [thirdInput, setThirdInput] = useState("")
   const [monthlySpend, setMonthlySpend] = useState<number | null>(null)
-  const [dailyEmployees, setDailyEmployees] = useState<number | null>(null)
-  const [dailyVehicles, setDailyVehicles] = useState<number | null>(null)
+  const [second, setSecond] = useState<number | null>(null)
+  const [third, setThird] = useState<number | null>(null)
 
-  const inputsComplete = hasValidInputs(monthlySpend, dailyEmployees, dailyVehicles)
-  const metrics = inputsComplete && monthlySpend !== null ? calculateAuditMetrics(monthlySpend) : null
+  const inputsComplete = hasValidInputs(monthlySpend, second, third)
   const money = (amount: number) => formatMoney(amount, currency)
+
+  const commute =
+    mode === "commute" && inputsComplete && monthlySpend !== null && second !== null && third !== null
+      ? calculateCommuteMetrics(monthlySpend, second, third)
+      : null
+  const travel =
+    mode === "travel" && inputsComplete && monthlySpend !== null && third !== null
+      ? calculateTravelMetrics(monthlySpend, third)
+      : null
+  const metrics = commute ?? travel
+
+  const percent = (n: number) => `${Math.round(n * 100)}%`
+  const tiles: { label: string; value: string }[] = commute
+    ? [
+        { label: t("commute.metrics.first"), value: percent(commute.routeEfficiencyGain) },
+        {
+          label: t("commute.metrics.second"),
+          value: `${percent(commute.currentUtilization)} → ${percent(commute.projectedUtilization)}`,
+        },
+        { label: t("commute.metrics.third"), value: money(commute.monthlyLeakageRecovery) },
+      ]
+    : travel
+      ? [
+          { label: t("travel.metrics.first"), value: money(travel.policyLeakagePrevented) },
+          {
+            label: t("travel.metrics.second"),
+            value: t("travel.metrics.hours", { hours: Math.round(travel.hoursSaved).toLocaleString("en-US") }),
+          },
+          { label: t("travel.metrics.third"), value: money(travel.vendorRateYield) },
+        ]
+      : []
 
   useEffect(() => {
     onValidityChange(inputsComplete)
   }, [inputsComplete, onValidityChange])
+
+  const field = (
+    id: string,
+    label: string,
+    value: string,
+    setValue: (v: string) => void,
+    setParsed: (n: number | null) => void,
+    placeholder: string,
+  ) => (
+    <div className="space-y-2">
+      <label htmlFor={id} className="text-sm font-medium text-white/70">
+        {label}
+      </label>
+      <Input
+        id={id}
+        inputMode="numeric"
+        type="text"
+        value={value}
+        onChange={(e) => {
+          const v = e.target.value
+          setValue(v)
+          startTransition(() => {
+            setParsed(parseNumericInput(v))
+          })
+        }}
+        placeholder={placeholder}
+        className="h-10 border-white/10 bg-white/[0.03] text-white placeholder:text-white/20 focus:border-primary/50 ltr-content"
+        dir="ltr"
+      />
+    </div>
+  )
 
   return (
     <>
@@ -178,7 +285,7 @@ function AuditFormCard({
                 <button
                   key={code}
                   type="button"
-                  onClick={() => setLocalCurrency(code)}
+                  onClick={() => onCurrencyChange(code)}
                   className={`rounded-full px-3 py-1.5 transition-colors ${
                     localCurrency === code
                       ? "bg-primary text-white"
@@ -192,72 +299,32 @@ function AuditFormCard({
           </div>
         )}
 
-        <div className="space-y-2">
-          <label htmlFor="monthly-spend" className="text-sm font-medium text-white/70">
-            {t("fields.monthlySpend", { currency })}
-          </label>
-          <Input
-            id="monthly-spend"
-            inputMode="numeric"
-            type="text"
-            value={monthlySpendInput}
-            onChange={(e) => {
-              const value = e.target.value
-              setMonthlySpendInput(value)
-              startTransition(() => {
-                setMonthlySpend(parseNumericInput(value))
-              })
-            }}
-            placeholder={t("fields.monthlySpendPlaceholder", { example: CURRENCY_EXAMPLES[currency] })}
-            className="h-10 border-white/10 bg-white/[0.03] text-white placeholder:text-white/20 focus:border-primary/50 ltr-content"
-            dir="ltr"
-          />
-        </div>
+        {field(
+          "monthly-spend",
+          t(`${mode}.fields.monthlySpend`, { currency }),
+          monthlySpendInput,
+          setMonthlySpendInput,
+          setMonthlySpend,
+          t(`${mode}.fields.monthlySpendPlaceholder`, { example: examples[currency] }),
+        )}
 
         <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <label htmlFor="daily-employees" className="text-sm font-medium text-white/70">
-              {t("fields.dailyEmployees")}
-            </label>
-            <Input
-              id="daily-employees"
-              inputMode="numeric"
-              type="text"
-              value={dailyEmployeesInput}
-              onChange={(e) => {
-                const value = e.target.value
-                setDailyEmployeesInput(value)
-                startTransition(() => {
-                  setDailyEmployees(parseNumericInput(value))
-                })
-              }}
-              placeholder={t("fields.dailyEmployeesPlaceholder")}
-              className="h-10 border-white/10 bg-white/[0.03] text-white placeholder:text-white/20 focus:border-primary/50 ltr-content"
-              dir="ltr"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="daily-vehicles" className="text-sm font-medium text-white/70">
-              {t("fields.dailyVehicles")}
-            </label>
-            <Input
-              id="daily-vehicles"
-              inputMode="numeric"
-              type="text"
-              value={dailyVehiclesInput}
-              onChange={(e) => {
-                const value = e.target.value
-                setDailyVehiclesInput(value)
-                startTransition(() => {
-                  setDailyVehicles(parseNumericInput(value))
-                })
-              }}
-              placeholder={t("fields.dailyVehiclesPlaceholder")}
-              className="h-10 border-white/10 bg-white/[0.03] text-white placeholder:text-white/20 focus:border-primary/50 ltr-content"
-              dir="ltr"
-            />
-          </div>
+          {field(
+            "audit-second",
+            t(`${mode}.fields.second`),
+            secondInput,
+            setSecondInput,
+            setSecond,
+            t(`${mode}.fields.secondPlaceholder`),
+          )}
+          {field(
+            "audit-third",
+            t(`${mode}.fields.third`),
+            thirdInput,
+            setThirdInput,
+            setThird,
+            t(`${mode}.fields.thirdPlaceholder`),
+          )}
         </div>
       </div>
 
@@ -270,11 +337,12 @@ function AuditFormCard({
                   {t("output.label")}
                 </p>
                 <span className="rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                  {t("output.rateHint")}
+                  {t(`${mode}.rateHint`)}
                 </span>
               </div>
-              <p className="mt-1.5 text-3xl font-bold tabular-nums text-primary sm:text-4xl">
-                {money(metrics.annualSavings)}
+              <p dir="ltr" className="mt-1.5 text-start text-3xl font-bold tabular-nums text-primary sm:text-4xl">
+                {currency}{" "}
+                <CountUp to={Math.round(metrics.annualSavings)} duration={1} separator="," />
               </p>
             </div>
 
@@ -288,14 +356,28 @@ function AuditFormCard({
               <SpendBar
                 label={t("output.after")}
                 value={money(metrics.optimizedMonthlySpend)}
-                width="70%"
+                width={`${Math.round((1 - metrics.savingsRate) * 100)}%`}
                 tone="primary"
               />
+            </div>
+
+            <div className="grid gap-2 sm:grid-cols-3">
+              {tiles.map((tile) => (
+                <div
+                  key={tile.label}
+                  className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2.5"
+                >
+                  <p className="text-[10px] font-medium uppercase leading-snug tracking-wider text-white/35">
+                    {tile.label}
+                  </p>
+                  <p className="mt-1 text-sm font-bold tabular-nums text-white">{tile.value}</p>
+                </div>
+              ))}
             </div>
           </div>
         ) : (
           <div className="flex min-h-[120px] flex-col justify-center rounded-2xl border border-dashed border-white/[0.08] bg-white/[0.015] px-5 py-5 text-center">
-            <p className="text-sm text-white/35">{t("output.emptyPrompt")}</p>
+            <p className="text-sm text-white/35">{t(`${mode}.emptyPrompt`)}</p>
             <div className="mt-4 space-y-2 opacity-40">
               <div className="h-2 w-full rounded-full bg-white/10" />
               <div className="h-2 w-[70%] rounded-full bg-primary/25" />

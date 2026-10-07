@@ -38,12 +38,13 @@ export function TeamSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-16 text-center"
+          className="mb-16 text-center max-w-3xl mx-auto"
         >
           <span className="text-xs text-primary/60 tracking-widest uppercase font-medium">{t("eyebrow")}</span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight">
             {t("title")}
           </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/45">{t("description")}</p>
         </motion.div>
 
         <div className="flex flex-col sm:flex-row justify-center gap-10 max-w-2xl mx-auto">

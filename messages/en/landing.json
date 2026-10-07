@@ -10,10 +10,10 @@
       "travel": "Travel"
     },
     "hero": {
-      "badge": "Enterprise Mobility Intelligence",
-      "titleLine1": "The Intelligence Layer for",
-      "titleHighlight": "Managed Mobility",
-      "description": "Traflinq is the architectural foundation for corporate transit. We provide the logic, oversight, and telemetry required to orchestrate workforce movement at an institutional scale.",
+      "badge": "UNIFIED MOBILITY PLATFORM (UMP)",
+      "titleLine1": "One Platform.",
+      "titleHighlight": "Every Employee Moves.",
+      "description": "From daily shift commutes to cross-country business trips. Search, orchestrate, policy-check, and reconcile every flight, rail, bus, and fleet ride in one central software layer.",
       "map": {
         "liveMap": "Live Map",
         "before": "Before",
@@ -30,6 +30,60 @@
         "routeLegendA": "Zone A",
         "routeLegendB": "Zone B",
         "routeLegendC": "Zone C"
+      },
+      "rotatingPrefix": "Orchestrating every",
+      "rotatingWords": [
+        "shift commute",
+        "flight",
+        "rail journey",
+        "bus ride",
+        "fleet ride"
+      ]
+    },
+    "operations": {
+      "eyebrow": "Operations Dimension",
+      "title": "Two Operations. One Platform.",
+      "rows": {
+        "dimension": "Operations Dimension",
+        "capabilities": "Core Capabilities",
+        "audience": "Built For"
+      },
+      "tabs": {
+        "commute": {
+          "label": "Daily Workforce Transit",
+          "tag": "Commute",
+          "dimension": "High-density daily employee transport and fixed routes.",
+          "capabilities": "Fixed-route optimization, automated shift scheduling, real-time vehicle tracking, and automated driver check-ins for corporate fleets and shuttle vendors.",
+          "audience": "Facilities, HR, and daily transport operations teams."
+        },
+        "travel": {
+          "label": "Multi-Modal Business Travel",
+          "tag": "UMP",
+          "dimension": "Long-distance intercity and multi-leg corporate travel.",
+          "capabilities": "Door-to-door itineraries pairing long-haul flights, intercity rail, and buses with first-mile/last-mile rides, backed by automated travel policy approvals.",
+          "audience": "Corporate travel managers, procurement, and business travelers."
+        }
+      }
+    },
+    "pillars": {
+      "eyebrow": "Core Product Pillars",
+      "title": "Search. Govern. Reconcile.",
+      "items": {
+        "search": {
+          "tag": "Multi-Modal Search & Routing",
+          "title": "Door-to-Door Itinerary Engine",
+          "description": "Search flights, rail, intercity coaches, and local transfers in a single unified search. Alter one leg without losing linked pickup connections."
+        },
+        "policy": {
+          "tag": "Dynamic Policy Engine",
+          "title": "Automated Governance & Approvals",
+          "description": "Set multi-level sign-offs and travel grade limits. Routine commutes and policy-compliant bookings go through instantly."
+        },
+        "audit": {
+          "tag": "Fiscal Audit Engine",
+          "title": "Line-Item Multi-Vendor Reconciliation",
+          "description": "Reconcile variable fuel costs, distance charges, and ticket fares across third-party vendors against original purchase orders before invoice generation."
+        }
       }
     },
     "problem": {
@@ -80,11 +134,8 @@
       }
     },
     "travel": {
-      "badge": "New",
-      "eyebrow": "Traflinq Travel",
-      "kicker": "Corporate Travel",
-      "title": "One Trip, Fully Covered.",
-      "description": "Flights, trains, buses and chauffeured cars — plus the ride to and from every terminal — booked in one app, paid from one wallet, invoiced the right way.",
+      "eyebrow": "Feature Matrix",
+      "title": "One Platform, Three Views.",
       "groups": {
         "traveler": {
           "label": "The App",
@@ -92,19 +143,19 @@
           "items": {
             "everyMode": {
               "title": "Every Mode, One Flow",
-              "description": "Flight, bus, train or chauffeured car — the same search, the same booking, the same wallet."
+              "description": "Search flights, rail, buses, and ground rides in one search without jumping between websites."
             },
             "doorToDoor": {
-              "title": "Door-to-Door",
-              "description": "A first-mile ride to the terminal and a last-mile ride to the hotel, bundled into the same booking — ride-hail, airport transfer, or a rental."
+              "title": "Door-to-Door Rides",
+              "description": "Pair terminal rides with hotel transfers in the same booking."
             },
             "roundTrips": {
-              "title": "Round Trips That Don't Reset",
-              "description": "Book outbound, then return, in one continuous flow — change a date later without losing what's already booked."
+              "title": "Flexible Round Trips",
+              "description": "Change return dates or adjust individual legs without canceling the rest of your trip."
             },
-            "liveSpend": {
-              "title": "Spend, Visible in Real Time",
-              "description": "Every traveler sees their live balance and the full cost breakdown before they confirm — no surprises later."
+            "liveTracking": {
+              "title": "Live Schedule Tracking",
+              "description": "Receive immediate notifications if a flight or train is delayed so ground pickups update automatically."
             }
           }
         },
@@ -113,16 +164,16 @@
           "title": "For the company",
           "items": {
             "approval": {
-              "title": "Approval, Your Way",
-              "description": "Require sign-off company-wide, or only for the travel grades that need it — everyone else books instantly."
+              "title": "Simple Approval Rules",
+              "description": "Set custom sign-off rules for different employee tiers while letting routine bookings go through instantly."
             },
-            "wallets": {
-              "title": "Two Wallets, One System",
-              "description": "Fund a shared company wallet or allocate individual travel allowances — the platform charges the right one automatically."
+            "budgets": {
+              "title": "Shared Corporate Budgets",
+              "description": "Fund central company accounts or assign individual travel limits by department."
             },
-            "visibility": {
-              "title": "Full Spend Visibility",
-              "description": "Every booking, every dollar allocated and used, in one live view — not a monthly reconciliation."
+            "spend": {
+              "title": "Clear Spend Tracking",
+              "description": "Monitor active trips and real-time travel expenses without waiting for end-of-month spreadsheets."
             }
           }
         },
@@ -131,23 +182,19 @@
           "title": "For operations",
           "items": {
             "preview": {
-              "title": "Preview Before You Bill",
-              "description": "See every line item an invoice will contain before it's generated — fare, transfers, fuel, all itemized."
+              "title": "Invoice Previews",
+              "description": "Review itemized costs for fare, fuel adjustments, and transfers before invoices are generated."
             },
-            "billing": {
-              "title": "Billed the Way Travel Actually Costs",
-              "description": "Flat fees charged at booking. Fuel billed afterward, against the real distance driven — never left unbilled."
+            "audit": {
+              "title": "Automated Audit Checks",
+              "description": "Match variable ground costs and vendor rates against original purchase orders automatically."
             },
-            "fleet": {
-              "title": "Fleet, Under Control",
-              "description": "CORT-owned vehicles and vendor fleets, their rates and their drivers, managed from one place."
+            "vendors": {
+              "title": "Vendor Management",
+              "description": "Track third-party transport partners, corporate vehicles, and driver rates in one portal."
             }
           }
         }
-      },
-      "cta": {
-        "title": "See Traflinq Travel in action.",
-        "description": "Book a walkthrough tailored to how your team travels."
       }
     },
     "about": {
@@ -162,7 +209,7 @@
     },
     "team": {
       "eyebrow": "Leadership",
-      "title": "The team behind the platform.",
+      "title": "Executive Leadership & Platform Governance",
       "members": {
         "aqeel": {
           "role": "Chief Executive Officer",
@@ -172,57 +219,43 @@
           "role": "Chief Technology Officer",
           "bio": "Full-stack architect and AI systems engineer building the proprietary routing and fiscal engines that power Traflinq's intelligence layer."
         }
-      }
+      },
+      "description": "Traflinq leadership brings enterprise software scale and deep operational expertise to modern mobility orchestration."
     },
     "trust": {
       "eyebrow": "Institutional Trust",
-      "titleLine1": "Enterprise-grade security",
-      "titleLine2": "by design.",
-      "description": "Your mobility data is among your most sensitive operational assets. Traflinq is built with the governance, encryption, and audit controls that enterprise compliance teams require.",
+      "title": "Enterprise Security & Compliance Controls",
       "pillars": {
-        "dataSovereignty": {
-          "title": "Data Sovereignty",
-          "description": "Your data stays yours. Full tenant isolation with configurable retention policies and export controls."
+        "soc2": {
+          "title": "SOC 2 Readiness",
+          "description": "Built to comply with strict enterprise data protection and security standards."
         },
-        "uptime": {
-          "title": "99.9% Uptime SLA",
-          "description": "Mission-critical infrastructure with redundant failover and real-time health monitoring."
+        "tenantIsolation": {
+          "title": "Tenant Isolation",
+          "description": "Dedicated logical isolation for enterprise organization data."
         },
-        "globalScalability": {
-          "title": "Global Scalability",
-          "description": "Architected for MENA expansion — from Karachi to Riyadh, deploy at 100 or 10,000 commuters."
+        "rbac": {
+          "title": "Role-Based Access Control (RBAC)",
+          "description": "Granular permissions tailored to admins, department leads, managers, and travelers."
+        },
+        "auditLogs": {
+          "title": "Immutable Audit Logs",
+          "description": "Complete digital trail for every approval, policy change, and vendor transaction."
         }
-      },
-      "badges": {
-        "encryption": "End-to-End Encryption",
-        "accessControls": "Role-Based Access",
-        "auditLogging": "Immutable Audit Logs",
-        "soc2": "SOC 2 Ready",
-        "zeroTrust": "Zero Trust Architecture"
       }
     },
     "cta": {
       "eyebrow": "The Transition",
-      "title": "Stop managing logistics and start",
-      "titleMuted": "orchestrating movement.",
-      "description": "Experience the operating system that powers enterprise mobility."
+      "title": "Stop managing fragmented travel.",
+      "titleMuted": "Start orchestrating movement.",
+      "description": "Book a 15-minute walkthrough tailored to how your enterprise handles commutes and travel."
     },
     "selfAuditFlow": {
       "badge": "2-Minute Self-Audit",
       "title": "Run a 2-Minute Self-Audit",
-      "subtext": "See how much your company can save on corporate transport—no sales call needed.",
-      "fields": {
-        "monthlySpend": "Monthly Spend ({currency})",
-        "monthlySpendPlaceholder": "e.g. {example}",
-        "dailyEmployees": "Daily Commuting Employees",
-        "dailyEmployeesPlaceholder": "e.g. 120",
-        "dailyVehicles": "Daily Commuting Vehicles",
-        "dailyVehiclesPlaceholder": "e.g. 20"
-      },
+      "subtext": "See how much your company can save on daily commutes and corporate travel—no sales call needed.",
       "output": {
         "label": "Projected Annual Savings",
-        "rateHint": "up to 30%",
-        "emptyPrompt": "Enter monthly spend, employees, and vehicles to see your live savings.",
         "monthlySavings": "Est. monthly savings",
         "costPerEmployeeDay": "Cost per employee / day",
         "paybackPeriod": "Payback period",
@@ -232,24 +265,78 @@
         "pillarsHeading": "What you unlock",
         "trust": "Used by 40+ fleets in Karachi & Lahore"
       },
-      "pillars": {
-        "cost": {
-          "title": "Cost",
-          "description": "Eliminate billing leaks & route redundancies."
-        },
-        "convenience": {
-          "title": "Convenience & Ease",
-          "description": "Automated shift commute scheduling."
-        },
-        "tracking": {
-          "title": "Tracking",
-          "description": "Real-time visibility across all routes."
-        }
-      },
       "cta": {
         "claim": "Claim These Savings",
         "helper": "Book a 15-minute executive review — no sales pitch.",
         "contactSales": "Prefer email? Contact sales"
+      },
+      "modes": {
+        "commute": "Daily Employee Commute",
+        "travel": "Corporate Business Travel Spend"
+      },
+      "commute": {
+        "fields": {
+          "monthlySpend": "Monthly Commuting Budget ({currency})",
+          "monthlySpendPlaceholder": "e.g. {example}",
+          "second": "Daily Commuting Employees",
+          "secondPlaceholder": "e.g. 120",
+          "third": "Active Fleet Vehicles / Shuttles",
+          "thirdPlaceholder": "e.g. 20"
+        },
+        "emptyPrompt": "Enter your monthly commuting budget, employees, and vehicles to see your live savings.",
+        "rateHint": "up to 30%",
+        "metrics": {
+          "first": "Route efficiency gain",
+          "second": "Vehicle capacity utilization",
+          "third": "Est. monthly leakage recovery"
+        },
+        "pillars": {
+          "cost": {
+            "title": "Cost",
+            "description": "Eliminate billing leaks & route redundancies."
+          },
+          "convenience": {
+            "title": "Convenience & Ease",
+            "description": "Automated shift commute scheduling."
+          },
+          "tracking": {
+            "title": "Tracking",
+            "description": "Real-time visibility across all routes."
+          }
+        }
+      },
+      "travel": {
+        "fields": {
+          "monthlySpend": "Monthly Corporate Travel Budget ({currency})",
+          "monthlySpendPlaceholder": "e.g. {example}",
+          "second": "Active Business Travelers",
+          "secondPlaceholder": "e.g. 60",
+          "third": "Monthly Multi-Vendor Invoices",
+          "thirdPlaceholder": "e.g. 150"
+        },
+        "emptyPrompt": "Enter your monthly travel budget, travelers, and invoice volume to see your live savings.",
+        "rateHint": "up to 18%",
+        "metrics": {
+          "first": "Policy violation leakage prevented",
+          "second": "Manual reconciliation hours saved",
+          "third": "Vendor rate optimization yield",
+          "perMonth": "/ month",
+          "hours": "{hours} hrs / month"
+        },
+        "pillars": {
+          "cost": {
+            "title": "Policy Control",
+            "description": "Stop out-of-policy bookings before they're charged."
+          },
+          "convenience": {
+            "title": "Automated Reconciliation",
+            "description": "Match vendor invoices to purchase orders automatically."
+          },
+          "tracking": {
+            "title": "Spend Visibility",
+            "description": "Real-time view of every trip and traveler."
+          }
+        }
       }
     },
     "footer": {

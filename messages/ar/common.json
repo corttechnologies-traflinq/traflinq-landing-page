@@ -5,7 +5,8 @@
       "requestEnterpriseDemo": "اطلب عرضًا توضيحيًا للمؤسسات",
       "explorePlatform": "استكشف المنصة",
       "requestBriefing": "اطلب جلسة إحاطة استراتيجية",
-      "connect": "تواصل"
+      "connect": "تواصل",
+      "scheduleEnterpriseDemo": "حدّد موعدًا لعرض توضيحي للمؤسسات"
     },
     "locale": {
       "english": "EN",

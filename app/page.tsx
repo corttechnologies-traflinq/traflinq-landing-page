@@ -5,10 +5,9 @@ import { AnchorScrollHandler } from "@/components/anchor-scroll-handler"
 
 // Below-the-fold sections: code-split for faster initial load
 const SelfAuditSection = dynamic(() => import("@/components/self-audit-section").then(m => ({ default: m.SelfAuditSection })))
-const ProblemSection = dynamic(() => import("@/components/problem-section").then(m => ({ default: m.ProblemSection })))
-const RouteOptimizationSection = dynamic(() => import("@/components/route-optimization-section").then(m => ({ default: m.RouteOptimizationSection })))
+const OperationsSwitcherSection = dynamic(() => import("@/components/operations-switcher-section").then(m => ({ default: m.OperationsSwitcherSection })))
+const PillarsSection = dynamic(() => import("@/components/pillars-section").then(m => ({ default: m.PillarsSection })))
 const TravelSection = dynamic(() => import("@/components/travel-section").then(m => ({ default: m.TravelSection })))
-const AboutSection = dynamic(() => import("@/components/about-section").then(m => ({ default: m.AboutSection })))
 const TeamSection = dynamic(() => import("@/components/team-section").then(m => ({ default: m.TeamSection })))
 const OperationalSuccessReports = dynamic(() => import("@/components/operational-success-reports").then(m => ({ default: m.OperationalSuccessReports })))
 const PlatformSection = dynamic(() => import("@/components/platform-section").then(m => ({ default: m.PlatformSection })))
@@ -22,10 +21,9 @@ export default function Home() {
       <AnchorScrollHandler />
       <Navbar />
       <HeroSection />
-      <ProblemSection />
-      <RouteOptimizationSection />
+      <OperationsSwitcherSection />
+      <PillarsSection />
       <TravelSection />
-      <AboutSection />
       <SelfAuditSection />
       <TeamSection />
       <OperationalSuccessReports />

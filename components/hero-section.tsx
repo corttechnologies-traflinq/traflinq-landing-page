@@ -1,12 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, ChevronRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { motion, useAnimationFrame, useInView, useReducedMotion } from "framer-motion"
 import { useRef, useState, useCallback, useEffect, forwardRef } from "react"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
-import { usePathname } from "next/navigation"
+import RotatingText from "@/components/RotatingText"
 
 const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
 
@@ -534,9 +534,7 @@ function IsometricMap() {
 export function HeroSection() {
   const t = useTranslations("landing.hero")
   const tCommon = useTranslations("common")
-  const pathname = usePathname()
-  const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
-  const basePath = isSaudiRoute ? "/sa" : ""
+  const prefersReducedMotion = useReducedMotion()
 
   return (
     <section
@@ -581,11 +579,28 @@ export function HeroSection() {
               <span className="text-[#fe8503]">{t("titleHighlight")}</span>
             </motion.h1>
 
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-2 text-lg sm:text-xl font-semibold text-white/70"
+            >
+              <span>{t("rotatingPrefix")}</span>
+              <RotatingText
+                texts={t.raw("rotatingWords") as string[]}
+                splitBy="words"
+                auto={!prefersReducedMotion}
+                rotationInterval={2400}
+                mainClassName="overflow-hidden rounded-lg border border-[#fe8503]/25 bg-[#fe8503]/10 px-3 py-1 text-[#fe8503]"
+                splitLevelClassName="overflow-hidden"
+              />
+            </motion.div>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
-              className="mt-8 text-lg leading-8 text-white/45 max-w-xl"
+              className="mt-6 text-lg leading-8 text-white/45 max-w-xl"
             >
               {t("description")}
             </motion.p>
@@ -603,16 +618,6 @@ export function HeroSection() {
                 >
                   {tCommon("actions.requestEnterpriseDemo")}
                   <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href={`${basePath}/explore`}>
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  className="text-white/50 hover:text-white hover:bg-white/5 gap-1.5 px-6 text-sm tracking-wide"
-                >
-                  {tCommon("actions.explorePlatform")}
-                  <ChevronRight className="h-4 w-4" />
                 </Button>
               </Link>
             </motion.div>

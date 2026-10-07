@@ -5,7 +5,8 @@
       "requestEnterpriseDemo": "Request Enterprise Demo",
       "explorePlatform": "Explore the Platform",
       "requestBriefing": "Request a Strategic Briefing",
-      "connect": "Connect"
+      "connect": "Connect",
+      "scheduleEnterpriseDemo": "Schedule an Enterprise Demo"
     },
     "locale": {
       "english": "EN",

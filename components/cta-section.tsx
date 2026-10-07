@@ -6,14 +6,12 @@ import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
-import { usePathname } from "next/navigation"
+
+const CALENDAR_URL = "https://calendar.app.google/qeHQgMANfWNr77yz6"
 
 export function CTASection() {
   const t = useTranslations("landing.cta")
   const tCommon = useTranslations("common")
-  const pathname = usePathname()
-  const isSaudiRoute = pathname === "/sa" || pathname.startsWith("/sa/")
-  const basePath = isSaudiRoute ? "/sa" : ""
 
   return (
     <section className="relative py-32 overflow-hidden bg-[#080b14] border-t border-white/[0.04]">
@@ -56,9 +54,9 @@ export function CTASection() {
               className="bg-primary text-white hover:bg-primary/90 px-10 gap-2.5 shadow-xl shadow-primary/20 text-sm tracking-wide"
               asChild
             >
-              <Link href={`${basePath}/request-briefing`}>
-                {tCommon("actions.requestBriefing")}
-                <ArrowRight className="h-4 w-4" />
+              <Link href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
+                {tCommon("actions.scheduleEnterpriseDemo")}
+                <ArrowRight className="h-4 w-4 rtl:rotate-180" />
               </Link>
             </Button>
           </div>
