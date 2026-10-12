@@ -54,14 +54,14 @@
           "tag": "Commute",
           "dimension": "High-density daily employee transport and fixed routes.",
           "capabilities": "Fixed-route optimization, automated shift scheduling, real-time vehicle tracking, and automated driver check-ins for corporate fleets and shuttle vendors.",
-          "audience": "Facilities, HR, and daily transport operations teams."
+          "audience": "Facilities, HR, And Daily Transport Operations Teams."
         },
         "travel": {
           "label": "Multi-Modal Business Travel",
           "tag": "UMP",
           "dimension": "Long-distance intercity and multi-leg corporate travel.",
           "capabilities": "Door-to-door itineraries pairing long-haul flights, intercity rail, and buses with first-mile/last-mile rides, backed by automated travel policy approvals.",
-          "audience": "Corporate travel managers, procurement, and business travelers."
+          "audience": "Corporate Travel Managers, Procurement, And Business Travelers."
         }
       }
     },
@@ -139,19 +139,15 @@
       "groups": {
         "traveler": {
           "label": "The App",
-          "title": "For the traveler",
+          "title": "For Traveler",
           "items": {
             "everyMode": {
               "title": "Every Mode, One Flow",
               "description": "Search flights, rail, buses, and ground rides in one search without jumping between websites."
             },
-            "doorToDoor": {
-              "title": "Door-to-Door Rides",
-              "description": "Pair terminal rides with hotel transfers in the same booking."
-            },
             "roundTrips": {
               "title": "Flexible Round Trips",
-              "description": "Change return dates or adjust individual legs without canceling the rest of your trip."
+              "description": "Book terminal and hotel rides in the same trip, and change any leg without canceling the rest."
             },
             "liveTracking": {
               "title": "Live Schedule Tracking",
@@ -161,7 +157,7 @@
         },
         "company": {
           "label": "The Dashboard",
-          "title": "For the company",
+          "title": "For Enterprise",
           "items": {
             "approval": {
               "title": "Simple Approval Rules",
@@ -179,7 +175,7 @@
         },
         "operations": {
           "label": "The Back Office",
-          "title": "For operations",
+          "title": "For Operations",
           "items": {
             "preview": {
               "title": "Invoice Previews",

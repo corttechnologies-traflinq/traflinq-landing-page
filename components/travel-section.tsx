@@ -9,7 +9,6 @@ import {
   BellRing,
   Car,
   FileCheck2,
-  MapPinned,
   Plane,
   Repeat,
   SearchCheck,
@@ -26,7 +25,6 @@ const groups: Group[] = [
     key: "traveler",
     items: [
       { icon: Plane, key: "everyMode" },
-      { icon: MapPinned, key: "doorToDoor" },
       { icon: Repeat, key: "roundTrips" },
       { icon: BellRing, key: "liveTracking" },
     ],
