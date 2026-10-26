@@ -77,6 +77,8 @@ export function TeamSection() {
                 <Link
                   href={member.linkedin}
                   target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${member.name} on LinkedIn`}
                   className="absolute top-4 end-4 z-20 h-10 w-10 flex items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/40 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary"
                 >
                   <Linkedin className="h-4 w-4" />
@@ -98,6 +100,7 @@ export function TeamSection() {
                 <Link
                   href={member.linkedin}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-6 flex items-center gap-2 text-[11px] font-bold text-white/30 uppercase tracking-widest hover:text-primary transition-colors group/link"
                 >
                   <span className="h-px w-4 bg-white/20 transition-all group-hover/link:w-8 group-hover/link:bg-primary" />

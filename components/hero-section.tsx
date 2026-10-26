@@ -556,12 +556,12 @@ export function HeroSection() {
 
           {/* Left: Copy */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
           >
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-8"
@@ -573,7 +573,7 @@ export function HeroSection() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-[2.5rem] sm:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-white leading-[1.1] sm:leading-[1.05]"
@@ -583,7 +583,7 @@ export function HeroSection() {
             </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
               className="mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-2 text-lg sm:text-xl font-semibold text-white/70"
@@ -600,7 +600,7 @@ export function HeroSection() {
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35 }}
               className="mt-6 text-lg leading-8 text-white/45 max-w-xl"
@@ -609,7 +609,7 @@ export function HeroSection() {
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
               className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-4"

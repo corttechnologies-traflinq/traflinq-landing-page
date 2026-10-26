@@ -17,7 +17,7 @@ const Footer = dynamic(() => import("@/components/footer").then(m => ({ default:
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#080b14]">
+    <main className="min-h-screen overflow-x-clip bg-[#080b14]">
       <AnchorScrollHandler />
       <Navbar />
       <HeroSection />

@@ -45,7 +45,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <Link href={`${basePath}/#home`} className="-m-1.5 p-1.5 flex items-center">
+          <Link href={`${basePath}/#home`} aria-label={tCommon("misc.brandAlt")} className="-m-1.5 p-1.5 flex items-center">
             <Image
               src="/traflinq_dark_no_tagline-Photoroom.png"
               alt={tCommon("misc.brandAlt")}

@@ -56,7 +56,7 @@ export function Footer() {
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12">
 
           <div className="lg:max-w-[280px] shrink-0">
-            <Link href={`${basePath}/#home`} className="inline-block -ms-4">
+            <Link href={`${basePath}/#home`} aria-label={tCommon("misc.brandAlt")} className="inline-block -ms-4">
               <Image
                 src="/traflinq_dark_no_tagline-Photoroom.png"
                 alt={tCommon("misc.brandAlt")}

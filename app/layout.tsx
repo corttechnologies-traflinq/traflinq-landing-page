@@ -18,7 +18,20 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'Traflinq — The Intelligence Layer for Managed Mobility',
   description: 'Traflinq is the architectural foundation for corporate transit. We provide the logic, oversight, and telemetry required to orchestrate workforce movement at an institutional scale.',
-  generator: 'v0.app',
+  metadataBase: new URL('https://www.traflinq.com'),
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    siteName: 'Traflinq',
+    url: '/',
+    title: 'Traflinq — The Intelligence Layer for Managed Mobility',
+    description: 'Orchestrate workforce commutes and corporate travel in one platform: routing, policy governance and fiscal reconciliation.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Traflinq — The Intelligence Layer for Managed Mobility',
+    description: 'Orchestrate workforce commutes and corporate travel in one platform: routing, policy governance and fiscal reconciliation.',
+  },
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',
