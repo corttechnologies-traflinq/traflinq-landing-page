@@ -1,10 +1,11 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ChevronRight } from "lucide-react"
 import { motion, useAnimationFrame, useInView, useReducedMotion } from "framer-motion"
 import { useRef, useState, useCallback, useEffect, forwardRef } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
 import RotatingText from "@/components/RotatingText"
 
@@ -535,6 +536,8 @@ export function HeroSection() {
   const t = useTranslations("landing.hero")
   const tCommon = useTranslations("common")
   const prefersReducedMotion = useReducedMotion()
+  const pathname = usePathname()
+  const basePath = pathname === "/sa" || pathname.startsWith("/sa/") ? "/sa" : ""
 
   return (
     <section
@@ -618,6 +621,16 @@ export function HeroSection() {
                 >
                   {tCommon("actions.requestEnterpriseDemo")}
                   <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href={`${basePath}/explore`}>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="text-white/50 hover:text-white hover:bg-white/5 gap-1.5 px-6 text-sm tracking-wide"
+                >
+                  {tCommon("actions.explorePlatform")}
+                  <ChevronRight className="h-4 w-4" />
                 </Button>
               </Link>
             </motion.div>
