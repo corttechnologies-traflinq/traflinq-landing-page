@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: '*', allow: '/', disallow: ['/demo/', '/coming-soon'] },
+    rules: { userAgent: '*', allow: '/' },
     sitemap: 'https://www.traflinq.com/sitemap.xml',
   }
 }
